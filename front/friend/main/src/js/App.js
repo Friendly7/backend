@@ -1,5 +1,6 @@
 import logo from '../img/logo.png';
 import '../css/App.css';
+import MainPage from './mainpage.js';
 import Login from './login.js';
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 
@@ -18,7 +19,7 @@ const App=()=>{
     <div className="App">
       <BrowserRouter>
       <Routes>
-       
+        <Route path="/" element={<MainPage />} />
         {/* <LogIn /> */}
         <Route path="/login" element={<Login />} />
       </Routes>

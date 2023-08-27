@@ -10,3 +10,5 @@ const Body_Top=()=>{
       </div>
     )
   }
+
+  export default Body_Top;
