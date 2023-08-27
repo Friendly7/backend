@@ -6,7 +6,11 @@
   padding: 20px;
 }
 
-.menu {
+.Image {
+  text-align: left;
+}
+
+.Menu {
   margin:50px;
   color: black;
   text-decoration-line: none;
