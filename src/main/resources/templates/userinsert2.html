@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<form action="/insert2" method="post">
+  <div>
+    아이디
+    <input name = "insertid" type="text" placeholder="아이디"/>
+    <br>
+    패스워드
+    <input name = "insertpw" type="password" placeholder="비밀번호"/>
+    <br>
+    회원이름
+    <input name = "insertname" type="text" placeholder="이름"/>
+    <br>
+    분야
+    <input name = "insertcategory" type="text" placeholder="분야를 적어주세요."/>
+    <br>
+    <input name="insert" type="submit" value="회원가입" onclick="insertOk()"/>
+  </div>
+</form>
+<script>
+  function insertOk(){
+    alert("회원가입 완료!")
+    }
+    </script>
+</body>
+</html>

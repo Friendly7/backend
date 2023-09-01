@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <div>
+    <table>
+      <th>유저 이름 </th>
+      <th>신청 분야</th>
+      <th>전문성/비전문성</th>
+      <th>원하는 시간</th>
+      <th>대면/비대면</th>
+      <th>선택된 멘토 이름</th>
+      <tr th:each="list:${list}">
+      <td th:text="${list.user_name}"></td>
+        <td th:text="${list.category}"></td>
+        <td th:text="${list.professional}"></td>
+        <td th:text="${list.advice_time}"></td>
+        <td th:text="${list.onoffline}"></td>
+        <td th:text="${list.matmentorname}"></td>
+        <td>
+          <form th:action="@{'/userwaitinglist2'}" method="POST">
+            <input type="hidden" name="request_id" th:value="${list.request_id}"/>
+            <input type="hidden" name="mentor_id" th:value="${list.matmentornum}"/>
+            <input type="submit" value="멘토 정보 상세보기"/>
+          </form>
+        </td>
+      </tr>
+    </table>
+  </div>
+</body>
+</html>
+

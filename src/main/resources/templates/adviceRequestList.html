@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <div>
+    <table>
+      <th>가</th>
+      <th>나</th>
+      <th>다</th>
+      <th>라</th>
+      <th>마</th>
+      <th>바</th>
+      <th>사</th>
+      <th>아</th>
+      <th>자</th>
+      <th>차</th>
+      <th>카</th>
+      <th>타</th>
+      <th>파</th>
+      <tr th:each="request:${requestList}">
+      <td th:text="${request.request_id}"></td>
+      <td th:text="${request.user_id}"></td>
+      <td th:text="${request.user_name}"></td>
+      <td th:text="${request.advice_time}"></td>
+      <td th:text="${request.onoffline}"></td>
+      <td th:text="${request.category}"></td>
+      <td th:text="${request.professional}"></td>
+      <td th:text="${request.one}"></td>
+      <td th:text="${request.two}"></td>
+      <td th:text="${request.three}"></td>
+      <td th:text="${request.matmentornum}"></td>
+      <td th:text="${request.matmentorname}"></td>
+      <td>
+        <form th:action="@{'/matchinglist'}" method="GET">
+          <input type="hidden" name="request" th:value="${request.request_id}" />
+          <input type="hidden" name="one" th:value="${request.one}"/>
+          <input type="hidden" name="two" th:value="${request.two}"/>
+          <input type="hidden" name="three" th:value="${request.three}"/>
+          <input th:type="submit" th:value="${request.matching}"/>
+        </form>
+
+      </td>
+      </tr>
+    </table>
+  </div>
+</body>
+
+</html>
+

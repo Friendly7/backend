@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<form action="/adviceRequest2" method="post">
+  <div>
+    1순위
+    <select name="one">
+      <option value="선택">선택</option>
+      <option value="가격">가격</option>
+      <option value="시간">시간</option>
+      <option value="전문성">전문성</option>
+    </select>
+    <br>
+    2순위
+    <select name="two">
+      <option value="선택">선택</option>
+      <option value="가격">가격</option>
+      <option value="시간">시간</option>
+      <option value="전문성">전문성</option>
+    </select>
+    <br>
+    3순위
+    <select name="three">
+      <option name="select" value="선택">선택</option>
+      <option name="price" value="가격">가격</option>
+      <option name="time" value="시간">시간</option>
+      <option name="pro" value="전문성">전문성</option>
+    </select>
+    <br>
+    <input name = "id" type="text" th:value="${id}"/>
+    <input name = "id" type="hidden" th:value="${id}"/>
+    <input name="adviceRequestEnd" type="submit" value="다음으로" onclick="ok()"/>
+    <script>
+      function ok(){
+        alert("상담신청이 완료되었습니다.")
+      }
+      /*function change1(){
+        var value1 = document.getElementById("one");
+        var value2 = document.getElementById("two");
+        var value3 = document.getElementById("three");
+        if (value1.value == "가격"){
+          value3.price.hide();
+          value3.time.show();
+          value3.pro.show();
+        }
+        else if(value1.value == "시간"){
+          value3.price.show();
+          value3.time.hide();
+          value3.pro.show();
+        }
+        else if(value1.value == "전문성"){
+          value3.price.show();
+          value3.time.show();
+          value3.pro.hide();
+        }
+      }*/
+    </script>
+  </div>
+</form>
+</body>
+</html>

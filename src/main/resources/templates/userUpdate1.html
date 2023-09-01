@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<form action="/update1" method="post">
+  <div>
+    회원번호
+    <input name = "id" type="text" placeholder="수정할 회원번호"/>
+    <br>
+    아이디
+    <input name = "user_id" type="text" placeholder="아이디"/>
+    <br>
+    패스워드
+    <input name = "password" type="password" placeholder="비밀번호"/>
+    <br>
+    회원이름
+    <input name = "name" type="text" placeholder="이름"/>
+    <br>
+    <input name="insert" type="submit" value="회원정보수정" onclick="updateOk()"/>
+  </div>
+</form>
+<script>
+  function updateOk(){
+    alert("회원정보 수정 완료!")
+  }
+</script>
+</body>
+
+</html>
