@@ -16,5 +16,5 @@ public class Location {
     @Column(name = "location_id")
     private Long id;
 
-    private String name;
+    private String name; //지역명
 }

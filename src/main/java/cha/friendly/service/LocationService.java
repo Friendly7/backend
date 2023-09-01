@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class LocationService {
     private final LocationRepository locationRepository;
 
-    public Long join(Location location) {
+    public Long saveLocation(Location location) {
         locationRepository.save(location);
         return location.getId();
     }

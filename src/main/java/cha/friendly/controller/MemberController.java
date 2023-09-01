@@ -3,6 +3,7 @@ package cha.friendly.controller;
 import cha.friendly.controller.MemberForm;
 import cha.friendly.domain.Member;
 import cha.friendly.domain.Role;
+import cha.friendly.service.LoginService;
 import cha.friendly.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -25,6 +26,7 @@ public class MemberController {
         model.addAttribute("memberForm", new MemberForm());
         return "members/createMemberForm";
     }
+
     @ModelAttribute("roles")
     public Role[] roles() {
         return Role.values(); // 해당 ENUM의 모든 정보를 배열로 반환한다.
@@ -47,6 +49,7 @@ public class MemberController {
         memberService.join(member);
         return "redirect:/";
     }
+
     @GetMapping("/members")
     public String list(Model model) {
         List<Member> members = memberService.findMembers();

@@ -10,7 +10,7 @@
     </div>
 </div>
 <br><br><br>
-<form role="form" action="/" th:object="${locationForm}"method="post">
+<form role="form" action="/map" th:object="${locationForm}" method="post">
     <div class="form-group">
         <label>주소</label>
         <input id="auth" value="" th:field="*{address}" class="form-control" readonly/>

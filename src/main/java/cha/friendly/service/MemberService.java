@@ -1,5 +1,6 @@
 package cha.friendly.service;
 
+import cha.friendly.domain.Address;
 import cha.friendly.domain.Member;
 import cha.friendly.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +29,12 @@ public class MemberService {
         if (findMembers.size() > 0) {
             throw new IllegalStateException("이미 존재하는 회원입니다.");
         }
+    }
+
+    @Transactional
+    public void updateLocation(Long memberId, Address address) {
+        Member findMember = memberRepository.findOne(memberId);
+        findMember.setAddress(address);
     }
 
     //회원 전체 조회
