@@ -1,12 +1,12 @@
 package cha.friendly.repository;
 
 import cha.friendly.domain.Member;
+import cha.friendly.domain.PaymentD;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,11 +44,7 @@ public class MemberRepository {
                 .findFirst();
     }
 
-//    public List<Member> loginFindAll() {
-//        return em.createQuery("select m from Member m", Member.class)
-//                .setParameter("name", name)
-//                .getResultList();
-//    }
-
-
+    public void save(PaymentD paymentD) {
+        em.persist(paymentD);
+    }
 }

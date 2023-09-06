@@ -2,12 +2,14 @@ package cha.friendly.service;
 
 import cha.friendly.domain.Address;
 import cha.friendly.domain.Member;
+import cha.friendly.domain.PaymentD;
 import cha.friendly.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Transactional(readOnly = true)
@@ -45,5 +47,14 @@ public class MemberService {
     //한 건 조회
     public Member findOne(Long memberId) {
         return memberRepository.findOne(memberId);
+    }
+
+    public void paymentSave(Map<String, Object> map) {
+
+    }
+
+    @Transactional
+    public void saveUid(PaymentD paymentD) {
+        memberRepository.save(paymentD);
     }
 }
