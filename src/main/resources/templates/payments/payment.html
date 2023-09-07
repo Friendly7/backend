@@ -29,13 +29,20 @@
 
         async function requestPay() {
             await axios({
-                url: "/payments/prepare",
+                url: "https://api.iamport.kr/payments/prepare",
                 method: "post",
                 headers: { "Content-Type": "application/json"},
                 data: {
                     merchant_uid: makeMerchantUid, // 가맹점 주문번호
                     amount: 1004, // 결제 예정금액
-                }
+                },
+
+                withCredentials: true // 쿠키 cors 통신 설정
+
+            }).then(function (res){
+                res.header('Access-Control-Allow-Origin', 'http://localhost:8080/');
+                res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+                res.header('Access-Control-Allow-Credentials', true);
             });
             IMP.request_pay({
                 pg: 'kakaopay.TC0ONETIME',

@@ -51,7 +51,8 @@ public class PaymentController {
     @PostMapping("/payments/prepare")
     @CrossOrigin(origins = "https://api.iamport.kr/payments/prepare")
     public String beforePay(@RequestParam Map<String, Object> map) {
-        return "redirect:https://api.iamport.kr/payments/prepare";
+
+        return "성공";
     }
 
 
