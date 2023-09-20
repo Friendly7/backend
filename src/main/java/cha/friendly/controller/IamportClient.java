@@ -4,6 +4,8 @@ import com.google.gson.*;
 import com.siot.IamportRestClient.Iamport;
 import com.siot.IamportRestClient.exception.IamportResponseException;
 import com.siot.IamportRestClient.request.AuthData;
+import com.siot.IamportRestClient.request.CancelData;
+import com.siot.IamportRestClient.request.PrepareData;
 import com.siot.IamportRestClient.request.ScheduleEntry;
 import com.siot.IamportRestClient.request.escrow.EscrowLogisInvoiceData;
 import com.siot.IamportRestClient.response.*;
@@ -13,10 +15,10 @@ import com.siot.IamportRestClient.serializer.EscrowInvoiceEntrySerializer;
 import com.siot.IamportRestClient.serializer.ScheduleEntrySerializer;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import org.springframework.stereotype.Service;
 import retrofit2.Call;
 import retrofit2.HttpException;
 import retrofit2.Response;
@@ -26,10 +28,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-import static com.siot.IamportRestClient.IamportClient.API_URL;
-import static com.siot.IamportRestClient.IamportClient.STATIC_API_URL;
-
 @Getter @Setter
+@Slf4j
 public class IamportClient {
     public static final String API_URL = "https://api.iamport.kr";
     public static final String STATIC_API_URL = "https://static-api.iamport.kr";
@@ -80,6 +80,38 @@ public class IamportClient {
         Response<IamportResponse<Payment>> response = call.execute();
         if ( !response.isSuccessful() )	throw new IamportResponseException( getExceptionMessage(response), new HttpException(response) );
 
+        return response.body();
+    }
+    public IamportResponse<Payment> cancelPaymentByImpUid(CancelData cancelData) throws IamportResponseException, IOException {
+        AccessToken auth = getAuth().getResponse();
+        Call<IamportResponse<Payment>> call = this.iamport.cancel_payment(auth.getToken(), cancelData);
+
+        Response<IamportResponse<Payment>> response = call.execute();
+        if ( !response.isSuccessful() )	throw new IamportResponseException( getExceptionMessage(response), new HttpException(response) );
+
+        return response.body();
+    }
+//    public String getAccessToken() throws IamportResponseException, IOException {
+//        AccessToken auth = getAuth().getResponse();
+//        String call = auth.getToken();
+//        return call;
+//    }
+
+    public IamportResponse<Prepare> postPrepare(PrepareData prepareData) throws IOException, IamportResponseException {
+        AccessToken auth = getAuth().getResponse();
+        log.info(auth.getToken());
+        Call<IamportResponse<Prepare>> call = this.iamport.post_prepare(auth.getToken(), prepareData);
+
+        Response<IamportResponse<Prepare>> response = call.execute();
+        if ( !response.isSuccessful() )	throw new IamportResponseException( getExceptionMessage(response), new HttpException(response) );
+        return response.body();
+    }
+
+    public IamportResponse<Prepare> getPrepare(String merchantUid) throws IOException, IamportResponseException {
+        AccessToken auth = getAuth().getResponse();
+        Call<IamportResponse<Prepare>> call = this.iamport.get_prepare(auth.getToken(), merchantUid);
+        Response<IamportResponse<Prepare>> response = call.execute();
+        if ( !response.isSuccessful() )	throw new IamportResponseException( getExceptionMessage(response), new HttpException(response) );
         return response.body();
     }
 

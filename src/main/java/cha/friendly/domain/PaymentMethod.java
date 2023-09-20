@@ -7,5 +7,6 @@ public enum PaymentMethod {
     CARD,
     TRANS,
     VBANK,
-    PHONE
+    PHONE,
+    POINT
 }

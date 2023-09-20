@@ -43,8 +43,4 @@ public class MemberRepository {
                 .filter(m -> m.getEmail().equals(loginId))
                 .findFirst();
     }
-
-    public void save(PaymentD paymentD) {
-        em.persist(paymentD);
-    }
 }
