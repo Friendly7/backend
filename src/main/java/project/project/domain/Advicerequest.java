@@ -39,6 +39,8 @@ public class Advicerequest {
     private String mentor_waiting;
 
 
+
+
     public Long getRequest_id(){return request_id;}
     public void setRequest_id(Long request_id){this.request_id = request_id;}
     public Long getUser_id(){return user_id;}
@@ -76,6 +78,8 @@ public class Advicerequest {
 
     public String getMentor_waiting(){return mentor_waiting;}
     public void setMentor_waiting(String mentor_waiting){this.mentor_waiting = mentor_waiting;}
+
+
 
 
 

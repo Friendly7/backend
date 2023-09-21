@@ -55,7 +55,7 @@ public class adviceRequest {
     }
 
     @GetMapping (value = "/AdviceRequestLsit1")public String AdviceRequestLsit1(Model model){
-        List<Advicerequest> advicerequest = adviceRequestCRUDRepository.findAll();
+        List<Advicerequest> advicerequest = adviceRequestCRUDRepository.findByAdviceRequestList();
         model.addAttribute("requestList", advicerequest);
         return "/adviceRequestList";
     }

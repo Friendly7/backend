@@ -23,6 +23,8 @@ public class Adviceuser {
 
     private  String time;
 
+    private String latelyuser;
+
     public Long getId(){return id;}
     public void setId(Long id){this.id = id;}
     public String getUser_id(){return user_id;}
@@ -42,6 +44,10 @@ public class Adviceuser {
 
     public String getTime(){return time;}
     public void setTime(String time){this.time = time;}
+
+
+    public String getLatelyuser(){return latelyuser;}
+    public void setLatelyuser(String latelyuser){this.latelyuser = latelyuser;}
 
 
 

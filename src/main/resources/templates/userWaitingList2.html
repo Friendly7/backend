@@ -12,7 +12,7 @@
       <th>전문성</th>
       <th>시간</th>
       <th>가격</th>
-      <tr th:each="list2:${list2}">
+      <tr>
       <td th:text="${list.name}"></td>
         <td th:text="${list.category}"></td>
         <td th:text="${list.professional}"></td>
@@ -22,8 +22,9 @@
           <form name="userwaiting" th:action="@{'/userwaiting'}" method="POST">
             <input type="hidden" name="request_id" th:value="${list2.request_id}"/>
             <input type="hidden" name="user_id" th:value="${list2.user_id}"/>
+            <input type="hidden" name="mentor_id" th:value="${list2.matmentornum}"/>
             <input type="hidden" name="popUP" value=""/>
-            <input type="submit" th:value="${list2.user_waiting}" onclick="popUp()"/>
+            <input type="submit" th:value="${list2.user_waiting}"  onclick="popUp()"/>
           </form>
         </td>
       </tr>

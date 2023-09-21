@@ -10,4 +10,6 @@ public interface AdviceUserLoginRepository extends JpaRepository<Adviceuser, Lon
 
     @Query(value = "select * from adviceuser where user_id = :id", nativeQuery = true)
     Adviceuser findByAdviceUser(String id);
+
+
 }

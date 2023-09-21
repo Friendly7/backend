@@ -34,7 +34,7 @@
       <td th:text="${request.matmentornum}"></td>
       <td th:text="${request.matmentorname}"></td>
       <td>
-        <form th:action="@{'/matchinglist'}" method="GET">
+        <form th:action="@{'/matchinglist'}" method="POST">
           <input type="hidden" name="request" th:value="${request.request_id}" />
           <input type="hidden" name="one" th:value="${request.one}"/>
           <input type="hidden" name="two" th:value="${request.two}"/>

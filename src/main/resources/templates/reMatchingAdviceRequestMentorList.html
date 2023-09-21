@@ -15,12 +15,11 @@
       <th>시간</th>
       <tr th:each="list:${list}">
       <td>
-        <form id="matching" th:action="@{'/matchingMentor'}" method="POST">
+        <form id="rematching" th:action="@{'/reMatchingMentor'}" method="POST">
           <input type="hidden" name="request_id" th:value="${id}"/>
           <input type="hidden" name="mentor_id" th:value="${list.id}" />
-          <input type="button" th:value="${list.user_id}" onclick="popUp()"/>
+          <input type="button" th:value="${list.user_id}" onclick="POPUP()"/>
         </form>
-
       </td>
         <td id="name" th:text="${list.name}"></td>
         <td th:text="${list.category}"></td>
@@ -29,14 +28,14 @@
         <td th:text="${list.time}"></td>
       </tr>
       <script>
-        function popUp(){
+        function POPUP(){
           var result = confirm("해당 유저를 선택 하시겠습니까?")
           if (result == false) {
             alert("다시 선택해주세요.");
-          } else {
+          }
+          else {
             alert("선택 되었습니다.");
-            return document.getElementById("matching").submit();
-
+            return document.getElementById("rematching").submit();
           }
         }
       </script>

@@ -28,7 +28,17 @@
       <td th:text="${request.matmentornum}"></td>
       <td th:text="${request.matmentorname}"></td>
       <td th:text="${request.matching}"></td>
+      <td>
+          <form th:action="@{'/rematchinglist'}" method="POST">
+            <input type="hidden" name="request" th:value="${request.request_id}" />
+            <input type="hidden" name="one" th:value="${request.one}"/>
+            <input type="hidden" name="two" th:value="${request.two}"/>
+            <input type="hidden" name="three" th:value="${request.three}"/>
+            <input th:type="submit" value="재매칭 리스트보기"/>
+          </form>
+      </td>
       </tr>
+
     </table>
   </div>
 </body>
