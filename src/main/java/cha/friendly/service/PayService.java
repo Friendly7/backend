@@ -1,37 +1,29 @@
 package cha.friendly.service;
 
-import cha.friendly.domain.Member;
 import cha.friendly.domain.PaymentD;
-import cha.friendly.repository.MemberRepository;
 import cha.friendly.repository.PaymentRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.json.JSONObject;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Mono;
 
 import javax.annotation.PostConstruct;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Optional;
 
 @Service
 @Slf4j
 @RequiredArgsConstructor
 public class PayService {
     private final PaymentRepository paymentRepository; //f
-
     private WebClient webClient;
 
     @PostConstruct
@@ -68,15 +60,24 @@ public class PayService {
     }
 
     //merchant_uid 저장 . 결제전
+//    @Transactional
+//    public void saveMerchantUid(PaymentD paymentD) {
+//        paymentRepository.saveMerchantUid(paymentD);
+//    }
     @Transactional
-    public void saveMerchantUid(PaymentD paymentD) {
-        paymentRepository.saveMerchantUid(paymentD);
+    public PaymentD savePayment(UpdatePaymentDto dto) {
+        PaymentD findPaymentD = paymentRepository.findPaymentDObject();
+        findPaymentD.change(dto);
+        return paymentRepository.savePayment(findPaymentD);
     }
-    //결제 내역 전체 저장
-    @Transactional
-    public void savePayment(UpdatePaymentDto paymentDto) {
-        PaymentD findMerchantUid = paymentRepository.findByMerchantUid(paymentDto.getMerchantUid());
-        findMerchantUid.change(paymentDto);
+    public List<PaymentD> findPayments() {
+        return paymentRepository.findAll();
+    }
+    public Optional<PaymentD> findPaymentOne(String merchantUid) {
+        return paymentRepository.findByMerchantUid(merchantUid);
+    }
+    public void saveUid(PaymentD paymentD) {
+        paymentRepository.saveUid_date(paymentD);
     }
 
 //    public PaymentD findOne(String merchantUid) {

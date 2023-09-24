@@ -1,6 +1,8 @@
 package cha.friendly.service;
 
+import cha.friendly.domain.Address;
 import cha.friendly.domain.Location;
+import cha.friendly.domain.Member;
 import cha.friendly.repository.LocationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

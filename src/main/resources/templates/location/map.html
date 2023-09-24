@@ -4,19 +4,23 @@
 <body>
 <div class="map_wrap">
     <div id="map" style="width:200px;height:200px;position:relative;overflow:hidden;"></div>
+    <div>
     <div class="hAddr">
-        <span class="title">지도중심기준 행정동 주소정보</span>
+        <span class="title">현재 내 위치는?</span>
         <span id="centerAddr"></span>
+    </div>
+        <span th:unless="${location == null}" th:text="|인증된 내 위치는 : ${location} 입니다.|"></span>
     </div>
 </div>
 <br><br><br>
 <form role="form" action="/map" th:object="${locationForm}" method="post">
-    <div class="form-group">
+    <div class="form-group">>
         <label>주소</label>
-        <input id="auth" value="" th:field="*{address}" class="form-control" readonly/>
+        <input id="auth" value="" th:field="*{address}" class="form-control" readonly style="size: auto"/>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary" style="size: auto">Submit</button>
 </form>
+
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e6ccd1bab23d68efbb72e8f0e7f4c03c&libraries=services"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>

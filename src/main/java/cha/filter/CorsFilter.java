@@ -25,7 +25,6 @@ public class CorsFilter implements Filter {
 
         //내가 허용하고자 하는 클라이언트의 url
         response.setHeader("Access-Control-Allow-Origin", "http://localhost:8080");
-        //response.setHeader("Access-Control-Allow-Origin", "*");  //이렇게 해서 모든 요청에 대해서 허용할 수도 있습니다.
         response.setHeader("Access-Control-Allow-Credentials", "true");
         response.setHeader("Access-Control-Allow-Methods","*");
         response.setHeader("Access-Control-Max-Age", "3600");

@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html>
+<head th:replace="fragments/header :: header" />
+<body>
+<h4 class="mb-3" th:text="|로그인: ${member.name}|">로그인 사용자 이름</h4>
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader" />
+    <div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>결제 상태</th>
+                <th>구매자</th>
+                <th>금액</th>
+                <th>결제일시</th>
+                <th>상품명</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="payment : ${payments}">
+                <td th:text="${payment.status}"></td>
+                <td th:text="${payment.buyer}"></td>
+                <td th:text="${payment.amount}"></td>
+                <td th:text="${#strings.substring(payment.paidAt,0, 16)}"></td>
+                <td th:text="${payment.itemName}"></td>
+            </tr>
+            </tbody> </table>
+    </div>
+    <div th:replace="fragments/footer :: footer" />
+</div> <!-- /container -->
+</body>
+</html>

@@ -9,13 +9,27 @@
 
     <script>
         const userCode = "imp38636483";
+
         var today = new Date();
         var hours = today.getHours(); // 시
         var minutes = today.getMinutes();  // 분
         var seconds = today.getSeconds();  // 초
         var milliseconds = today.getMilliseconds();
-        var makeMerchantUid = "order_id_"+hours +  minutes + seconds + milliseconds;
-        var Testamount = 10000;
+        var makeMerchantUid = "order_id_" + hours +  minutes + seconds + milliseconds;
+        var Testamount = 0;
+        var userName =  "[[${name}]]"
+        var itemName = ""
+        var userPhone = [[${phoneNumber}]]
+        var userEmail = "[[${email}]]"
+
+        function makeDate() {
+            let today = new Date();
+            let hours = today.getHours(); // 시
+            let minutes = today.getMinutes();  // 분
+            let seconds = today.getSeconds();  // 초
+            let milliseconds = today.getMilliseconds();
+            return today;
+        }
 
         function saveMerchantUid(){
             $.ajax({
@@ -24,10 +38,36 @@
                 type: "post"
             });
         }
-        saveMerchantUid() //DB에 merchantUid 등록
+        function callPayment() {
+            const list
+                = document.getElementsByName('radio-23');
+            list.forEach((res) => {
+                if(res.checked)  {
+                    Testamount = res.value;
+                    console.log("res.value:" + typeof res.value)
+                    switch (res.value) {
+                        case "1100":
+                            itemName = "1000포인트";
+                            break;
+                        case "5500":
+                            itemName = "5000포인트";
+                            break;
+                        case "11000":
+                            itemName = "10000포인트";
+                            break;
+                        case "55000":
+                            itemName = "50000포인트"
+                            break;
+                    }
+                }
+            })
+        }
 
-        function requestPay() {
-            axios({
+        console.log("itemname: " + itemName)
+        async function requestPay() {
+            await callPayment()
+            //saveMerchantUid() //DB에 merchantUid 등록 - 안해도 지장 없음
+            await axios({
                 url: "/payments/prepare",
                 method: "post",
                 headers: {"Content-Type": "application/json"},
@@ -35,17 +75,15 @@
                     merchant_uid: makeMerchantUid, // 가맹점 주문번호
                     amount: Testamount, // 결제 예정금액
                 }
-            }).then(response=> {
-                axios({
-                    url: "/payments/prepare/"+makeMerchantUid,
+            }).then(async response => {
+                await axios({
+                    url: "/payments/prepare/" + makeMerchantUid,
                     method: "get",
                     headers: {"Content-Type": "application/json"}
-                }).then(response=> {
-                    if(makeMerchantUid!=response.data.merchant_uid ||
-                         response.data.amount !=Testamount) {
-                        alert("결제 정보가 올바르지 않습니다. \n" +
-                            "다시 시도해주세요")
-                        window.location.href='http://localhost:8080/pay';
+                }).then(response => {
+                    if (response.data.amount != Testamount) {
+                        // alert("결제 정보가 올바르지 않습니다...다시 시도해주세요")
+                        window.location.href = 'http://localhost:8080/pay';
                     }
                 })
             }).catch(err=> {
@@ -56,11 +94,11 @@
                 pg: 'kakaopay.TC0ONETIME',
                 pay_method: 'card',
                 merchant_uid: makeMerchantUid, //상점에서 생성한 고유 주문번호
-                name: '주문명:결제테스트',   //필수 파라미터 입니다.
-                amount: 10000,
-                buyer_email: 'iamport@siot.do',
-                buyer_name: '구매자이름',
-                buyer_tel: '010-1234-5678'
+                name: itemName,
+                amount: Testamount,
+                buyer_email: userEmail,
+                buyer_name: userName,
+                buyer_tel: userPhone,
             }, function (rsp) {
                 console.log(rsp)
                 var imp_uid = rsp.imp_uid
@@ -72,37 +110,16 @@
                     console.log(response)
                     // 위의 rsp.paid_amount 와 data.response.amount를 비교한후 로직 실행 (import 서버검증)
                     if (rsp.paid_amount === response.amount) {
-                        console.log("결제 완료")
                         $.ajax({
                             type: "POST",
                             url: "/paySuccess/" + imp_uid
+                        }).then(res=> {
+                            window.location.href = "http://localhost:8080/payments/paymentDetail?payment="+res;
                         })
                     } else {
                         alert("결제 실패");
                     }
-                });
-            });
-        }
-
-    //    환불로직
-        function cancelPay() {
-            jQuery.ajax({
-                "url": "/payments/cancel",
-                "type": "POST",
-                "contentType": "application/json",
-                "data": JSON.stringify({
-                    "merchant_uid": makeMerchantUid, // 예: ORD20180131-0000011
-                    "cancel_request_amount": Testamount, // 환불금액
-                    //테스트 데이터인 관계로 아래는 사용하지 않음.
-                    //"reason": "테스트 결제 환불" // 환불사유
-                    // [가상계좌 환불시 필수입력] 환불 수령계좌 예금주
-                    //"refund_holder": "홍길동",
-                    // [가상계좌 환불시 필수입력] 환불 수령계좌 은행코드(예: KG이니시스의 경우 신한은행은 88번)
-                    //"refund_bank": "88"
-                    // [가상계좌 환불시 필수입력] 환불 수령계좌 번호
-                    //"refund_account": "56211105948400"
-                }),
-                "dataType": "json"
+                })
             });
         }
     </script>
@@ -110,7 +127,62 @@
     <title>Sample Payment</title>
 </head>
 <body>
+<h4 class="mb-3" th:text="|로그인: ${member.name}|">로그인 사용자 이름</h4>
+<div>
+    <table class="table table-striped">
+        <!--link rel="stylesheet" href="./css/default.css"=-->
+        <thead>
+        <tr>
+            <th>포인트</th>
+            <th> </th>
+            <th>가격</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th>1000</th>
+            <td>
+                <label class="form-check-custom success" for="item1">
+                    <input type="radio" name="radio-23" id = "item1" value="1100">
+                    <span></span>
+                </label>
+            </td>
+            <td>1100원</td>
+        </tr>
+        <tr>
+            <th>5000</th>
+            <td>
+                <label class="form-check-custom success" for="item2">
+                    <input type="radio" name="radio-23" id = "item2" value="5500">
+                    <span></span>
+                </label>
+            </td>
+            <td>5500원</td>
+        </tr>
+        <tr>
+            <th>10000</th>
+            <td>
+                <label class="form-check-custom success" for="item3">
+                    <input type="radio" name="radio-23" id = "item3" value="11000">
+                    <span></span>
+                </label>
+            </td>
+            <td>11000원</td>
+        </tr>
+        <tr>
+            <th>50000</th>
+            <td>
+                <label class="form-check-custom success" for="item4">
+                    <input type="radio" name="radio-23" id = "item4" value="55000" checked>
+                    <span></span>
+                </label>
+            </td>
+            <td>55000원</td>
+        </tr>
+        </tbody>
+    </table>
+    <div id='result'></div>
+</div>
 <button onclick="requestPay()">결제하기</button>
-<button onclick="cancelPay()">환불하기</button>
 </body>
 </html>

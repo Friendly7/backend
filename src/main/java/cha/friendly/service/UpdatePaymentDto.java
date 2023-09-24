@@ -16,4 +16,6 @@ public class UpdatePaymentDto {
     private PaymentStatus status;
     private PaymentMethod method;
     private String paidAt;
+    private String orderAt;
+    private String buyerEmail;
 }

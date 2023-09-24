@@ -4,17 +4,14 @@ import cha.friendly.service.UpdatePaymentDto;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import net.bytebuddy.asm.Advice;
 import org.springframework.format.annotation.DateTimeFormat;
 
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 
 @Entity
 @Slf4j
@@ -27,6 +24,7 @@ public class PaymentD {
     private Long id;
 
     private String buyer; // 구매자
+    private String buyerEmail;
 
     //private String receiptId; // PG 사에서 생성한 주문 번호
 
@@ -35,19 +33,19 @@ public class PaymentD {
     @Enumerated(EnumType.STRING)
     private PaymentMethod method; // 결제 수단
 
-    private String name; // 결제 상품명
+    private String itemName; // 결제 상품명
 
     private int amount; // 결제 금액
 
     @Enumerated(EnumType.STRING)
     private PaymentStatus status = PaymentStatus.READY; // 상태
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-    private ZonedDateTime payReqAt = LocalDateTime.now().atZone(ZoneId.of("UTC")); // 결제 요청 일시
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'/'HH:mm:ss")
+    private ZonedDateTime orderAt; // 결제 요청 일시
+    @DateTimeFormat(pattern = "yyyy-MM-dd'/'HH:mm:ss")
     private ZonedDateTime paidAt;
 
-    //private LocalDateTime failedAt; // 결제 실패 일시
+    private ZonedDateTime failedAt; // 결제 실패 일시
 
     private int cancel_amount; // 취소된 금액
 
@@ -56,16 +54,20 @@ public class PaymentD {
     public void change(UpdatePaymentDto paymentDto) {
         buyer = paymentDto.getBuyer();
         method = paymentDto.getMethod(); // 결제 수단
-        name = paymentDto.getItemName(); // 결제 상품명
+        itemName = paymentDto.getItemName(); // 결제 상품명
         amount = paymentDto.getAmount(); // 결제 금액
         status = paymentDto.getStatus();
+        paidAt = convertDateTime(paymentDto.getPaidAt());
+    }
 
-        String[] timeArray = paymentDto.getPaidAt().split(" ");//'Mon Sep 18 17:04:17 KST 2023'
+    private ZonedDateTime convertDateTime(String at) {
+        String[] timeArray = at.split(" ");//'Mon Sep 18 17:04:17 KST 2023'
         String month = convertMonth(timeArray[1]);
         String paid_date = timeArray[5]+"-"+month+"-"+timeArray[2]+" " + timeArray[3];
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        paidAt = LocalDateTime.parse(paid_date, formatter).atZone(ZoneId.of("UTC"));
+        return LocalDateTime.parse(paid_date, formatter).atZone(ZoneId.of("UTC"));
     }
+
     private String convertMonth(String month) {
         switch (month) {
             case "Jan":
