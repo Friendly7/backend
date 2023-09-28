@@ -1,6 +1,5 @@
 package cha.friendly.controller;
 
-import cha.friendly.Language;
 import cha.friendly.domain.*;
 import cha.friendly.service.PayService;
 import cha.friendly.service.UpdatePaymentDto;

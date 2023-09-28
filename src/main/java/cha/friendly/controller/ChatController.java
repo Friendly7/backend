@@ -1,27 +1,24 @@
 package cha.friendly.controller;
 
+import cha.friendly.handler.ChatMessage;
 import cha.friendly.handler.ChatRoom;
-import cha.friendly.handler.ChatService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.simp.SimpMessageSendingOperations;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RequiredArgsConstructor
-@RestController
-@Slf4j
+@Controller
 public class ChatController {
-    private final ChatService chatService;
 
-    @PostMapping("/chat")
-    public ChatRoom createRoom(@RequestBody String name) {
-        log.info(name);
-        return chatService.createRoom(name);
-    }
+    private final SimpMessageSendingOperations messagingTemplate;
 
-    @GetMapping("/chat")
-    public List<ChatRoom> findAllRoom() {
-        return chatService.findAllRoom();
+    @MessageMapping("/chat/message")
+    public void message(ChatMessage message) {
+        if (ChatMessage.MessageType.ENTER.equals(message.getType()))
+            message.setMessage(message.getSender() + "님이 입장하셨습니다.");
+        messagingTemplate.convertAndSend("/sub/chat/room/" + message.getRoomId(), message);
     }
 }
