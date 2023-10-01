@@ -1,13 +1,10 @@
 package cha.friendly.controller;
 
-import cha.friendly.handler.ChatMessage;
-import cha.friendly.handler.ChatRoom;
+import cha.friendly.domain.ChatMessage;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @Controller

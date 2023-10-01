@@ -1,7 +1,9 @@
 package cha.friendly.controller;
 
-import cha.friendly.handler.ChatRoom;
-import cha.friendly.repository.ChatRoomRepository;
+import cha.friendly.domain.ChatRoom;
+import cha.friendly.domain.Member;
+import cha.friendly.service.ChatRoomService;
+import cha.friendly.session.SessionConst;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,36 +15,46 @@ import java.util.List;
 @Controller
 @RequestMapping("/chat")
 public class ChatRoomController {
-
-    private final ChatRoomRepository chatRoomRepository;
+    private final ChatRoomService chatRoomService;
 
     // 채팅 리스트 화면
     @GetMapping("/room")
-    public String rooms(Model model) {
-        return "/chat/room";
-    }
-    // 모든 채팅방 목록 반환
-    @GetMapping("/rooms")
-    @ResponseBody
-    public List<ChatRoom> room() {
-        return chatRoomRepository.findAllRoom();
+    public String rooms(Model model, @SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember) {
+        //세션에 회원 데이터가 없으면 home
+        if (loginMember == null) {
+            return "home";
+        }
+        model.addAttribute("member", loginMember);
+        //세션이 유지되면 로그인으로 이동
+        return "/chat/admin";
     }
     // 채팅방 생성
     @PostMapping("/room")
     @ResponseBody
     public ChatRoom createRoom(@RequestParam String name) {
-        return chatRoomRepository.createChatRoom(name);
+        ChatRoom chatRoom = chatRoomService.createChatRoom(name);
+
+        return chatRoom;
     }
+
     // 채팅방 입장 화면
     @GetMapping("/room/enter/{roomId}")
     public String roomDetail(Model model, @PathVariable String roomId) {
         model.addAttribute("roomId", roomId);
-        return "/chat/roomdetail";
+        return "/chat/roomDetail";
     }
+
     // 특정 채팅방 조회
     @GetMapping("/room/{roomId}")
     @ResponseBody
     public ChatRoom roomInfo(@PathVariable String roomId) {
-        return chatRoomRepository.findRoomById(roomId);
+        return chatRoomService.findRoomById(roomId);
+    }
+
+    // 모든 채팅방 목록 반환
+    @GetMapping("/rooms")
+    @ResponseBody
+    public List<ChatRoom> room() {
+        return chatRoomService.findAllRoom();
     }
 }

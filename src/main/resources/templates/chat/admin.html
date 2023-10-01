@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+<h4 class="mb-3" th:text="|로그인: ${member.name}|">로그인 사용자 이름</h4>
+
+<span>
+    <p id="target_name">채팅방 이름</p>
+    <button id="btn_create" style="background-color: #4CAF50; /* Green */
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;" onclick="create_button()">매칭 승인하기
+    </button>
+    <button id="btn_delete" style="background-color: gray; /* Green */
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;" onclick="delete_button()">방 삭제하기
+    </button>
+</span>
+<script>
+    const chatRoomName = "방 이름을 설정하세요";
+    const params = new URLSearchParams();
+    params.append('name', chatRoomName);
+
+    console.log('버튼 클릭')
+    function create_button() {
+        axios.post(
+            "/chat/room/", params
+        ).then(response => {
+            // response.data.name +
+            alert("방 개설에 성공하였습니다.")
+            craeteBtnClicked();
+        }).catch(res => {
+            alert("채팅방 개설에 실패하였습니다.");
+        });
+    }
+    function craeteBtnClicked()  {
+        const target_create = document.getElementById('btn_create');
+        target_create.disabled = true; //비활성화
+        target_create.style.backgroundColor = "gray";
+        let target_delete = document.getElementById("btn_delete");
+        target_delete.disabled = false;
+        target_delete.style.backgroundColor = "red";
+        document.getElementById("target_name").innerText = "방 이름: "+chatRoomName
+    }
+    function delete_button() {
+
+    }
+</script>
+</form>
+</form>
+</body>
+</html>
