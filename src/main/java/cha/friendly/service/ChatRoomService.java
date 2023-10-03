@@ -18,46 +18,34 @@ import java.util.*;
 public class ChatRoomService {
     private final ChatRoomRepositoryImpl chatRoomRepository;
 
-    private Map<String, ChatRoom> chatRoomMap;
-
-    @PostConstruct
-    private void init() {
-        chatRoomMap = new LinkedHashMap<>();
-    }
-
-//    public String findRoom(String name) {
-//        ObjectMapper objectMapper = new ObjectMapper();
-//        try {
-//            if (chatRoomRepository.findAll() == null) {
-//                log.info("[Service] user name : not exist!!");
-//                return String.format("user name :  not exist!!");
-//            } else {
-//                return objectMapper.writeValueAsString(chatRoomRepository.findAll());
-//            }
-//        } catch (JsonProcessingException e) {
-//            e.printStackTrace();
-//            return "ERROR";
-//        }
-//    }
-
     public List<ChatRoom> findAllRoom() {
         // 채팅방 생성순서 최근 순으로 반환
-        List chatRooms = new ArrayList<>(chatRoomMap.values());
-        Collections.reverse(chatRooms);
-        return chatRooms;
-    }
-
-    public ChatRoom findRoomById(String id) {
-        return chatRoomMap.get(id);
+        List<ChatRoom> findRooms = chatRoomRepository.findAll();
+//        Collections.reverse(findRooms);
+        return findRooms;
     }
 
     //채팅방 생성
     public ChatRoom createChatRoom(String name) {
         //생성
         ChatRoom chatRoom = ChatRoom.create(name);
-        chatRoomMap.put(chatRoom.getRoomId(), chatRoom);
         //DB저장
         chatRoomRepository.save(chatRoom);
         return chatRoom;
     }
+
+    public int delChatRoom(String _id) {
+        try {
+            chatRoomRepository.deleteById(_id);
+        } catch (Exception e) {
+            log.info("방 삭제 실패!!!");
+            return 0;
+        }
+        return 1;
+    }
+
+//    public ChatRoom findByRoomId(String roomId) {
+//        ChatRoom findChatRoom = chatRoomRepository.findByRoomId(roomId);
+//
+//    }
 }

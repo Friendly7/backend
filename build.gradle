@@ -55,8 +55,6 @@ dependencies {
 	implementation 'org.webjars.bower:axios:0.17.1'
 	//MongoDB
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
-	implementation 'org.springframework.data.mongodb.MongoDatabaseFactory:3.0'
-
 }
 
 tasks.named('test') {
