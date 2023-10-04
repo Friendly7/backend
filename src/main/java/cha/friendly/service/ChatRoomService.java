@@ -44,8 +44,7 @@ public class ChatRoomService {
         return 1;
     }
 
-//    public ChatRoom findByRoomId(String roomId) {
-//        ChatRoom findChatRoom = chatRoomRepository.findByRoomId(roomId);
-//
-//    }
+    public void findRooms(String username) {
+        chatRoomRepository.findBy(username);
+    }
 }

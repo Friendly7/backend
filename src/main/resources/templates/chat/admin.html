@@ -28,7 +28,7 @@
 </span>
 
 <script>
-    let chatRoomName = "홍길동님의 방";
+    let chatRoomName = [[${user1}]]+","+[[${user2}]];
     let params = new URLSearchParams();
     params.append('name', chatRoomName);
 

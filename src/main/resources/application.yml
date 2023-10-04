@@ -2,8 +2,8 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-    url: jdbc:mysql://localhost:3306/testdb?serverTimezone=UTC&characterEncoding=UTF-8
-    password: 'dongyang'
+    url: jdbc:mysql://localhost:3306/friend?serverTimezone=UTC&characterEncoding=UTF-8
+    password: '1234'
   jpa:
     hibernate:
       ddl-auto: create
@@ -24,7 +24,6 @@ spring:
       database: admin
       username: myUserAdmin
       password: abc123
-
 
 logging.level:
   org.hibernate.SQL: debug

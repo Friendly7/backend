@@ -27,8 +27,21 @@ public class ChatRoomController {
             return "home";
         }
         model.addAttribute("member", loginMember);
+        model.addAttribute("user1", "tester1");
+        model.addAttribute("user2", "tester2");
         //세션이 유지되면 로그인으로 이동
         return "/chat/admin";
+    }
+    //채팅방 리스트(user)
+    @GetMapping("/room/user")
+    public String userRoomList(Model model, @SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember) {
+        //세션에 회원 데이터가 없으면 home
+        if (loginMember == null) {
+            return "home";
+        }
+        model.addAttribute("member", loginMember);
+        chatRoomService.findRooms(loginMember.getName());
+        return "/chat/user";
     }
     // 채팅방 생성
     @PostMapping("/room")
@@ -52,13 +65,6 @@ public class ChatRoomController {
         return "/chat/roomDetail";
     }
 
-    // 특정 채팅방 조회
-//    @GetMapping("/room/{roomId}")
-//    @ResponseBody
-//    public ChatRoom roomInfo(@PathVariable String roomId) {
-//        return chatRoomService.findRoomById(roomId);
-//    }
-
     // 모든 채팅방 목록 반환
     @GetMapping("/rooms")
     public String room(Model model, @SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember) {
@@ -73,3 +79,9 @@ public class ChatRoomController {
         return "/chat/roomList";
     }
 }
+// 특정 채팅방 조회
+//    @GetMapping("/room/{roomId}")
+//    @ResponseBody
+//    public ChatRoom roomInfo(@PathVariable String roomId) {
+//        return chatRoomService.findRoomById(roomId);
+//    }
