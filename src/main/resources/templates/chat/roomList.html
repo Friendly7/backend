@@ -19,13 +19,16 @@
         <tbody>
         <tr>
             <th>번호</th>
-            <th>방 이름</th>
+            <th>사용자1 방 이름</th>
+            <th>사용자2 방 이름</th>
             <th></th>
         </tr>
         </tbody>
         <tr th:each="item, itemState : ${roomList}">
             <td th:text="${itemState.count}">번호</td>
-            <td th:text="${item.name}">방 이름</td>
+            <td th:text="${item.roomName1}">사용자1 방 이름</td>
+            <td th:text="${item.roomName2}">사용자2 방 이름</td>
+
             <td><button type="button" value="remove"
                         id="btn_delete" style="background-color: red;
                           border: none;

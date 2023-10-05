@@ -28,18 +28,15 @@
 </span>
 
 <script>
-    let chatRoomName = [[${user1}]]+","+[[${user2}]];
+    let chatRoomName = "[[${user1}]]"+","+"[[${user2}]]";
     let params = new URLSearchParams();
-    params.append('name', chatRoomName);
-
+    params.append('defaultRoomName', chatRoomName);
 
     function create_button() {
         axios.post(
             "/chat/room/", params
         ).then(response => {
-            // response.data.name +
             alert("방 개설에 성공하였습니다.")
-            // craeteBtnClicked();
         }).catch(res => {
             alert("채팅방 개설에 실패하였습니다.");
         });

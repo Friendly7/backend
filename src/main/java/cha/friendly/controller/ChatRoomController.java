@@ -10,7 +10,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 
 @RequiredArgsConstructor
 @Controller
@@ -19,7 +22,7 @@ import java.util.List;
 public class ChatRoomController {
     private final ChatRoomService chatRoomService;
 
-    // 채팅 리스트 화면
+    //관리자 방 생성(테스트용)
     @GetMapping("/room")
     public String rooms(Model model, @SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember) {
         //세션에 회원 데이터가 없으면 home
@@ -32,7 +35,7 @@ public class ChatRoomController {
         //세션이 유지되면 로그인으로 이동
         return "/chat/admin";
     }
-    //채팅방 리스트(user)
+    //채팅방 리스트(user) 본인과 연관된 채팅방 리스트를 출력한다.
     @GetMapping("/room/user")
     public String userRoomList(Model model, @SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember) {
         //세션에 회원 데이터가 없으면 home
@@ -40,15 +43,20 @@ public class ChatRoomController {
             return "home";
         }
         model.addAttribute("member", loginMember);
-        chatRoomService.findRooms(loginMember.getName());
+        ConcurrentHashMap<Object, ChatRoom> rooms = chatRoomService.findRooms(loginMember.getName());
+        System.out.println("rooms = " + rooms);
+        try{
+            model.addAttribute("userRoomName", rooms);
+        } catch (Exception e){
+            log.info("null");
+        }
         return "/chat/user";
     }
     // 채팅방 생성
     @PostMapping("/room")
     @ResponseBody
-    public ChatRoom createRoom(@RequestParam String name) {
-        ChatRoom chatRoom = chatRoomService.createChatRoom(name);
-
+    public ChatRoom createRoom(@RequestParam String defaultRoomName) {
+        ChatRoom chatRoom = chatRoomService.createChatRoom(defaultRoomName);
         return chatRoom;
     }
     //채팅방 삭제
@@ -60,8 +68,13 @@ public class ChatRoomController {
 
     // 채팅방 입장 화면
     @GetMapping("/room/enter/{roomId}")
-    public String roomDetail(Model model, @PathVariable String roomId) {
-        model.addAttribute("roomId", roomId);
+    public String roomDetail(Model model, @PathVariable String roomId,
+                             @SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember) {
+        //세션에 회원 데이터가 없으면 home
+        if (loginMember == null) {
+            return "home";
+        }
+        model.addAttribute("member", loginMember);
         return "/chat/roomDetail";
     }
 
@@ -78,10 +91,11 @@ public class ChatRoomController {
         model.addAttribute("roomList", allRoom);
         return "/chat/roomList";
     }
+
+    //특정 채팅방 조회
+    @GetMapping("/room/{roomId}")
+    @ResponseBody
+    public ChatRoom roomInfo(@PathVariable String roomId) {
+        return chatRoomService.findByRoomId(roomId);
+    }
 }
-// 특정 채팅방 조회
-//    @GetMapping("/room/{roomId}")
-//    @ResponseBody
-//    public ChatRoom roomInfo(@PathVariable String roomId) {
-//        return chatRoomService.findRoomById(roomId);
-//    }

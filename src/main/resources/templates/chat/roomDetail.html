@@ -5,26 +5,17 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <!-- Bootstrap CSS -->
-<!--    <link rel="stylesheet" href="/webjars/bootstrap/4.3.1/dist/css/bootstrap.min.css">-->
-    <style>
-        [v-cloak] {
-            display: none;
-        }
-    </style>
 </head>
 <body>
-<div class="container" id="app" v-cloak>
+<h4 class="mb-3" th:text="|로그인: ${member.name}|">로그인 사용자 이름</h4>
+<div class="container" id="app">
     <div>
-        <h2>{{room.name}}</h2>
+        <h2>[[${roomName}]]</h2>
     </div>
     <div class="input-group">
-        <div class="input-group-prepend">
-            <label class="input-group-text">내용</label>
-        </div>
-        <input type="text" class="form-control" v-model="message" v-on:keypress.enter="sendMessage">
+        <input type="text" class="form-control" v-model="message" onkeydown="handleKeyPress(event)">
         <div class="input-group-append">
-            <button class="btn btn-primary" type="button" @click="sendMessage">보내기</button>
+            <button class="btn btn-primary" type="button" onclick="sendMessage">보내기</button>
         </div>
     </div>
     <ul class="list-group">
@@ -35,53 +26,53 @@
     <div></div>
 </div>
 <!-- JavaScript -->
-<script src="/webjars/vue/2.5.16/dist/vue.min.js"></script>
 <script src="/webjars/axios/0.17.1/dist/axios.min.js"></script>
 <script src="/webjars/sockjs-client/1.1.2/sockjs.min.js"></script>
 <script src="/webjars/stomp-websocket/2.3.3-1/stomp.min.js"></script>
 <script>
-    //alert(document.title);
-    // websocket & stomp initialize
     var sock = new SockJS("/ws-stomp");
     var ws = Stomp.over(sock);
     var reconnect = 0;
-    // vue.js
-    var vm = new Vue({
-        el: '#app',
-        data: {
-            roomId: '',
-            room: {},
-            sender: '',
-            message: '',
-            messages: []
-        },
-        created() {
-            this.roomId = localStorage.getItem('wschat.roomId');
-            this.sender = localStorage.getItem('wschat.sender');
-            this.findRoom();
-        },
-        methods: {
-            findRoom: function() {
-                axios.get('/chat/room/'+this.roomId).then(response => { this.room = response.data; });
-            },
-            sendMessage: function() {
-                ws.send("/pub/chat/message", {}, JSON.stringify({type:'TALK', roomId:this.roomId, sender:this.sender, message:this.message}));
-                this.message = '';
-            },
-            recvMessage: function(recv) {
-                this.messages.unshift({"type":recv.type,"sender":recv.type=='ENTER'?'[알림]':recv.sender,"message":recv.message})
-            }
-        }
-    });
+
+    var chat = {
+        roomId: '',
+        room: {},
+        sender: '',
+        message: '',
+        messages: []
+    };
+
+    function created() {
+        chat.roomId = localStorage.getItem('wschat.roomId');
+        chat.sender = localStorage.getItem('wschat.sender');
+        findRoom();
+    }
+
+    function findRoom() {
+        // axios 요청
+        axios.get('/chat/room/' + chat.roomId).then(function(response) {
+            chat.room = response.data;
+        });
+    }
+
+    function sendMessage() {
+        // ws.send로 메시지 전송
+        ws.send("/pub/chat/message", {}, JSON.stringify({ type: 'TALK', roomId: chat.roomId, sender: chat.sender, message: chat.message }));
+        chat.message = '';
+    }
+
+    function recvMessage(recv) {
+        chat.messages.unshift({ "type": recv.type, "sender": recv.type == 'ENTER' ? '[알림]' : recv.sender, "message": recv.message });
+    }
 
     function connect() {
         // pub/sub event
         ws.connect({}, function(frame) {
-            ws.subscribe("/sub/chat/room/"+vm.$data.roomId, function(message) {
+            ws.subscribe("/sub/chat/room/"+chat.roomId, function(message) {
                 var recv = JSON.parse(message.body);
-                vm.recvMessage(recv);
+                recvMessage(recv);
             });
-            ws.send("/pub/chat/message", {}, JSON.stringify({type:'ENTER', roomId:vm.$data.roomId, sender:vm.$data.sender}));
+            ws.send("/pub/chat/message", {}, JSON.stringify({type:'ENTER', roomId:chat.roomId, sender:chat.sender}));
         }, function(error) {
             if(reconnect++ <= 5) {
                 setTimeout(function() {
@@ -93,7 +84,15 @@
             }
         });
     }
+    created();
     connect();
+
+    function handleKeyPress(event) {
+        if (event.key === "Enter") {
+            // Enter 키가 눌렸을 때 실행할 코드를 여기에 추가
+            sendMessage();
+        }
+    }
 </script>
 </body>
 </html>

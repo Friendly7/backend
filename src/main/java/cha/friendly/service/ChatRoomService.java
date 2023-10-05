@@ -1,16 +1,13 @@
 package cha.friendly.service;
 
 import cha.friendly.domain.ChatRoom;
-import cha.friendly.repository.ChatRoomRepository;
 import cha.friendly.repository.ChatRoomRepositoryImpl;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 @Slf4j
@@ -26,9 +23,10 @@ public class ChatRoomService {
     }
 
     //채팅방 생성
-    public ChatRoom createChatRoom(String name) {
+    public ChatRoom createChatRoom(String defaultRoomName) {
+        String[] username = defaultRoomName.split(",");
         //생성
-        ChatRoom chatRoom = ChatRoom.create(name);
+        ChatRoom chatRoom = ChatRoom.create(defaultRoomName);
         //DB저장
         chatRoomRepository.save(chatRoom);
         return chatRoom;
@@ -44,7 +42,44 @@ public class ChatRoomService {
         return 1;
     }
 
-    public void findRooms(String username) {
-        chatRoomRepository.findBy(username);
+    public ConcurrentHashMap<Object, ChatRoom> findRooms(String username) {
+        List<ChatRoom> byUsername1 = chatRoomRepository.findByUsername1(username);
+        List<ChatRoom> byUsername2 = chatRoomRepository.findByUsername2(username);
+        ConcurrentHashMap<Object, ChatRoom> map = new ConcurrentHashMap<>();
+        int i =1;
+        if(byUsername1!=null) {
+            for (ChatRoom room : byUsername1) {
+                map.put(i,room);
+                i++;
+            }
+        }
+        if (byUsername2 != null) {
+            for (ChatRoom room : byUsername2) {
+                map.put(i, room);
+                i++;
+            }
+        }
+        return map;
+    }
+    public ConcurrentHashMap<Object, String> findRooms2(String username) {
+        List<ChatRoom> byUsername1 = chatRoomRepository.findByUsername1(username);
+        List<ChatRoom> byUsername2 = chatRoomRepository.findByUsername2(username);
+        ConcurrentHashMap<Object, String> map = new ConcurrentHashMap<>();
+        int i =1;
+        if(byUsername1!=null) {
+            for (ChatRoom room : byUsername1) {
+                map.put(i, room.getRoomName1());
+                i++;
+            }
+        }
+        for (ChatRoom room : byUsername2) {
+            map.put(i, room.getRoomName2());
+            i++;
+        }
+        return map;
+    }
+
+    public ChatRoom findByRoomId(String roomId) {
+        return chatRoomRepository.findByRoomId(roomId);
     }
 }

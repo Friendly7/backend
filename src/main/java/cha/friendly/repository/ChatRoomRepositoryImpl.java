@@ -7,5 +7,8 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.List;
 
 public interface ChatRoomRepositoryImpl extends MongoRepository<ChatRoom, String> {
-    List<ChatRoom> findBy(String name);
+    List<ChatRoom> findByUsername1(String username1);
+    List<ChatRoom> findByUsername2(String username2);
+
+    ChatRoom findByRoomId(String roomId);
 }
