@@ -4,6 +4,8 @@
 <body>
 <div class="container">
     <div th:replace="fragments/bodyHeader :: bodyHeader" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <h4 class="mb-3" th:text="|로그인: ${member.name}|">로그인 사용자 이름</h4>
     <div>
         <table class="table table-striped">
             <thead>
@@ -16,16 +18,78 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="member : ${members}">
-                <td th:text="${member.id}"></td>
-                <td th:text="${member.name}"></td>
-                <td th:text="${member.email}"></td>
-                <td th:text="${member.password}"></td>
-                <td th:text="${member.phoneNumber}"></td>
+            <tr th:each="m,iterStat : ${members}">
+                <td th:text="${m.id}"></td>
+                <td th:text="${m.name}"></td>
+                <td th:text="${m.email}"></td>
+                <td th:text="${m.password}"></td>
+                <td th:text="${m.phoneNumber}"></td>
+                <td><button th:if="${m.is_blocked == 1}" type="button" value="ban"
+                            th:id="'ban-'+ ${iterStat.index}" style="background-color: red;
+                          border: none;
+                          color: white;
+                          padding: 15px 32px;
+                          text-align: center;
+                          text-decoration: none;
+                          display: inline-block;
+                          font-size: 16px;
+                          margin: 4px 2px;
+                          cursor: pointer;" th:onclick="cancelBanBtn([[${m.id}]], [[${m.name}]], [[${iterStat.index}]])">정지 해제
+                </button></td>
+                <td><button th:if="${m.is_blocked == 0}" type="button" value="ban"
+                            th:id="'ban-'+ ${iterStat.index}" style="background-color: green;
+                          border: none;
+                          color: white;
+                          padding: 15px 32px;
+                          text-align: center;
+                          text-decoration: none;
+                          display: inline-block;
+                          font-size: 16px;
+                          margin: 4px 2px;
+                          cursor: pointer;" th:onclick="banBtn([[${m.id}]], [[${m.name}]], [[${iterStat.index}]])">정지
+                </button></td>
             </tr>
             </tbody> </table>
     </div>
     <div th:replace="fragments/footer :: footer" />
 </div> <!-- /container -->
 </body>
+<script>
+    function banBtn(id, name, idx) {
+        var data = {
+            id: id,
+            name: name
+        };
+        var btnId = "ban-" + idx
+        var btn = document.getElementById(btnId)
+        if (confirm(name + "님을 정지하겠습니까?")) {
+            axios.post("/members/ban", data
+            ).then(response => {
+                alert("정지되었습니다")
+                location.reload()
+            }).catch(res => {
+                console.log(res);
+                alert("실패!");
+            });
+        }
+    }
+    function cancelBanBtn(id, name, idx) {
+        var data = {
+            id: id,
+            name: name
+        };
+        var btnId = "ban-" + idx
+        var btn = document.getElementById(btnId)
+        if (confirm(name + "님의 정지를 해제하시겠습니까?")) {
+            axios.post("/members/ban/cancel", data
+            ).then(response => {
+                alert("해제되었습니다")
+                location.reload()
+            }).catch(res => {
+                console.log(res);
+                alert("실패!");
+            });
+        }
+    }
+</script>
 </html>

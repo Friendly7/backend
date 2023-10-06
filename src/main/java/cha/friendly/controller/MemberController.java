@@ -7,6 +7,7 @@ import cha.friendly.service.LoginService;
 import cha.friendly.service.MemberService;
 import cha.friendly.session.SessionConst;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,6 +18,7 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
+@Slf4j
 public class MemberController {
     private final MemberService memberService; //주로 controller가 service를 갖다 씀
 
@@ -50,9 +52,15 @@ public class MemberController {
     }
 
     @GetMapping("/members")
-    public String list(Model model) {
+    public String list(Model model, @SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember) {
+        //세션에 회원 데이터가 없으면 home
+        if (loginMember == null) {
+            return "home";
+        }
+        //세션이 유지되면 로그인으로 이동
         List<Member> members = memberService.findMembers();
         model.addAttribute("members", members);
+        model.addAttribute("member", loginMember);
         return "members/memberList";
     }
 
@@ -62,20 +70,39 @@ public class MemberController {
         memberForm.setName(loginMember.getName());
         memberForm.setEmail(loginMember.getEmail());
         memberForm.setPhoneNumber(loginMember.getPhoneNumber());
+        memberForm.setPassword(loginMember.getPassword());
         model.addAttribute("member", loginMember);
         model.addAttribute("memberForm", memberForm);
         return "members/editMemberForm";
     }
 
     @PostMapping("/members/edit")
-    public String edit(@Valid MemberForm form, BindingResult result, @RequestParam Member member) {
+    public String edit(@Valid MemberForm form, BindingResult result, @RequestParam String id) {
         if (result.hasErrors()) {
-            return "members/createMemberForm";
+            return "members/editMemberForm";
         }
+        log.info("여기?");
+        Member member = memberService.findOne(Long.valueOf(id));
+
         member.setName(form.getName());
         member.setEmail(form.getEmail());
         member.setPassword(form.getPassword());
         member.setPhoneNumber(form.getPhoneNumber());
+        System.out.println(member.getName());
         memberService.update(member);
+        return "redirect:/";
+    }
+
+    @PostMapping("/members/ban")
+    @ResponseBody
+    public String banUser(@RequestBody Member member) {
+        memberService.ban(member);
+        return member.getName();
+    }
+    @PostMapping("/members/ban/cancel")
+    @ResponseBody
+    public String cancelBanUser(@RequestBody Member member) {
+        memberService.cancelBan(member);
+        return member.getName();
     }
 }

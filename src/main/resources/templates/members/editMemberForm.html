@@ -11,7 +11,7 @@
     <div th:replace="fragments/bodyHeader :: bodyHeader"/>
     <form role="form" action="/members/edit" th:object="${memberForm}" method="post">
 
-        <input type="hidden" name="hiddenField1" value=${member}>
+        <input type="hidden" name="id" th:value="${member.id}">
 
         <div class="form-group">
             <label th:for="name">닉네임</label>
@@ -30,7 +30,6 @@
         <div class="form-group">
             <label th:for="password">비밀번호</label>
             <input type="password" th:field="*{password}" class="form-control"
-                   placeholder="비밀번호를 입력하세요"
                    th:class="${#fields.hasErrors('password')}? 'form-controlfieldError' : 'form-control'">
             <p th:if="${#fields.hasErrors('password')}"
                th:errors="*{password}">Incorrect date</p>
@@ -42,12 +41,10 @@
             <p th:if="${#fields.hasErrors('phoneNumber')}"
                th:errors="*{phoneNumber}">Incorrect date</p>
         </div>
-        <button type="submit" class="btn btn-primary" onclick="sendMember()">Submit</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
     </form>
     <br/>
     <div th:replace="fragments/footer :: footer" />
 </div> <!-- /container -->
-<script>
-</script>
 </body>
 </html>

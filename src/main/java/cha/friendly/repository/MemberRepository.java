@@ -1,7 +1,6 @@
 package cha.friendly.repository;
 
 import cha.friendly.domain.Member;
-import cha.friendly.domain.PaymentD;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -36,11 +35,26 @@ public class MemberRepository {
     }
 
     /**
-     *  여기부터는 로그인 관련
+     *  로그인
      */
     public Optional<Member> findByLoginId(String loginId) { //loginId == email
         return findAll().stream()
                 .filter(m -> m.getEmail().equals(loginId))
                 .findFirst();
+    }
+
+    public void ban(Long userId) {
+        em.createQuery("update Member m set m.is_blocked = 1 WHERE m.id = :userId")
+                .setParameter("userId", userId)
+                .executeUpdate();
+    }
+    public void cancelBan(Long userId) {
+        em.createQuery("update Member m set m.is_blocked = 0 WHERE m.id = :userId")
+                .setParameter("userId", userId)
+                .executeUpdate();
+    }
+    public List<Member> banList() {
+        return em.createQuery("SELECT m FROM Member m WHERE m.is_blocked = true", Member.class)
+                .getResultList();
     }
 }

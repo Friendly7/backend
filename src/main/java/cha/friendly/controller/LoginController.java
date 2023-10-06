@@ -36,10 +36,15 @@ public class LoginController {
         if (bindingResult.hasErrors()) {
             return "login/loginForm";
         }
-        Member loginMember = loginService.login(form.getLoginId(),
-                form.getPassword());
+        Member loginMember = loginService.login(form.getLoginId(), form.getPassword());
         if (loginMember == null) {
             bindingResult.reject("loginFail", "아이디 또는 비밀번호가 맞지 않습니다.");
+            return "login/loginForm";
+        }
+        //ban유무
+        if (loginMember.getIs_blocked()==1) {
+            // "ban" 상태인 회원일 경우 로그인 거부 처리
+            bindingResult.reject("loginFail", "회원님은 정지 상태입니다.");
             return "login/loginForm";
         }
         //로그인 성공 처리

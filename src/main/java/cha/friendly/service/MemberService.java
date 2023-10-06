@@ -53,6 +53,16 @@ public class MemberService {
     }
     @Transactional
     public void update(Member member) {
-        memberRepository.up
+        memberRepository.save(member);
+    }
+
+    @Transactional
+    public void ban(Member member) {
+        memberRepository.ban(member.getId());
+    }
+
+    @Transactional
+    public void cancelBan(Member member) {
+        memberRepository.cancelBan(member.getId());
     }
 }

@@ -15,7 +15,6 @@ spring:
     init:
       mode: always
 
-
   data:
     mongodb:
       host: localhost

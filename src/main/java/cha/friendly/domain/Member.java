@@ -36,6 +36,8 @@ public class Member {
 
     private String latelyuser; //최근 매칭된 사람
 
+    private int is_blocked; //정지유무
+
 //    @OneToMany(mappedBy = "member") //order테이블에 있는 member를 뜻한다.
 //    private List<Order> orders = new ArrayList<>();
 }

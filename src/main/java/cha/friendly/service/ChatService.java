@@ -13,6 +13,6 @@ public class ChatService {
     private final ChatRepositoryImpl chatRepository;
 
     public void saveMsg(ChatMessage message) {
-//        chatRepository.save(message);
+        chatRepository.save(message);
     }
 }
