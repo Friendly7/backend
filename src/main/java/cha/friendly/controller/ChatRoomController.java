@@ -75,6 +75,13 @@ public class ChatRoomController {
             return "home";
         }
         model.addAttribute("member", loginMember);
+        model.addAttribute("roomId", roomId);
+        ChatRoom byRoomId = chatRoomService.findByRoomId(roomId);
+        if (loginMember.getName().equals(byRoomId.getUsername1())) { //이름 같으면
+            model.addAttribute("roomName", byRoomId.getRoomName1());
+        } else {
+            model.addAttribute("roomName", byRoomId.getRoomName2());
+        }
         return "/chat/roomDetail";
     }
 

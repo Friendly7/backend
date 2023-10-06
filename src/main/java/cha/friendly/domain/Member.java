@@ -25,6 +25,17 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private Role role; //1개의 계정은 1개의 역할만 같는다.
 
+    /**
+     ryu코드 추가
+     */
+    private String category; //1개
+
+    private Long price; //선호 가격
+
+    private String time; //선호 시간
+
+    private String latelyuser; //최근 매칭된 사람
+
 //    @OneToMany(mappedBy = "member") //order테이블에 있는 member를 뜻한다.
 //    private List<Order> orders = new ArrayList<>();
 }

@@ -16,5 +16,5 @@ public class MemberForm {
     private String email; //계정 id . 중복 불가
     private String password;
     private String phoneNumber; //1인 1번호. 중복 불가
-    private Role role; // COUNSELOR, MENTOR, USER
+    private Role role; // COUNSELOR, NONCOUNSELOR, MENTOR, USER
 }

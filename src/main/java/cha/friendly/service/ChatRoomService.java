@@ -1,5 +1,6 @@
 package cha.friendly.service;
 
+import cha.friendly.domain.ChatMessage;
 import cha.friendly.domain.ChatRoom;
 import cha.friendly.repository.ChatRoomRepositoryImpl;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +25,6 @@ public class ChatRoomService {
 
     //채팅방 생성
     public ChatRoom createChatRoom(String defaultRoomName) {
-        String[] username = defaultRoomName.split(",");
         //생성
         ChatRoom chatRoom = ChatRoom.create(defaultRoomName);
         //DB저장

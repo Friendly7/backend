@@ -15,7 +15,6 @@ import java.util.List;
 @RequiredArgsConstructor //lombok에서 memberRepository 생성자 만들어줌
 public class MemberService {
     private final MemberRepository memberRepository; //final해놓으면 값세팅 안하면 빨간줄
-    private final PaymentRepository paymentRepository;
 
     //회원 가입
     @Transactional
@@ -51,5 +50,9 @@ public class MemberService {
     public Address getLocation(Long id) {
         Address address = memberRepository.findOne(id).getAddress();
         return address;
+    }
+    @Transactional
+    public void update(Member member) {
+        memberRepository.up
     }
 }
