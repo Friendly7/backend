@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <div>
+    <table>
+      <th>신청번호</th>
+      <th>사용자번호</th>
+      <th>사용자이름</th>
+      <th>시간</th>
+      <th>대면/비대면</th>
+      <th>원하는분야</th>
+      <th>전문성</th>
+      <th>1순위</th>
+      <th>2순위</th>
+      <th>3순위</th>
+      <th>매칭상태</th>
+      <tr th:each="request:${list}">
+      <td th:text="${request.request_id}"></td>
+      <td th:text="${request.user_id}"></td>
+      <td th:text="${request.user_name}"></td>
+      <td th:text="${request.advice_time}"></td>
+      <td th:text="${request.onoffline}"></td>
+      <td th:text="${request.category}"></td>
+      <td th:text="${request.professional}"></td>
+      <td th:text="${request.one}"></td>
+      <td th:text="${request.two}"></td>
+      <td th:text="${request.three}"></td>
+      <td th:text="${request.matching}"></td>
+      <td>
+          <form th:action="@{'/rematchinglist'}" method="POST">
+            <input type="hidden" name="request" th:value="${request.request_id}" />
+            <input type="hidden" name="one" th:value="${request.one}"/>
+            <input type="hidden" name="two" th:value="${request.two}"/>
+            <input type="hidden" name="three" th:value="${request.three}"/>
+            <input th:type="submit" value="재매칭 리스트보기"/>
+          </form>
+      </td>
+      </tr>
+
+    </table>
+  </div>
+</body>
+
+</html>
+

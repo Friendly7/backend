@@ -3,7 +3,6 @@ package cha.friendly.service;
 import cha.friendly.domain.Address;
 import cha.friendly.domain.Member;
 import cha.friendly.repository.MemberRepository;
-import cha.friendly.repository.PaymentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +14,10 @@ import java.util.List;
 @RequiredArgsConstructor //lombok에서 memberRepository 생성자 만들어줌
 public class MemberService {
     private final MemberRepository memberRepository; //final해놓으면 값세팅 안하면 빨간줄
+
+    public List<Member> findByName(String name) {
+        return memberRepository.findByName(name);
+    }
 
     //회원 가입
     @Transactional

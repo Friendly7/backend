@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="/adviceRequestPage1">상담신청</a>
+<form th:action="@{'/userwaitinglist1'}" method="POST">
+    <input type="hidden" name="user_id" th:value="${loginData.getId()}"/>
+    <input type="submit" value="요청 대기 리스트 확인"/>
+</form>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<li th:text="${loginData.getName()}"></li>
+<form th:action="@{'/mentorwaitinglist'}" method="POST">
+    <input type="hidden" name="mentor_id" th:value="${loginData.getId()}"/>
+    <input type="submit" value="요청 대기 리스트 확인"/>
+</form>
+
+</body>
+</html>

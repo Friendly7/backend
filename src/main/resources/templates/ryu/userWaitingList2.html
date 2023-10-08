@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <div>
+    <table>
+      <th>멘토 이름</th>
+      <th>분야</th>
+      <th>전문성</th>
+      <th>시간</th>
+      <th>가격</th>
+      <tr>
+      <td th:text="${list.name}"></td>
+        <td th:text="${list.category}"></td>
+        <td th:text="${list.professional}"></td>
+        <td th:text="${list.time}"></td>
+        <td th:text="${list.price}"></td>
+        <td>
+          <form name="userwaiting" th:action="@{'/userwaiting'}" method="POST">
+            <input type="hidden" name="request_id" th:value="${list2.request_id}"/>
+            <input type="hidden" name="user_id" th:value="${list2.user_id}"/>
+            <input type="hidden" name="mentor_id" th:value="${list2.matmentornum}"/>
+            <input type="hidden" name="popUP" value=""/>
+            <input type="submit" th:value="${list2.user_waiting}"  onclick="popUp()"/>
+          </form>
+        </td>
+      </tr>
+      <script>
+        function popUp(){
+          var a;
+          var result = confirm("해당 요청을 수락 하시겠습니까?");
+          if (result == false) {
+            alert("거절하였습니다.");
+            a = 0;
+            return document.userwaiting.popUP.value = a;
+          } else {
+            alert("수락하셨습니다.");
+            a = 1;
+            return  document.userwaiting.popUP.value = a;
+          }
+        }
+      </script>
+    </table>
+  </div>
+</body>
+</html>
+

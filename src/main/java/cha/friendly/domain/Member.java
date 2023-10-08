@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Getter @Setter
 public class Member {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id")
     private Long id;
 
@@ -30,9 +30,12 @@ public class Member {
      */
     private String category; //1개
 
-    private Long price; //선호 가격
+    private Long minPrice; //선호 가격
+    private Long maxPrice;
 
     private String time; //선호 시간
+
+    private int matchCnt = 0; //매칭된 인원 수(최대 3)
 
     private String latelyuser; //최근 매칭된 사람
 

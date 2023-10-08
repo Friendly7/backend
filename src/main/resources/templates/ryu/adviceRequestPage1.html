@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<form action="/adviceRequest1" method="post">
+  <div>
+    닉네임
+    <input name = "name" type="text" th:value="${member.name}" readonly/>
+    <br>
+    시간대
+    <input name = "adviceTime" type="text" placeholder="선호 시간대"/>
+    <br>
+    대면/비대면
+    <input name = "onoffline" type="text" placeholder="대면/비대면 선택"/>
+    <br>
+    분야
+    <input name = "category" type="text" placeholder="분야"/> <!--대분류 소분류-->
+    <br>
+    전문/비전문
+    <input name = "professional" type="text" placeholder="전문/비전문 중에 선택하여 적으시오"/>
+    <br>
+    가격
+    <input name = "minPrice" type="text" placeholder="최소 가격 설정"/>
+    <input name = "maxPrice" type="text" placeholder="최대 가격 설정"/>
+
+    <br>
+    <input name="adviceRequest1" type="submit" value="다음으로" onclick="next()"/>
+    <script>
+      function next(){
+        alert("1순위 2순위 3순위를 골라주세요!")
+      }
+    </script>
+  </div>
+</form>
+</body>
+</html>

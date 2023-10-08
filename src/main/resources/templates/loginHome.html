@@ -25,13 +25,31 @@
                 회원목록
             </button>
         </div>
+        <div>
+            <button class="w-100 btn btn-secondary btn-lg" type="button"
+                    th:onclick="|location.href='@{/adviceRequestPage1}'|">
+                상담 신청
+            </button>
+            <form th:action="@{'/userwaitinglist1'}" method="POST">
+                <input type="hidden" name="id" th:value="${member.id}"/>
+                <input type="submit" value="요청 대기 리스트 확인"/>
+            </form>
+        </div>
+        <div class="col">
+            <button class="w-100 btn btn-secondary btn-lg" type="button"
+                    th:onclick="|location.href='@{/AdviceRequestList1}'|">
+                상담신청 목록
+            </button>
+        </div>
         <div class="col">
             <form th:action="@{/logout}" method="post">
                 <button class="w-100 btn btn-dark btn-lg" type="submit">
                     로그아웃
                 </button>
+
             </form>
-        </div> </div>
+        </div>
+    </div>
     <hr class="my-4">
 </div> <!-- /container -->
 </body>

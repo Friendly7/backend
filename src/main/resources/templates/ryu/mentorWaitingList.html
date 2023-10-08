@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <div>
+    <table>
+      <th>번호</th>
+      <th>이름</th>
+      <th>분야</th>
+      <th>전문성</th>
+      <th>시간</th>
+      <th>대면/비대면</th>
+      <th>상태</th>
+      <tr th:each="list:${list}">
+      <td th:text="${list.user_id}"></td>
+        <td th:text="${list.user_name}"></td>
+        <td th:text="${list.category}"></td>
+        <td th:text="${list.professional}"></td>
+        <td th:text="${list.advice_time}"></td>
+        <td th:text="${list.onoffline}"></td>
+        <td>
+          <form name="mentorwaiting" th:action="@{'/mentorwaiting'}" method="POST">
+            <input type="hidden" name="request_id" th:value="${list.request_id}"/>
+            <input type="hidden" name="mentor_id" th:value="${list.matmentornum}"/>
+            <input type="hidden" name="popUP" value=""/>
+            <input type="submit" th:value="${list.mentor_waiting}" onclick="popUp()"/>
+          </form>
+        </td>
+      </tr>
+      <script>
+        function popUp(){
+          var a;
+          var result = confirm("해당 요청을 수락 하시겠습니까?");
+          if (result == false) {
+            alert("거절하였습니다.");
+            a = 0;
+            return document.mentorwaiting.popUP.value = a;
+          } else {
+            alert("수락하셨습니다.");
+            a = 1;
+            return  document.mentorwaiting.popUP.value = a;
+          }
+        }
+      </script>
+    </table>
+  </div>
+</body>
+</html>
+
