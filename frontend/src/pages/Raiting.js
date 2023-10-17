@@ -12,12 +12,14 @@ function RatingAndReview() {
 
   const handleSubmit = () => {
       const reviewData = {
-          raiting: value
-
+          raiting: value,
+          text: review
       }
-    axios.post("/review/save")
-    console.log('별점:', value);
-    console.log('후기:', review);
+    axios.post("/review/save", reviewData)
+        .then(response=>{
+            if(response.data ==="save") alert("작성 완료")
+            else alert("작성 실패")
+        })
   };
 
   return (
