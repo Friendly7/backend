@@ -1,0 +1,66 @@
+html,
+      body {
+        width: 100vs;
+        height: 100vh;
+        margin: 0px;
+      }
+
+.container_ep{
+    width: 100%;
+    height: 100%;
+    background-image: url( "../expla_bg.jpg" );
+    background-size: cover;
+    position: relative;
+}
+
+#gohome{
+    background-image: url("../home.jpg");
+    background-color: white;
+    background-position: 5px;
+    background-repeat: no-repeat;
+    width: 55px;
+    height: 50px;
+    border: 1px solid black;
+    border-radius: 8px;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.body_ep{
+    margin-top: 30px;
+    margin-left: 140px;
+}
+
+#body_ep_name{
+    color: #166F00;
+    font-size: xx-large;
+    font-weight: bolder;
+}
+
+.body_ep_content{
+    margin-top: 30px;
+    margin-left: 60px;
+}
+
+#body_ep_num{
+    display: block;
+    color: #6DA85E;
+    font-size: large;
+    font-weight: bold;
+    padding-top: 30px;
+}
+
+#body_ep_con{
+    display: block;
+    color: #6DA85E;
+    font-size: large;
+    font-weight: bold;
+    padding: 10px ;
+}
+
+#body_ep_end{
+    color:#A2C898;
+    display: block;
+    margin-top: 10px ;
+    margin-left: 10px;
+}

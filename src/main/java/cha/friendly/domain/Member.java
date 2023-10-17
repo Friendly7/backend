@@ -18,28 +18,39 @@ public class Member {
     private String password;
 
     @Embedded
-    private Address Address; //회원가입 시 받지 않는다. null가능
+    private Address Address;
 
     private String phoneNumber; //1인 1번호. 중복 불가
 
     @Enumerated(EnumType.STRING)
     private Role role; //1개의 계정은 1개의 역할만 같는다.
 
-    /**
-     ryu코드 추가
-     */
-    private String category; //1개
+    private int is_blocked; //정지유무
 
-    private Long minPrice; //선호 가격
-    private Long maxPrice;
+    /**
+     매칭에 사용되는 데이터
+     */
+    private String mainCate;
+    private String subCate;
+
+    private int minPrice;
+    private int maxPrice;
+
+    private String  DOW; //요일 DaysOfWeek
 
     private String time; //선호 시간
+    private int expStat; // 체험여부(멘토용)
+    private String introduce; //Biography (자기소개)
+    private int remote; //대면가능여부(멘토용)
 
     private int matchCnt = 0; //매칭된 인원 수(최대 3)
+    private String recentMatched; //(최근 매칭된 사람)
 
-    private String latelyuser; //최근 매칭된 사람
+    private float raiting; //별점
+    private int reviewCnt; //리뷰개수
+    private float resRate; //응답률
 
-    private int is_blocked; //정지유무
+    private int Point;
 
 //    @OneToMany(mappedBy = "member") //order테이블에 있는 member를 뜻한다.
 //    private List<Order> orders = new ArrayList<>();

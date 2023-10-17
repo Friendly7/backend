@@ -11,9 +11,9 @@ spring:
       hibernate:
         format_sql: true
     defer-datasource-initialization: true
-#  sql:
-#    init:
-#      mode: always
+  sql:
+    init:
+      mode: always
 
   data:
     mongodb:
@@ -24,6 +24,29 @@ spring:
       username: myUserAdmin
       password: abc123
 
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${mail.username}
+    password: ${mail.password}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          timeout: 5000
+          starttls:
+            enable: true
+    default-encoding: UTF-8
+    test-connection: true #서버와의 연결검증
+                          # Spring Boot 애플리케이션이 시작될 때 메일 서버와의 연결을 테스트하고, 연결이 실패하면 애플리케이션이 구동되지 않습니다.
+  thymeleaf:
+    templateResolver:
+      prefix: classpath:/templates/
+      suffix: .html
+    viewResolver:
+      order: 0
+      viewNames: thymeleaf/*
+      templateEngine: thymeleaf
 logging.level:
   org.hibernate.SQL: debug
   org.hibernate.type: trace

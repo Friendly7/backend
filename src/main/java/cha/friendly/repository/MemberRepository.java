@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 import java.util.Optional;
@@ -37,9 +38,9 @@ public class MemberRepository {
     /**
      *  로그인
      */
-    public Optional<Member> findByLoginId(String loginId) { //loginId == email
+    public Optional<Member> findByLoginId(String email) {
         return findAll().stream()
-                .filter(m -> m.getEmail().equals(loginId))
+                .filter(m -> m.getEmail().equals(email))
                 .findFirst();
     }
 
@@ -54,7 +55,17 @@ public class MemberRepository {
                 .executeUpdate();
     }
     public List<Member> banList() {
-        return em.createQuery("SELECT m FROM Member m WHERE m.is_blocked = true", Member.class)
+        return em.createQuery("SELECT m FROM Member m WHERE m.is_blocked = 0", Member.class)
                 .getResultList();
+    }
+
+    public Member findByEmail(String email) {
+        try {
+            return em.createQuery("SELECT m FROM Member m WHERE m.email = :email", Member.class)
+                    .setParameter("email", email)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return null; // 이메일에 해당하는 회원이 없을 경우 null 반환
+        }
     }
 }

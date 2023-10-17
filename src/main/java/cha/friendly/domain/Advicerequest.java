@@ -1,6 +1,5 @@
 package cha.friendly.domain;
 
-import cha.friendly.controller.RequestDto;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.DynamicInsert;

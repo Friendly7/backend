@@ -1,4 +1,4 @@
-package cha.friendly.controller;
+package cha.friendly.domain;
 
 import lombok.Getter;
 import lombok.Setter;

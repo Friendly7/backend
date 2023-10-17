@@ -1,4 +1,4 @@
-package cha.friendly.controller;
+package cha.friendly.controller.form;
 
 import cha.friendly.domain.Address;
 import cha.friendly.domain.Role;

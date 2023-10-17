@@ -1,6 +1,7 @@
 package cha.friendly.controller;
 
 import cha.friendly.domain.*;
+import cha.friendly.service.MemberService;
 import cha.friendly.service.PayService;
 import cha.friendly.service.UpdatePaymentDto;
 import cha.friendly.session.SessionConst;
@@ -29,13 +30,14 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.*;
 
-@Controller
+@RestController
 @Slf4j
 @Getter @Setter
 public class PaymentController {
     private PayService payService;
     private IamportClient api;
 
+    private MemberService memberService;
     public PaymentController(PayService payService) {
         this.payService = payService;
         // REST API 키와 REST API secret 를 아래처럼 순서대로 입력한다.
@@ -43,8 +45,7 @@ public class PaymentController {
     }
 
     @GetMapping("/pay")
-    public String payment(Model model, @SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false)
-    Member loginMember) {
+    public String payment(Model model, @SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember) {
         //세션에 회원 데이터가 없으면 home
         if (loginMember == null) {
             return "home";
@@ -145,27 +146,6 @@ public class PaymentController {
         model.addAttribute("payments", payment);
         return "payments/paymentDetail";
     }
-//    @GetMapping("/payments/paymentDetail")
-//    public String payDetail(@SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember,
-//                            Model model, @RequestParam("payment") String uid) {
-//        log.info("받은 데이터(uid): " + uid);
-//        PaymentD findPayment = payService.findPaymentOne(uid);
-//        //세션에 회원 데이터가 없으면 home
-//        if (loginMember == null) {
-//            return "home";
-//        }
-//        //세션이 유지되면 로그인으로 이동
-//        model.addAttribute("member", loginMember);
-//        model.addAttribute("payments", findPayment);
-//        log.info("진입");
-//        return "payments/paymentDetail";
-//    }
-//    @GetMapping("payments/paymentDetail")
-//    public String a() {
-//        log.info("진입합니다");
-//
-//        return "payments/paymentDetail";
-//    }
 
     private PaymentD makeUpdatePaymentDto(Payment response) {
         UpdatePaymentDto PaymentDto = new UpdatePaymentDto();
@@ -193,6 +173,22 @@ public class PaymentController {
         Payment response = api.cancelPaymentByImpUid(cancelData).getResponse();
         log.info(String.valueOf(response));
         return response;
+    }
+
+    @PostMapping("/cash/convert")
+    public String cashConvert(@SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember,
+                              @RequestBody String point) {
+        loginMember.setPoint(loginMember.getPoint() - Integer.parseInt(point.replace("=","")));
+        return String.valueOf(loginMember.getPoint());
+    }
+
+    @GetMapping("/point")
+    public String getPoint(@SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember) {
+        if (loginMember == null) {
+            return "home";
+        }
+        //세션이 유지되면 로그인으로 이동
+        return String.valueOf(loginMember.getPoint());
     }
 }
     //---------------------------------------------------------------------------//
@@ -243,5 +239,26 @@ public class PaymentController {
 //        int code = api.getPrepare(merchant_uid).getCode();
 //        log.info(String.valueOf(code));
 //        return code;
+//    }
+//    @GetMapping("/payments/paymentDetail")
+//    public String payDetail(@SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember,
+//                            Model model, @RequestParam("payment") String uid) {
+//        log.info("받은 데이터(uid): " + uid);
+//        PaymentD findPayment = payService.findPaymentOne(uid);
+//        //세션에 회원 데이터가 없으면 home
+//        if (loginMember == null) {
+//            return "home";
+//        }
+//        //세션이 유지되면 로그인으로 이동
+//        model.addAttribute("member", loginMember);
+//        model.addAttribute("payments", findPayment);
+//        log.info("진입");
+//        return "payments/paymentDetail";
+//    }
+//    @GetMapping("payments/paymentDetail")
+//    public String a() {
+//        log.info("진입합니다");
+//
+//        return "payments/paymentDetail";
 //    }
 

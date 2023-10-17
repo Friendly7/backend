@@ -2,6 +2,7 @@ package cha.friendly.controller;
 
 import cha.friendly.domain.Advicerequest;
 import cha.friendly.domain.Member;
+import cha.friendly.domain.RequestDto;
 import cha.friendly.repository.AdviceRequestCRUDRepository;
 import cha.friendly.service.MemberService;
 import cha.friendly.session.SessionConst;
@@ -19,7 +20,7 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor
 @Transactional
-public class AdviceRequest {
+public class AdviceRequestController {
 
     private final MemberService memberService;
     @Autowired

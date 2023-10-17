@@ -1,0 +1,180 @@
+html,
+      body {
+        width: 100vs;
+        height: 100vh;
+        margin: 0px;
+      }
+
+.container_cs{
+    width: 100%;
+    height: 100%;
+    background-image: url( "../login_bg.JPG" );
+    background-size: 100%;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+.counsel{
+    position: absolute;
+    top: 0%;
+    left: 25%;
+    border: 1px solid white;
+    width: 700px;
+    height: 750px;
+    background-image: url("../board.PNG");
+    background-size: cover;
+    background-repeat: no-repeat;
+    border: none;
+}
+
+#counsel_name{
+  margin-top: 190px;
+  margin-left: 280px;
+  color: black;
+  font-weight: bolder;
+  font-size: large;
+}
+
+.counsel_form{
+  margin-top: 40px;
+  margin-left: 180px;
+}
+
+.counsel_nameex_lb{
+  font-size: 15px;
+  font-weight:600;
+}
+
+#counsel_exp_lb{
+  margin-left: 120px;
+}
+
+.counsel_nameex_input{
+  margin-top: 10px;
+}
+
+#counsel_name_input{
+  margin-left: 3px;
+  width: 160px;
+  border-width: 0 0 1px;
+
+}
+
+#counsel_exp_input_o{
+  margin-left: 40px;
+  vertical-align: 0px;
+}
+
+#counsel_exp_input_n{
+  margin-left: 35px;
+  font-size: 10px;
+}
+
+#counsel_name_input_olb{
+  font-size: 14px;
+  margin-left: 40px;
+}
+
+#counsel_name_input_nlb{
+  font-size: 14px;
+  margin-left: 30px;
+}
+
+.counsel_fietm_lb{
+  font-size: 15px;
+  font-weight:600;
+  margin-top: 15px;
+}
+
+#counsel_time_lb{
+  margin-left: 140px;
+}
+
+.counsel_fietm_select{
+  margin-top: 7px;
+}
+
+#field{
+  margin-left: 3px;
+  width: 170px;
+  height: 25px;
+  border-radius: 7px;
+  border: 0.5px solid rgba(0, 0, 0, 0.26);
+  background: #FFF;
+}
+
+#time{
+  margin-left: 35px;
+  width: 170px;
+  height: 25px;
+  border-radius: 7px;
+  border: 0.5px solid rgba(0, 0, 0, 0.26);
+  background: #FFF;
+}
+
+.significant{
+  font-size: 15px;
+  font-weight:600;
+  margin-top: 20px;
+}
+
+#significant_input{
+  margin-top: 8px;
+  margin-left: 3px;
+  width: 370px;
+  border-width: 0 0 1px;
+}
+
+.counsel_nummeth_lb{
+  margin-top: 15px;
+  font-size: 15px;
+  font-weight:600;
+}
+
+#counsel_method_lb{
+  margin-left: 140px;
+}
+
+.counsel_nummeth_input{
+  margin-top: 8px;
+}
+
+#counsel_number_input_o{
+  font-size: 10px;
+  margin-left: 3px;
+  vertical-align: 0px;
+}
+
+#counsel_number_input_n{
+  margin-left: 25px;
+  font-size: 10px;
+}
+
+#counsel_method_input_o{
+  font-size: 10px;
+  margin-left: 75px;
+  vertical-align: 0px;
+}
+
+#counsel_method_input_n{
+  margin-left: 25px;
+  font-size: 10px;
+}
+
+#counsel_number_input_nlb{
+  font-size: 14px;
+  margin-left: 10px;
+}
+
+#counsel_method_input_nlb{
+  font-size: 14px;
+  margin-left: 10px;
+}
+
+#counsel_number_input_olb{
+  font-size: 14px;
+}
+
+#counsel_method_input_olb{
+  font-size: 14px;
+}

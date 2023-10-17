@@ -55,6 +55,13 @@ dependencies {
 	implementation 'org.webjars.bower:axios:0.17.1'
 	//MongoDB
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+	//mail
+	implementation 'com.sun.mail:javax.mail:1.6.2'
+	implementation 'org.springframework:spring-context-support:5.3.10'
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
+
+//	implementation 'org.springframework.boot:spring-boot-starter-security'
+//	implementation 'io.jsonwebtoken:jjwt:0.9.1'
 }
 
 tasks.named('test') {

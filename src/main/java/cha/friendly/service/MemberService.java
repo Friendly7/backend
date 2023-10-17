@@ -11,9 +11,9 @@ import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
-@RequiredArgsConstructor //lombok에서 memberRepository 생성자 만들어줌
+@RequiredArgsConstructor
 public class MemberService {
-    private final MemberRepository memberRepository; //final해놓으면 값세팅 안하면 빨간줄
+    private final MemberRepository memberRepository;
 
     public List<Member> findByName(String name) {
         return memberRepository.findByName(name);
@@ -67,5 +67,27 @@ public class MemberService {
     @Transactional
     public void cancelBan(Member member) {
         memberRepository.cancelBan(member.getId());
+    }
+
+    public boolean isEmailUnique(String email) {
+
+        Member existingMember = memberRepository.findByEmail(email);
+        // null이면 현재 회원이 아니다.
+        return existingMember == null;
+    }
+
+    public void SetTempPassword(String to, String authNum) {
+        Member member = memberRepository.findByEmail(to);
+
+        if (member != null) {
+            // 임시 비밀번호 암호화
+//            String encodedTempPassword = passwordEncoder.encode(authNum);
+
+            // 임시 비밀번호 저장
+            member.setPassword(authNum);
+            memberRepository.save(member);
+        } else {
+            throw new RuntimeException("사용자를 찾을 수 없음");
+        }
     }
 }
