@@ -1,4 +1,4 @@
-package cha.friendly.domain;
+package cha.friendly.domain.enumP;
 
 import lombok.Getter;
 

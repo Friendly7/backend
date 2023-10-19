@@ -1,9 +1,12 @@
 package cha.friendly.controller;
 
+import cha.friendly.controller.form.IamportClient;
 import cha.friendly.domain.*;
+import cha.friendly.domain.enumP.PaymentMethod;
+import cha.friendly.domain.enumP.PaymentStatus;
 import cha.friendly.service.MemberService;
 import cha.friendly.service.PayService;
-import cha.friendly.service.UpdatePaymentDto;
+import cha.friendly.domain.Dto.UpdatePaymentDto;
 import cha.friendly.session.SessionConst;
 import com.siot.IamportRestClient.exception.IamportResponseException;
 import com.siot.IamportRestClient.request.CancelData;
@@ -16,14 +19,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.ZoneId;
@@ -38,6 +38,7 @@ public class PaymentController {
     private IamportClient api;
 
     private MemberService memberService;
+
     public PaymentController(PayService payService) {
         this.payService = payService;
         // REST API 키와 REST API secret 를 아래처럼 순서대로 입력한다.
@@ -54,7 +55,7 @@ public class PaymentController {
         String email = loginMember.getEmail();
         String name = loginMember.getName();
         String phoneNumber = loginMember.getPhoneNumber();
-        log.info(email+" " + name + " " + phoneNumber);
+        log.info(email + " " + name + " " + phoneNumber);
         model.addAttribute("name", name);
         model.addAttribute("email", email);
         model.addAttribute("phoneNumber", phoneNumber);
@@ -175,21 +176,31 @@ public class PaymentController {
         return response;
     }
 
-    @PostMapping("/cash/convert")
-    public String cashConvert(@SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember,
-                              @RequestBody String point) {
-        loginMember.setPoint(loginMember.getPoint() - Integer.parseInt(point.replace("=","")));
-        return String.valueOf(loginMember.getPoint());
-    }
+//    @PostMapping("/cash/convert")
+//    public String cashConvert(@SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember,
+//                              @RequestBody String point) {
+//        loginMember.setPoint(loginMember.getPoint() - Integer.parseInt(point.replace("=","")));
+//
+//        return String.valueOf(loginMember.getPoint());
+//    }
 
     @GetMapping("/point")
     public String getPoint(@SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember) {
         if (loginMember == null) {
             return "home";
         }
-        //세션이 유지되면 로그인으로 이동
-        return String.valueOf(loginMember.getPoint());
+        List<Point> memberPoint = payService.findByMemberId(loginMember.getId());
+
+        return null;
     }
+
+//
+//    @PostMapping("/cash/convertList")
+//    public String cashConvertList(@SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember,
+//                                  @RequestBody String point) {
+//        loginMember.setPoint(loginMember.getPoint() - Integer.parseInt(point.replace("=","")));
+//        return String.valueOf(loginMember.getPoint());
+//    }
 }
     //---------------------------------------------------------------------------//
 //    @GetMapping("/members/new")

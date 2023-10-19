@@ -1,4 +1,4 @@
-package cha.friendly.controller;
+package cha.friendly.controller.form;
 
 import com.google.gson.*;
 import com.siot.IamportRestClient.Iamport;

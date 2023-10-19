@@ -2,7 +2,7 @@ package cha.friendly.controller;
 
 import cha.friendly.controller.form.MemberForm;
 import cha.friendly.domain.Member;
-import cha.friendly.domain.Role;
+import cha.friendly.domain.enumP.Role;
 import cha.friendly.service.MemberService;
 import cha.friendly.session.SessionConst;
 import lombok.RequiredArgsConstructor;

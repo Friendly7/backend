@@ -1,7 +1,8 @@
 package cha.friendly.controller;
 import cha.friendly.domain.EmailMessage;
-import cha.friendly.domain.EmailPostDto;
-import cha.friendly.domain.EmailResponseDto;
+import cha.friendly.domain.Dto.EmailPostDto;
+import cha.friendly.domain.Dto.EmailResponseDto;
+import cha.friendly.service.EmailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

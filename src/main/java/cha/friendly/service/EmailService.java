@@ -1,4 +1,4 @@
-package cha.friendly.controller;
+package cha.friendly.service;
 
 import cha.friendly.domain.EmailMessage;
 import cha.friendly.service.MemberService;

@@ -1,6 +1,8 @@
 package cha.friendly.repository;
 
+import cha.friendly.domain.Member;
 import cha.friendly.domain.PaymentD;
+import cha.friendly.domain.Point;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
@@ -56,5 +58,11 @@ public class PaymentRepository {
                 .getResultList();
 
         return payments.stream().findAny();
+    }
+
+    public List<Point> findByMemberId(Long memberId) {
+        return em.createQuery("select t from Point t where t.id = :memberId", Point.class)
+                .setParameter("memberId", memberId)
+                .getResultList();
     }
 }

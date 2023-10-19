@@ -1,6 +1,8 @@
 package cha.friendly.domain;
 
-import cha.friendly.service.UpdatePaymentDto;
+import cha.friendly.domain.enumP.PaymentMethod;
+import cha.friendly.domain.enumP.PaymentStatus;
+import cha.friendly.domain.Dto.UpdatePaymentDto;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;

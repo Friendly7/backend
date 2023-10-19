@@ -24,6 +24,8 @@ function CashConversion() {
                 .then(response => {
                     if(response.data===(point-amount)) {
                         alert("신청 완료되었습니다.")
+                        //신청내역 가져오기
+                        axios.get("/cash/convertList")
                         setLoadData(true)
                         window.location.reload()
                     }

@@ -1,6 +1,8 @@
 package cha.friendly.service;
 
+import cha.friendly.domain.Dto.UpdatePaymentDto;
 import cha.friendly.domain.PaymentD;
+import cha.friendly.domain.Point;
 import cha.friendly.repository.PaymentRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,6 +27,10 @@ import java.util.Optional;
 public class PayService {
     private final PaymentRepository paymentRepository; //f
     private WebClient webClient;
+
+    public List<Point> findByMemberId(Long memberId) {
+        return paymentRepository.findByMemberId(memberId);
+    }
 
     @PostConstruct
     public void initWebClient() {

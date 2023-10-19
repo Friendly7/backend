@@ -1,7 +1,9 @@
 package cha.friendly.controller;
 
+import cha.friendly.controller.form.ReviewForm;
 import cha.friendly.domain.Member;
 import cha.friendly.domain.Review;
+import cha.friendly.service.ReviewService;
 import cha.friendly.session.SessionConst;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +29,7 @@ public class ReviewController {
             reviewService.saveReview(review);
             return "save";
         } catch (Exception e) {
+            e.printStackTrace();
             return "fail";
         }
     }

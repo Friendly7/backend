@@ -1,13 +1,10 @@
 package cha.friendly.controller.form;
 
-import cha.friendly.domain.Address;
-import cha.friendly.domain.Role;
+import cha.friendly.domain.enumP.Role;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Embedded;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 
 @Getter @Setter
 public class MemberForm {

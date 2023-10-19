@@ -13,7 +13,7 @@ import Counsel from "./pages/Counsel";
 import Location from "./pages/Location";
 import ErrorPage from "./pages/ErrorPage";
 import CashConversion from "./pages/CashConversion";
-import Raiting from "./pages/Raiting";
+import RatingAndReview from "./pages/RatingAndReview";
 
 function App() {
   return (
@@ -29,7 +29,7 @@ function App() {
         <Route path="Location" element={<Location />} />
         <Route path="CashConversion" element={<CashConversion />} />
         <Route path="ErrorPage" element={<ErrorPage />} />
-        <Route path="Raiting" element={<Raiting />} />
+        <Route path="RatingAndReview" element={<RatingAndReview />} />
       </Routes>
     </BrowserRouter>
     </body>

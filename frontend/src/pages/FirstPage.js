@@ -43,7 +43,7 @@ export default function FirstPage() {
                 <button onClick={() => navigate('/cashConversion')}>현금화 </button>
             </div>
             <div>
-                <button onClick={() => navigate('/Raiting')}>후기(별점) </button>
+                <button onClick={() => navigate('/RatingAndReview')}>후기(별점) </button>
             </div>
         </div>
     );
