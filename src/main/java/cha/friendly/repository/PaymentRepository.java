@@ -65,4 +65,8 @@ public class PaymentRepository {
                 .setParameter("memberId", memberId)
                 .getResultList();
     }
+
+    public void saveUsePoint(Point point) {
+        em.persist(point);
+    }
 }

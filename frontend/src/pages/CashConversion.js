@@ -9,6 +9,7 @@ function CashConversion() {
     const [point, setPoint] = useState('');
     const navigate = useNavigate();
     const [loadData, setLoadData] = useState(false);
+    const [dataList, setDataList] = useState([]);
 
     // 현금화 요청을 보내는 함수
     const handleCashConversion = () => {
@@ -26,6 +27,12 @@ function CashConversion() {
                         alert("신청 완료되었습니다.")
                         //신청내역 가져오기
                         axios.get("/cash/convertList")
+                            .then(response=>{
+                                setDataList(response.data);
+                            })
+                            .catch((error) => {
+                                console.error(error);
+                            });
                         setLoadData(true)
                         window.location.reload()
                     }
@@ -61,6 +68,26 @@ function CashConversion() {
                     <button onClick={handleCashConversion}>현금화 요청</button>
                     <p>현금화 신청은 10,000포인트 이상부터 가능합니다.</p>
                     <p>보유 포인트: {point}</p>
+
+                    <h1>Data Table</h1>
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>포인트</th>
+                            <th>상태</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {dataList.map((item) => (
+                            <tr key={item.id}>
+                                <td>{item.id}</td>
+                                <td>{item.name}</td>
+                                {/* 여기에 다른 데이터 열을 추가할 수 있습니다. */}
+                            </tr>
+                        ))}
+                        </tbody>
+                    </table>
                 </div>
             ) : (
                 <div></div>

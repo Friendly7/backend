@@ -86,6 +86,10 @@ public class PayService {
         paymentRepository.saveUid_date(paymentD);
     }
 
+    public void saveUsePoint(Point point) {
+        paymentRepository.saveUsePoint(point);
+    }
+
 //    public PaymentD findOne(String merchantUid) {
 //        return paymentRepository.findOne(merchantUid);
 //    }

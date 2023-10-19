@@ -16,8 +16,6 @@ public class Point {
     @ManyToOne
     @JoinColumn(name = "member_id")
     private Member memberId;
-
-    private int point;
     private String history;
     private String status; //충전, 사용, 현금화
 }

@@ -176,31 +176,30 @@ public class PaymentController {
         return response;
     }
 
-//    @PostMapping("/cash/convert")
-//    public String cashConvert(@SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember,
-//                              @RequestBody String point) {
-//        loginMember.setPoint(loginMember.getPoint() - Integer.parseInt(point.replace("=","")));
-//
-//        return String.valueOf(loginMember.getPoint());
-//    }
+    @PostMapping("/cash/convert")
+    public String cashConvert(@SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember,
+                              @RequestBody String amount) {
+        loginMember.setPoint(loginMember.getPoint() - Integer.parseInt(amount.replace("=","")));
+        Point point = new Point();
+        point.setStatus("현금화");
+        point.setHistory("-"+amount);
+        payService.saveUsePoint(point);
+        return String.valueOf(loginMember.getPoint());
+    }
 
     @GetMapping("/point")
     public String getPoint(@SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember) {
         if (loginMember == null) {
             return "home";
         }
-        List<Point> memberPoint = payService.findByMemberId(loginMember.getId());
-
-        return null;
+        return String.valueOf(loginMember.getPoint());
     }
 
-//
-//    @PostMapping("/cash/convertList")
-//    public String cashConvertList(@SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember,
-//                                  @RequestBody String point) {
-//        loginMember.setPoint(loginMember.getPoint() - Integer.parseInt(point.replace("=","")));
-//        return String.valueOf(loginMember.getPoint());
-//    }
+    @PostMapping("/cash/convertList")
+    public List<Point> cashConvertList(@SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember,
+                                       @RequestBody String point) {
+        return payService.findByMemberId(loginMember.getId());
+    }
 }
     //---------------------------------------------------------------------------//
 //    @GetMapping("/members/new")
