@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter @Setter
@@ -49,7 +50,7 @@ public class Member {
 
     private float raiting; //별점
     private int reviewCnt; //리뷰개수
-    private float resRate; //응답률
+    private int matchedCnt; //매칭된 사람 수
 
     private int point;
 //    @OneToMany(mappedBy = "member") //order테이블에 있는 member를 뜻한다.

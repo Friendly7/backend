@@ -8,47 +8,45 @@ function CashConversion() {
     const [amount, setAmount] = useState(''); // 입력한 금액을 상태로 관리
     const [point, setPoint] = useState('');
     const navigate = useNavigate();
-    const [loadData, setLoadData] = useState(false);
+    const [loadData, setLoadData] = useState(true);
     const [dataList, setDataList] = useState([]);
 
     // 현금화 요청을 보내는 함수
     const handleCashConversion = () => {
-        if(amount<10000) {
-            alert("10,000원 이상부터 가능합니다.")
+        if(amount<10000 || amount % 1000 !=0) {
+            alert("[조건 불충족] \n 1. 10,000원 이상\n 2. 1,000원 단위")
         }
         else if(point<amount) {
             alert("보유 포인트가 부족합니다.")
         }
         else {
-            window.confirm(amount+"포인트를 사용하여 \n"+(parseInt(amount)*0.9)+"원을 신청하시겠습니까?")
+            window.confirm(amount+"포인트를 사용하여 \n"+parseInt((parseInt(amount)*0.9))+"원을 신청하시겠습니까?")
             axios.post("/cash/convert", amount)
                 .then(response => {
-                    if(response.data===(point-amount)) {
-                        alert("신청 완료되었습니다.")
-                        //신청내역 가져오기
-                        axios.get("/cash/convertList")
-                            .then(response=>{
-                                setDataList(response.data);
-                            })
-                            .catch((error) => {
-                                console.error(error);
-                            });
-                        setLoadData(true)
-                        window.location.reload()
-                    }
+                    setLoadData(true)
+                    alert("신청 완료되었습니다.")
+                    // window.location.reload()
                 }).catch(error=>{
             })
         }
     }
     useEffect(() => {
-        if (isLoggedIn || loadData) {
+        if (isLoggedIn && loadData) {
             axios.get('/point')
                 .then(response => {
                     setPoint(response.data)
-                    setLoadData(false)
                 })
                 .catch(error => {
                     console.error('데이터 요청 중 오류 발생:', error);
+                });
+            //신청내역 가져오기
+            axios.get("/cash/convertList")
+                .then(response=>{
+                    setDataList(response.data);
+                    setLoadData(false)
+                })
+                .catch((error) => {
+                    console.error(error);
                 });
         }
     },[isLoggedIn,loadData]);
@@ -79,11 +77,11 @@ function CashConversion() {
                         </tr>
                         </thead>
                         <tbody>
-                        {dataList.map((item) => (
+                        {dataList.map((item, index) => (
                             <tr key={item.id}>
-                                <td>{item.id}</td>
-                                <td>{item.name}</td>
-                                {/* 여기에 다른 데이터 열을 추가할 수 있습니다. */}
+                                <td>{index+1}</td>
+                                <td>{item.history}</td>
+                                <td>{item.status}</td>
                             </tr>
                         ))}
                         </tbody>

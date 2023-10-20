@@ -22,7 +22,8 @@ public class ReviewController {
     public String save(@RequestBody ReviewForm form,
                        @SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember) {
         Review review = new Review();
-        review.setMember_id(loginMember.getId());
+        review.setMemberId(loginMember);
+        review.setName(form.getName());
         review.setText(form.getText());
         review.setRating(Integer.parseInt(form.getRaiting()));
         try{

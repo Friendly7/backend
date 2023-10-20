@@ -19,7 +19,8 @@ export default function RatingAndReview() {
     const handleSubmit = () => {
         const reviewData = {
             raiting: textRatingValue,
-            text: review
+            text: review,
+            name: "상대방이름"
         }
         axios.post("/review/save", reviewData)
             .then(response=>{

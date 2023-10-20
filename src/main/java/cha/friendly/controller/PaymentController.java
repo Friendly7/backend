@@ -180,9 +180,11 @@ public class PaymentController {
     public String cashConvert(@SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember,
                               @RequestBody String amount) {
         loginMember.setPoint(loginMember.getPoint() - Integer.parseInt(amount.replace("=","")));
+
         Point point = new Point();
         point.setStatus("현금화");
-        point.setHistory("-"+amount);
+        point.setHistory("-"+amount.replace("=",""));
+        point.setMemberId(loginMember);
         payService.saveUsePoint(point);
         return String.valueOf(loginMember.getPoint());
     }
@@ -195,10 +197,11 @@ public class PaymentController {
         return String.valueOf(loginMember.getPoint());
     }
 
-    @PostMapping("/cash/convertList")
-    public List<Point> cashConvertList(@SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember,
-                                       @RequestBody String point) {
-        return payService.findByMemberId(loginMember.getId());
+    @GetMapping("/cash/convertList")
+    public List<Point> cashConvertList(@SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember) {
+        List<Point> points = payService.findByMemberId(loginMember.getId());
+        Collections.reverse(points);
+        return points;
     }
 }
     //---------------------------------------------------------------------------//

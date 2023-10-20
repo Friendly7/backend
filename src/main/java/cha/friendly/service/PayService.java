@@ -28,6 +28,7 @@ public class PayService {
     private final PaymentRepository paymentRepository; //f
     private WebClient webClient;
 
+    @Transactional(readOnly = true)
     public List<Point> findByMemberId(Long memberId) {
         return paymentRepository.findByMemberId(memberId);
     }
@@ -86,6 +87,7 @@ public class PayService {
         paymentRepository.saveUid_date(paymentD);
     }
 
+    @Transactional
     public void saveUsePoint(Point point) {
         paymentRepository.saveUsePoint(point);
     }

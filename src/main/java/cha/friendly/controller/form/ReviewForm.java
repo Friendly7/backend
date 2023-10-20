@@ -8,4 +8,5 @@ import lombok.Setter;
 public class ReviewForm {
     String text;
     String raiting;
+    String name; //상대방 이름
 }

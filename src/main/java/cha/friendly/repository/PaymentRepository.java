@@ -61,7 +61,7 @@ public class PaymentRepository {
     }
 
     public List<Point> findByMemberId(Long memberId) {
-        return em.createQuery("select t from Point t where t.id = :memberId", Point.class)
+        return em.createQuery("select t from Point t where t.memberId.id = :memberId", Point.class)
                 .setParameter("memberId", memberId)
                 .getResultList();
     }
