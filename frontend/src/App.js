@@ -14,6 +14,11 @@ import Location from "./pages/Location";
 import ErrorPage from "./pages/ErrorPage";
 import CashConversion from "./pages/CashConversion";
 import RatingAndReview from "./pages/RatingAndReview";
+import ReviewList from "./pages/ReviewList";
+import ReviewListLogin from "./pages/ReviewListLogin";
+import ChatRoom from "./pages/ChatRoom";
+import ChatRoomList from "./pages/ChatRoomList";
+import Chat from "./pages/Chat";
 
 function App() {
   return (
@@ -30,6 +35,11 @@ function App() {
         <Route path="CashConversion" element={<CashConversion />} />
         <Route path="ErrorPage" element={<ErrorPage />} />
         <Route path="RatingAndReview" element={<RatingAndReview />} />
+        <Route path="ReviewListLogin" element={<ReviewListLogin />} />
+        <Route path="ReviewList" element={<ReviewList />} />
+        <Route path="ChatRoom" element={<ChatRoom />} />
+        <Route path="ChatRoomList" element={<ChatRoomList />} />
+        <Route path="Chat" element={<Chat />} />
       </Routes>
     </BrowserRouter>
     </body>

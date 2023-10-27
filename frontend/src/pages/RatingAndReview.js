@@ -3,7 +3,7 @@ import TextRating from "./TextRating";
 import axios from 'axios';
 import {useNavigate} from "react-router-dom";
 
-export default function RatingAndReview() {
+export default function RatingAndReview({ mentorName }) {
     const [review, setReview] = useState(''); // 후기 상태
     const [textRatingValue, setTextRatingValue] = useState(0);
     const navigate = useNavigate();
@@ -20,7 +20,7 @@ export default function RatingAndReview() {
         const reviewData = {
             raiting: textRatingValue,
             text: review,
-            name: "상대방이름"
+            name: mentorName
         }
         axios.post("/review/save", reviewData)
             .then(response=>{

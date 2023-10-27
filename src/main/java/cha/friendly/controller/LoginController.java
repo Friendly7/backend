@@ -45,8 +45,9 @@ public class LoginController {
     public String checkSession(HttpSession session) {
         // 세션에 사용자 정보가 있는지 확인하거나 다른 세션 상태 체크 로직을 수행
         if (session.getAttribute(SessionConst.LOGIN_MEMBER) != null) {
-            // 사용자가 로그인한 경우
-            return "authenticated";
+            Member loginMember = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
+            String memberName = loginMember.getName();
+            return memberName;
         } else {
             return "not_authenticated";
         }

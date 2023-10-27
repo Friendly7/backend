@@ -1,5 +1,6 @@
 package cha.friendly.domain;
 
+import cha.friendly.domain.Dto.ChatReqName;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
@@ -19,12 +20,11 @@ public class ChatRoom {
     private String username1;//일반 사용자
     private String username2;//멘토, 상담사
 
-    public static ChatRoom create(String defaultRoomName) {
+    public static ChatRoom create(ChatReqName chatReqName) {
         ChatRoom chatRoom = new ChatRoom();
-        String[] split = defaultRoomName.split(",");
         chatRoom.roomId = UUID.randomUUID().toString();
-        chatRoom.username1 = split[0];
-        chatRoom.username2 = split[1];
+        chatRoom.username1 = chatReqName.getUser1();
+        chatRoom.username2 = chatReqName.getUser2();
         chatRoom.roomName1 = chatRoom.username2;
         chatRoom.roomName2 = chatRoom.username1;
         return chatRoom;

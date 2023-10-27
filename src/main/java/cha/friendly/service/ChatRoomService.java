@@ -2,6 +2,7 @@ package cha.friendly.service;
 
 import cha.friendly.domain.ChatMessage;
 import cha.friendly.domain.ChatRoom;
+import cha.friendly.domain.Dto.ChatReqName;
 import cha.friendly.repository.ChatRoomRepositoryImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,10 +25,8 @@ public class ChatRoomService {
     }
 
     //채팅방 생성
-    public ChatRoom createChatRoom(String defaultRoomName) {
-        //생성
-        ChatRoom chatRoom = ChatRoom.create(defaultRoomName);
-        //DB저장
+    public ChatRoom createChatRoom(ChatReqName chatReqName) {
+        ChatRoom chatRoom = ChatRoom.create(chatReqName);
         chatRoomRepository.save(chatRoom);
         return chatRoom;
     }
@@ -43,38 +42,17 @@ public class ChatRoomService {
     }
 
     public ConcurrentHashMap<Object, ChatRoom> findRooms(String username) {
-        List<ChatRoom> byUsername1 = chatRoomRepository.findByUsername1(username);
-        List<ChatRoom> byUsername2 = chatRoomRepository.findByUsername2(username);
+        List<ChatRoom> rooms1 = chatRoomRepository.findByUsername1(username);
+        List<ChatRoom> rooms2 = chatRoomRepository.findByUsername2(username);
         ConcurrentHashMap<Object, ChatRoom> map = new ConcurrentHashMap<>();
         int i =1;
-        if(byUsername1!=null) {
-            for (ChatRoom room : byUsername1) {
-                map.put(i,room);
-                i++;
-            }
+        if(rooms1 != null) {
+            for (ChatRoom room : rooms1)
+                map.put(i++,room);
         }
-        if (byUsername2 != null) {
-            for (ChatRoom room : byUsername2) {
-                map.put(i, room);
-                i++;
-            }
-        }
-        return map;
-    }
-    public ConcurrentHashMap<Object, String> findRooms2(String username) {
-        List<ChatRoom> byUsername1 = chatRoomRepository.findByUsername1(username);
-        List<ChatRoom> byUsername2 = chatRoomRepository.findByUsername2(username);
-        ConcurrentHashMap<Object, String> map = new ConcurrentHashMap<>();
-        int i =1;
-        if(byUsername1!=null) {
-            for (ChatRoom room : byUsername1) {
-                map.put(i, room.getRoomName1());
-                i++;
-            }
-        }
-        for (ChatRoom room : byUsername2) {
-            map.put(i, room.getRoomName2());
-            i++;
+        if (rooms2 != null) {
+            for (ChatRoom room : rooms2)
+                map.put(i++, room);
         }
         return map;
     }

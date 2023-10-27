@@ -44,7 +44,6 @@ public class MemberController {
 
     @GetMapping("/member/findByName")
     public String findByName(@RequestParam(value = "name") String name){
-        System.out.println("name = " + name);
         List<Member> byName = memberService.findByName(name);
         if(byName.size()!=0) {
             return "exist";
@@ -99,7 +98,6 @@ public class MemberController {
         if (result.hasErrors()) {
             return "members/editMemberForm";
         }
-        log.info("여기?");
         Member member = memberService.findOne(Long.valueOf(id));
 
         member.setName(form.getName());
