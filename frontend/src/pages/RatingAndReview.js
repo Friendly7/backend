@@ -33,7 +33,7 @@ export default function RatingAndReview({ mentorName }) {
     };
 
     return (
-        <div>
+        <>
           <h2>별점과 후기</h2>
           <div>
               <TextRating value={textRatingValue} onRatingChange={handleTextRatingChange}/>
@@ -43,6 +43,6 @@ export default function RatingAndReview({ mentorName }) {
             <textarea value={review} onChange={handleReviewChange} />
           </div>
           <button onClick={handleSubmit}>제출</button>
-        </div>
+        </>
     );
 }

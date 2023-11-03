@@ -24,7 +24,7 @@ export default function FirstPage() {
         navigate('ReviewList', {state : {name: '멘토'}})
     };
     return (
-        <div>
+        <>
             {isLoggedIn ? (
                 // 로그인 상태인 경우
                 <div>
@@ -60,6 +60,6 @@ export default function FirstPage() {
             <div>
                 <button onClick={() => navigate('/ChatRoomList')}>내 채팅방 목록 </button>
             </div>
-        </div>
+        </>
     );
   }

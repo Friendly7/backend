@@ -1,50 +1,96 @@
-import React, { useEffect } from 'react';
-import SockJS from 'sockjs-client';
-import Stomp from '@stomp/stompjs';
+import React, { useEffect, useState,useCallback } from 'react';
+import { Client, Stomp } from '@stomp/stompjs';
+import * as SockJS from "sockjs-client";
+import SessionManager from "./SessionManager";
 
-export default function WebSocketComponent() {
+function WebSocketComponent({ roomId, sender }) {
+    const [messages, setMessages] = useState([]);
+    const [stompClient, setStompClient] = useState(null);
+    const [messageText, setMessageText] = useState(''); // 사용자가 입력한 메시지를 상태로 관리
+
     useEffect(() => {
-        // WebSocket 연결 설정
-        const socket = new SockJS('http://localhost:8080/ws-stomp');
-        const stompClient = Stomp.over(socket);
+        try {
+            const client = new Client({
+                //brokerURL: 'ws://localhost:8080/ws-stomp', // WebSocket 서버 URL
+                webSocketFactory: () => new SockJS("/ws-stomp"),
+                debug: (str) => {
+                    console.log(str);
+                },
+                reconnectDelay: 5000,
+                heartbeatIncoming: 4000,
+                heartbeatOutgoing: 4000,
+            });
+            client.onConnect = () => {
+                console.log('Connected to WebSocket'+roomId+sender);
+                if(sender) {
+                    client.subscribe('/sub/chat/room/' + roomId, (message) => {
+                        try {
+                            const messageData = JSON.parse(message.body);
+                            const s = messageData.type === 'ENTER' ? '[알림]' : messageData.sender;
+                            setMessages((prevMessages) => [
+                                ...prevMessages,
+                                {
+                                    "type": messageData.type,
+                                    "sender": s,
+                                    "message": messageData.message
+                                }
+                            ]);
+                        } catch (error) {
+                            console.error('구독 메시지 처리 중 오류 발생:', error);
+                        }
+                    });
+                    setStompClient(client);
+                }
+            };
+            client.activate();
 
-        stompClient.connect(
-            {},
-            () => {
-                // 연결에 성공하면 실행할 작업
-                console.log('WebSocket 연결 성공!');
+            sendChat()
+        } catch (e) {
+            console.log(e)
+        }
 
-                // 구독할 대상 및 메시지 처리
-                stompClient.subscribe('/sub/chat', (message) => {
-                    const chatMessage = JSON.parse(message.body);
-                    console.log('받은 메시지:', chatMessage);
-
-                    // 여기에서 메시지를 화면에 표시하거나 상태를 업데이트할 수 있습니다.
-                });
-
-                // 메시지 전송 예시
-                const message = {
-                    username: '사용자 이름',
-                    content: '메시지 내용',
-                };
-                stompClient.send('/pub/chat', {}, JSON.stringify(message));
-            },
-            (error) => {
-                // 연결 중 오류 발생 시 실행할 작업
-                console.error('WebSocket 오류:', error);
-            }
-        );
-
-        // 컴포넌트 언마운트 시 WebSocket 연결 종료
         return () => {
-            stompClient.disconnect();
-            console.log('WebSocket 연결 종료');
+            if (stompClient) {
+                stompClient.deactivate();
+            }
         };
     }, []);
 
+    const sendChat = () => {
+        if (stompClient) {
+            stompClient.publish({
+                destination: "/pub/chat/message", // 메시지 전송 대상
+                body: JSON.stringify({type: "ENTER", sender: sender, roomId: roomId})
+            })
+        }
+    }
+    const sendMessage = useCallback(()=> {
+        if(stompClient) {
+            stompClient.send("/pub/chat/message", {}, JSON.stringify({
+                type: 'TALK',
+                roomId: roomId,
+                sender: sender,
+                message: messageText
+            }))
+        }
+        setMessageText('');
+    })
+
     return (
-        <div>
-            {/* 채팅 내용을 표시할 부분 */}
-        </div>
+        <>
+            <ul>
+                {messages.map((message, index) =>
+                    <li key={index}>{message.message}</li>
+                )}
+            </ul>
+            <input
+                type="text"
+                value={messageText}
+                onChange={e=> setMessageText(e.target.value)}
+            />
+            <button onClick={sendMessage}>Send</button>
+        </>
     );
 }
+
+export default WebSocketComponent;

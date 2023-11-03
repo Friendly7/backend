@@ -18,7 +18,7 @@ export default function TextRating(props) {
     };
 
     return (
-        <div>
+        <>
             <Rating
                 name="text-feedback"
                 value={value}
@@ -27,6 +27,6 @@ export default function TextRating(props) {
                 onChange={handleRatingChange}
             />
             <div>{labels[value]}</div>
-        </div>
+        </>
     );
 }

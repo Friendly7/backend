@@ -14,7 +14,7 @@ class VerificationCodeInput extends Component {
 
     render() {
         return (
-            <div>
+            <>
                 <label>인증 번호:</label>
                 <input
                     type="text"
@@ -22,7 +22,7 @@ class VerificationCodeInput extends Component {
                     onChange={this.handleCodeChange}
                 />
                 <button onClick={() => this.props.onVerify(this.state.code)}>확인</button>
-            </div>
+            </>
         );
     }
 }

@@ -38,6 +38,10 @@ export default function Login() {
         .catch((error) => {
         });
   };
+  const keyPress = e => {
+    if (e.key === 'Enter')
+      signin();
+  }
 
   return (
       <div className="container_lg">
@@ -56,10 +60,10 @@ export default function Login() {
               </div>
               <div className='login_form'>
                 <label id='email_lb'>Email</label><br/>
-                <input type="email" name='email' id="email_form" placeholder="example@naver.com" value={email}
+                <input type="email" name='email' id="email_form" placeholder="example@naver.com" value={email} onKeyDown={keyPress}
                        onChange={(e) => setEmail(e.target.value)} required/><br/><br/>
                 <label id='passwd_lb'>Password</label><br/>
-                <input type="password" name='passwd' id="passwd_form" value={password}
+                <input type="password" name='passwd' id="passwd_form" value={password} onKeyDown={keyPress}
                        onChange={(e) => setPassword(e.target.value)} required />
               </div>
 

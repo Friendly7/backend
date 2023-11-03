@@ -1,68 +1,68 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <title>Document</title>
-</head>
-<body>
-<h4 class="mb-3" th:text="|로그인: ${member.name}|">로그인 사용자 이름</h4>
+<!--<!doctype html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport"-->
+<!--          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">-->
+<!--    <meta http-equiv="X-UA-Compatible" content="ie=edge">-->
+<!--    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>-->
+<!--    <title>Document</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h4 class="mb-3" th:text="|로그인: ${member.name}|">로그인 사용자 이름</h4>-->
 
-<div th:if="${#lists.isEmpty(roomList)}">
-    <p>채팅방이 존재하지 않습니다.</p>
-</div>
-<table>
-<div th:if="${!#lists.isEmpty(roomList)}">
-        <tbody>
-        <tr>
-            <th>번호</th>
-            <th>사용자1 방 이름</th>
-            <th>사용자2 방 이름</th>
-            <th></th>
-        </tr>
-        </tbody>
-        <tr th:each="item, itemState : ${roomList}">
-            <td th:text="${itemState.count}">번호</td>
-            <td th:text="${item.roomName1}">사용자1 방 이름</td>
-            <td th:text="${item.roomName2}">사용자2 방 이름</td>
+<!--<div th:if="${#lists.isEmpty(roomList)}">-->
+<!--    <p>채팅방이 존재하지 않습니다.</p>-->
+<!--</div>-->
+<!--<table>-->
+<!--<div th:if="${!#lists.isEmpty(roomList)}">-->
+<!--        <tbody>-->
+<!--        <tr>-->
+<!--            <th>번호</th>-->
+<!--            <th>사용자1 방 이름</th>-->
+<!--            <th>사용자2 방 이름</th>-->
+<!--            <th></th>-->
+<!--        </tr>-->
+<!--        </tbody>-->
+<!--        <tr th:each="item, itemState : ${roomList}">-->
+<!--            <td th:text="${itemState.count}">번호</td>-->
+<!--            <td th:text="${item.roomName1}">사용자1 방 이름</td>-->
+<!--            <td th:text="${item.roomName2}">사용자2 방 이름</td>-->
 
-            <td><button type="button" value="remove"
-                        id="btn_delete" style="background-color: red;
-                          border: none;
-                          color: white;
-                          padding: 15px 32px;
-                          text-align: center;
-                          text-decoration: none;
-                          display: inline-block;
-                          font-size: 16px;
-                          margin: 4px 2px;
-                          cursor: pointer;" th:onclick="delete_button([[${itemState.count}]], [[${item.id}]])">방 삭제</button></td>
-        </tr>
-</table>
-</div>
+<!--            <td><button type="button" value="remove"-->
+<!--                        id="btn_delete" style="background-color: red;-->
+<!--                          border: none;-->
+<!--                          color: white;-->
+<!--                          padding: 15px 32px;-->
+<!--                          text-align: center;-->
+<!--                          text-decoration: none;-->
+<!--                          display: inline-block;-->
+<!--                          font-size: 16px;-->
+<!--                          margin: 4px 2px;-->
+<!--                          cursor: pointer;" th:onclick="delete_button([[${itemState.count}]], [[${item.id}]])">방 삭제</button></td>-->
+<!--        </tr>-->
+<!--</table>-->
+<!--</div>-->
 
-<script>
-    const params = new URLSearchParams();
+<!--<script>-->
+<!--    const params = new URLSearchParams();-->
 
-    function delete_button(count, _id) {
-        if(confirm(count+"번 방을 삭제하시겠습니까?")) {
-            params.append('_id', _id);
-            axios.post(
-                "/chat/room/delete", params
-            ).then(response => {
-                console.log(response.data)
-                alert(response.data + "번 방 삭제 완료")
-                window.location.reload();
-            }).catch(res => {
-                console.log(res)
-                console.log(res.data);
-                alert("삭제 실패!!");
-            });
-        }
-    }
-</script>
-</body>
-</html>
+<!--    function delete_button(count, _id) {-->
+<!--        if(confirm(count+"번 방을 삭제하시겠습니까?")) {-->
+<!--            params.append('_id', _id);-->
+<!--            axios.post(-->
+<!--                "/chat/room/delete", params-->
+<!--            ).then(response => {-->
+<!--                console.log(response.data)-->
+<!--                alert(response.data + "번 방 삭제 완료")-->
+<!--                window.location.reload();-->
+<!--            }).catch(res => {-->
+<!--                console.log(res)-->
+<!--                console.log(res.data);-->
+<!--                alert("삭제 실패!!");-->
+<!--            });-->
+<!--        }-->
+<!--    }-->
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->

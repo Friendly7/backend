@@ -30,21 +30,21 @@ export default function ChatRoomList() {
         navigate('/Chat',{ state: {id: roomId}})
     }
     return (
-        <div>
+        <>
             {isLoggedIn && roomList != null ? (
                 <ul>
                     {Object.keys(roomList).map((key) => (
                         <div key={key} style={{ display: "flex", alignItems: "center" }}>
-                            <span>{name === roomList[key].roomName1 ? (
+                            <div>{name === roomList[key].roomName1 ? (
                                 <p>Room Name: {roomList[key].roomName2} </p>
-                            ) : <p>Room Name: {roomList[key].roomName1} </p>}</span>
-                            <span><button onClick={() => enterRoom(roomList[key].roomId)}>입장</button></span>
+                            ) : <p>Room Name: {roomList[key].roomName1} </p>}</div>
+                            <button onClick={() => enterRoom(roomList[key].roomId)}>입장</button>
                         </div>
                     ))}
                 </ul>
             ) : (
                 <div>로그인해</div>
             )}
-        </div>
+        </>
     )
 }

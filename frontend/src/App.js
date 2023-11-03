@@ -22,7 +22,6 @@ import Chat from "./pages/Chat";
 
 function App() {
   return (
-    <body>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
@@ -42,7 +41,6 @@ function App() {
         <Route path="Chat" element={<Chat />} />
       </Routes>
     </BrowserRouter>
-    </body>
   );
 }
 

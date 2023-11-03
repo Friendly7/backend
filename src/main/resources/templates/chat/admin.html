@@ -1,53 +1,53 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <title>Document</title>
-</head>
-<body>
-<h4 class="mb-3" th:text="|로그인: ${member.name}|">로그인 사용자 이름</h4>
-<p>
-    <a class="btn btn-lg btn-dark" href="/chat/rooms">방 목록</a>
-</p>
-<span>
-    <button id="btn_create" style="background-color: #4CAF50; /* Green */
-      border: none;
-      color: white;
-      padding: 15px 32px;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      font-size: 16px;
-      margin: 4px 2px;
-      cursor: pointer;" onclick="create_button()">매칭 승인하기
-    </button>
-</span>
+<!--<!doctype html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport"-->
+<!--          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">-->
+<!--    <meta http-equiv="X-UA-Compatible" content="ie=edge">-->
+<!--    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>-->
+<!--    <title>Document</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h4 class="mb-3" th:text="|로그인: ${member.name}|">로그인 사용자 이름</h4>-->
+<!--<p>-->
+<!--    <a class="btn btn-lg btn-dark" href="/chat/rooms">방 목록</a>-->
+<!--</p>-->
+<!--<span>-->
+<!--    <button id="btn_create" style="background-color: #4CAF50; /* Green */-->
+<!--      border: none;-->
+<!--      color: white;-->
+<!--      padding: 15px 32px;-->
+<!--      text-align: center;-->
+<!--      text-decoration: none;-->
+<!--      display: inline-block;-->
+<!--      font-size: 16px;-->
+<!--      margin: 4px 2px;-->
+<!--      cursor: pointer;" onclick="create_button()">매칭 승인하기-->
+<!--    </button>-->
+<!--</span>-->
 
-<script>
-    let chatRoomName = "[[${user1}]]"+","+"[[${user2}]]";
-    let params = new URLSearchParams();
-    params.append('defaultRoomName', chatRoomName);
+<!--<script>-->
+<!--    let chatRoomName = "[[${user1}]]"+","+"[[${user2}]]";-->
+<!--    let params = new URLSearchParams();-->
+<!--    params.append('defaultRoomName', chatRoomName);-->
 
-    function create_button() {
-        axios.post(
-            "/chat/room/", params
-        ).then(response => {
-            alert("방 개설에 성공하였습니다.")
-        }).catch(res => {
-            alert("채팅방 개설에 실패하였습니다.");
-        });
-    }
-    function craeteBtnClicked()  {
-        const target_create = document.getElementById('btn_create');
-        target_create.disabled = true; //비활성화
-        target_create.style.backgroundColor = "gray";
-    }
-</script>
-</form>
-</form>
-</body>
-</html>
+<!--    function create_button() {-->
+<!--        axios.post(-->
+<!--            "/chat/room/", params-->
+<!--        ).then(response => {-->
+<!--            alert("방 개설에 성공하였습니다.")-->
+<!--        }).catch(res => {-->
+<!--            alert("채팅방 개설에 실패하였습니다.");-->
+<!--        });-->
+<!--    }-->
+<!--    function craeteBtnClicked()  {-->
+<!--        const target_create = document.getElementById('btn_create');-->
+<!--        target_create.disabled = true; //비활성화-->
+<!--        target_create.style.backgroundColor = "gray";-->
+<!--    }-->
+<!--</script>-->
+<!--</form>-->
+<!--</form>-->
+<!--</body>-->
+<!--</html>-->

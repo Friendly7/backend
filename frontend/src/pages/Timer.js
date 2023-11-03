@@ -28,10 +28,10 @@ function Timer() {
     };
 
     return (
-        <div>
+        <>
             {/*<p>{formatTime(seconds)}</p>*/}
             <p>{seconds}초</p>}
-        </div>
+        </>
     );
 }
 
