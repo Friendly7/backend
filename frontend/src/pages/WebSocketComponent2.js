@@ -32,10 +32,11 @@ function WebSocketComponent2({ roomId, sender }) {
                 sender: sender
             }));
             setStompClient(stomp);
+            console.log(stompClient)
             setIsLoading(false)
         }, error => {
-            if (reconnect++ <= 10) {
-                setTimeout(function () {
+            if (reconnect++ <= 5) {
+                setTimeout( ()=> {
                     console.log("Connection reconnect");
                     socket = new SockJS("/ws-stomp");
                     stomp = Stomp.over(socket);
