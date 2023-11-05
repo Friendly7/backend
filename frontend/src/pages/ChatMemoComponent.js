@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 function ChatMemoComponent() {
     const [memo, setMemo] = useState('');
     const [memos, setMemos] = useState([]);
-    const maxLength = 100;
+    const maxLength = 200;
 
     const addMemo = () => {
         if (memo.trim() !== '') {
@@ -17,7 +17,7 @@ function ChatMemoComponent() {
         setMemos(updatedMemos);
     };
 
-    const remainingCharacters = maxLength - memo.length;
+    const remainingCharacters = memo.length;
 
     return (
         <div className="chat-memo">

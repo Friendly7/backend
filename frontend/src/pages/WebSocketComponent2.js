@@ -1,7 +1,7 @@
 import React, { useEffect, useState,useCallback } from 'react';
 import SockJS from 'sockjs-client';
 import Stomp from 'stompjs';
-import ChatMemoComponent from "./ChatMemoComponent";
+
 
 function WebSocketComponent2({ roomId, sender }) {
     const [messages, setMessages] = useState([]);
@@ -33,7 +33,7 @@ function WebSocketComponent2({ roomId, sender }) {
                 sender: sender
             }));
             setStompClient(stomp);
-            console.log(stompClient)
+            console.log('client'+stompClient)
             setIsLoading(false)
         }, error => {
             if (reconnect++ <= 5) {
@@ -59,7 +59,7 @@ function WebSocketComponent2({ roomId, sender }) {
             connect();
         }
         return () => disconnect();
-    }, []);
+    }, [stompClient, roomId, sender]);
 
     const sendMessage = useCallback(()=> {
         stompClient.send("/pub/chat/message", {}, JSON.stringify({type:'TALK', roomId:roomId, sender:sender, message:messageText}));
@@ -87,7 +87,6 @@ function WebSocketComponent2({ roomId, sender }) {
                 onKeyDown={(e) => {if (e.key === 'Enter') {sendMessage();}}}
             />
             <button onClick={sendMessage}>Send</button>
-            <ChatMemoComponent />
                 </div>
                 )}
         </>

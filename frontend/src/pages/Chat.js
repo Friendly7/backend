@@ -3,6 +3,7 @@ import SessionManager from "./SessionManager";
 import React, {useEffect, useState} from "react";
 import axios from 'axios';
 import WebSocketComponent2 from "./WebSocketComponent2";
+import ChatMemoComponent from "./ChatMemoComponent";
 
 export default function Chat() {
     const { isLoggedIn,name } = SessionManager(); // 세션 상태를 관리
@@ -28,6 +29,7 @@ export default function Chat() {
             <div>
             {name && <WebSocketComponent2 roomId={roomId} sender={name}/>}
             </div>
+            <ChatMemoComponent />
         </>
     )
 }
