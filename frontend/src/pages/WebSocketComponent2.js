@@ -71,6 +71,11 @@ function WebSocketComponent2({ roomId, sender }) {
         setMessageText('');
     }, [stompClient, roomId, sender, messageText]);
 
+    function parseAndFormatTimestamp(timestamp) {
+        const timePart = timestamp
+        return timePart
+    }
+
     return (
         <>
             {isLoading ? (
@@ -83,7 +88,7 @@ function WebSocketComponent2({ roomId, sender }) {
                     <ul>
                         {messages.map((message, index) => (
                             <li key={index}>
-                                {message.sender} : {message.message}
+                                {message.sender} : {message.message} <span>{message.timestamp && parseAndFormatTimestamp(message.timestamp)}</span>
                             </li>
                         ))}
                     </ul>
