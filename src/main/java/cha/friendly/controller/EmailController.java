@@ -39,7 +39,6 @@ public class EmailController {
                 .subject("[친해지자] 이메일 인증을 위한 인증 코드 발송")
                 .build();
         String code = emailService.sendMail(emailMessage, "email");
-        System.out.println("code = " + code);
         EmailResponseDto emailResponseDto = new EmailResponseDto();
         emailResponseDto.setCode(code);
 

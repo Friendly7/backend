@@ -6,7 +6,7 @@ export default function ChatRoom() {
 
     useEffect(() => {
         if (!loading) {
-            return; // 이미 로딩 중인 경우 중복 호출 방지
+            return;
         }
 
         const reqName = {

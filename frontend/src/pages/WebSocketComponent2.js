@@ -1,6 +1,7 @@
 import React, { useEffect, useState,useCallback } from 'react';
 import SockJS from 'sockjs-client';
 import Stomp from 'stompjs';
+import ChatMemoComponent from "./ChatMemoComponent";
 
 function WebSocketComponent2({ roomId, sender }) {
     const [messages, setMessages] = useState([]);
@@ -86,6 +87,7 @@ function WebSocketComponent2({ roomId, sender }) {
                 onKeyDown={(e) => {if (e.key === 'Enter') {sendMessage();}}}
             />
             <button onClick={sendMessage}>Send</button>
+            <ChatMemoComponent />
                 </div>
                 )}
         </>
