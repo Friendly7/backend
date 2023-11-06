@@ -50,9 +50,12 @@ public class Member {
 
     private float raiting; //별점
     private int reviewCnt; //리뷰개수
-    private int matchedCnt; //매칭된 사람 수
 
     private int point;
+
+    private int totalMatchingCount; //총 매칭수
+    private  String professional;
+
 //    @OneToMany(mappedBy = "member") //order테이블에 있는 member를 뜻한다.
 //    private List<Order> orders = new ArrayList<>();
 }

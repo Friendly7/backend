@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<form action="/adviceRequest" method="post">
+  <div>
+    닉네임
+    <input name = "name" type="text" placeholder="닉네임"/>
+    <br>
+    시간대
+    <input name = "time" type="text" placeholder="원하는 시간대"/>
+    <br>
+    대면/비대면
+    <input name = "onoffline" type="text" placeholder="대면/비대면 중 선택하여 적으시오"/>
+    <br>
+    요일
+    <input name = "dow" type="text" placeholder="원하는 요일"/>
+    <br>
+    분야
+    <input name = "category" type="text" placeholder="분야"/>
+    <br>
+    무료체험여부
+    <input id="expStat" name = "expStat" type="checkbox" />
+
+    <br>
+    전문/비전문
+    <input name = "professional" type="text" placeholder="전문/비전문 중에 선택하여 적으시오"/>
+    <br>
+    최소 가격
+    <input name = "minPrice" type="number" placeholder="원하는 가격대를 적으시오"/>
+    <br>
+    최대 가격
+    <input name = "maxPrice" type="number" placeholder="원하는 가격대를 적으시오"/>
+    <br>
+      1순위
+      <select name="one">
+        <option value="선택">선택</option>
+        <option value="별점">별점</option>
+        <option value="리뷰수">리뷰수</option>
+        <option value="매칭횟수">매칭횟수</option>
+      </select>
+      <br>
+      2순위
+      <select name="two">
+        <option value="선택">선택</option>
+        <option value="별점">별점</option>
+        <option value="리뷰수">리뷰수</option>
+        <option value="매칭횟수">매칭횟수</option>
+      </select>
+      <br>
+      3순위
+      <select name="three">
+        <option name="select" value="선택">선택</option>
+        <option value="별점">별점</option>
+        <option value="리뷰수">리뷰수</option>
+        <option value="매칭횟수">매칭횟수</option>
+      </select>
+      <br>
+    <textarea name="significant" placeholder="특이 사항을 적어주세요!"></textarea>
+    <br>
+    <input name="adviceRequest1" type="submit" value="신청하기" onclick="ok()"/>
+    <script>
+
+
+      function ok(){
+        alert("상담신청이 완료되었습니다.")
+      }
+      /*function change1(){
+        var value1 = document.getElementById("one");
+        var value2 = document.getElementById("two");
+        var value3 = document.getElementById("three");
+        if (value1.value == "가격"){
+          value3.price.hide();
+          value3.time.show();
+          value3.pro.show();
+        }
+        else if(value1.value == "시간"){
+          value3.price.show();
+          value3.time.hide();
+          value3.pro.show();
+        }
+        else if(value1.value == "전문성"){
+          value3.price.show();
+          value3.time.show();
+          value3.pro.hide();
+        }
+      }*/
+    </script>
+  </div>
+</form>
+</body>
+</html>

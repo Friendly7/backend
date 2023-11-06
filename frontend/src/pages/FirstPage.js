@@ -60,6 +60,9 @@ export default function FirstPage() {
             <div>
                 <button onClick={() => navigate('/ChatRoomList')}>내 채팅방 목록 </button>
             </div>
+            <div>
+                <button onClick={() => navigate('/ManagementMatch')}>관리자 페이지 </button>
+            </div>
         </>
     );
   }

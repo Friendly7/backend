@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <div>
+    <table>
+      <th>아이디</th>
+      <th>이름</th>
+      <th>요일</th>
+      <th>분야</th>
+      <th>상세 분야</th>
+      <th>전문성</th>
+      <th>최소 가격</th>
+      <th>최대 가격</th>
+      <th>시간</th>
+      <th>무료체험</th>
+      <th>대면/비대면</th>
+      <th>별점</th>
+      <th>리뷰수</th>
+      <th>총 매칭횟수</th>
+      <th>정지여부</th>
+      <tr th:each="list:${list}">
+      <td>
+        <form id="matching" th:action="@{'/matchingMentor'}" method="POST">
+          <input type="hidden" name="request_id" th:value="${id}"/>
+          <input type="hidden" name="mentor_id" th:value="${list.id}" />
+          <input type="button" th:value="${list.email}" onclick="popUp()"/>
+        </form>
+
+      </td>
+        <td id="name" th:text="${list.name}"></td>
+        <td th:text="${list.DOW}"></td>
+        <td th:text="${list.mainCate}"></td>
+        <td th:text="${list.subCate}"></td>
+        <td th:text="${list.professional}"></td>
+        <td th:text="${list.minPrice}"></td>
+        <td th:text="${list.maxPrice}"></td>
+        <td th:text="${list.time}"></td>
+        <td th:text="${list.expStat}"></td>
+        <td th:text="${list.remote}"></td>
+        <td th:text="${list.raiting}"></td>
+        <td th:text="${list.reviewCnt}"></td>
+        <td th:text="${list.totalMatchingCount}"></td>
+        <td th:text="${list.is_blocked}"></td>
+      </tr>
+      <script>
+        function popUp(){
+          var result = confirm("해당 유저를 선택 하시겠습니까?")
+          if (result == false) {
+            alert("다시 선택해주세요.");
+          } else {
+            alert("선택 되었습니다.");
+            return document.getElementById("matching").submit();
+
+          }
+        }
+      </script>
+    </table>
+  </div>
+</body>
+
+</html>
+

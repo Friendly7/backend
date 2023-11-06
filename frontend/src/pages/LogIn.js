@@ -75,7 +75,6 @@ export default function Login() {
               </div>
               <div className='login_btn'>
                 <button onClick={signin} id='logincom'>Sign in</button><br/>
-                <button onClick={() => navigate('/')} id='kakaolg'>카카오로 로그인</button>
               </div>
               <div className='footer_lg'>
                 <span id='footer_lg_lb'>아직 계정이 없으신가요 ? </span>

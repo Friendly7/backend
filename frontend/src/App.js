@@ -19,6 +19,11 @@ import ReviewListLogin from "./pages/ReviewListLogin";
 import ChatRoom from "./pages/ChatRoom";
 import ChatRoomList from "./pages/ChatRoomList";
 import Chat from "./pages/Chat";
+import ManagerHeader from "./components/layouts/ManagerHeader";
+import ManagerProfile from "./pages/ManagerProfile";
+import ManagerMain from "./pages/ManagerMain";
+import styled from 'styled-components'
+
 
 function App() {
   return (
@@ -40,8 +45,38 @@ function App() {
         <Route path="ChatRoomList" element={<ChatRoomList />} />
         <Route path="Chat" element={<Chat />} />
       </Routes>
+      <ScreenWrapper>
+        <ManagerMain />
+      </ScreenWrapper>
     </BrowserRouter>
+
   );
 }
 
 export default App;
+
+const ScreenWrapper = styled.div`
+margin-left: 260px;
+margin-right: 260px;
+`;
+const ProfileWrapper = styled.div`
+  width: 380px;
+  height: 800px;
+  margin-top: 70px;
+`;
+
+const ViewWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+
+  padding-top: 10px;
+`;
+
+const TableWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+
+  width: 1000px;
+
+  padding-top: 100px;
+`;
