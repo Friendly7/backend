@@ -8,6 +8,7 @@ function WebSocketComponent2({ roomId, sender }) {
     const [stompClient, setStompClient] = useState(null);
     const [messageText, setMessageText] = useState('');
     const [isLoading, setIsLoading] = useState(true);
+    const [getPrev, setGetPrev] = useState(true)
 
     const getChatMessages = async (roomId) => {
         try {
@@ -20,7 +21,8 @@ function WebSocketComponent2({ roomId, sender }) {
     };
 
     useEffect(() => {
-        getChatMessages(roomId)
+        if(getPrev) {getChatMessages(roomId); setGetPrev(false)}
+
         const initializeWebSocket = () => {
             const socket = new SockJS('/ws-stomp');
             const stomp = Stomp.over(socket);
@@ -34,6 +36,7 @@ function WebSocketComponent2({ roomId, sender }) {
                         {
                             type: messageData.type,
                             sender: s,
+                            timestamp:messageData.timestamp,
                             message: messageData.message,
                         },
                     ]);
@@ -42,6 +45,7 @@ function WebSocketComponent2({ roomId, sender }) {
                     type: 'ENTER',
                     roomId: roomId,
                     sender: sender,
+                    timestamp:getCurrentTime()
                 }));
                 setStompClient(stomp);
                 setIsLoading(false);
@@ -67,14 +71,43 @@ function WebSocketComponent2({ roomId, sender }) {
             roomId: roomId,
             sender: sender,
             message: messageText,
+            timestamp:getCurrentTime()
         }));
         setMessageText('');
     }, [stompClient, roomId, sender, messageText]);
 
     function parseAndFormatTimestamp(timestamp) {
-        const timePart = timestamp
-        return timePart
+        let date = new Date(timestamp);
+        const hours = date.getUTCHours().toString().padStart(2, '0');
+        const minutes = date.getUTCMinutes().toString().padStart(2, '0');
+        const res = `${hours}:${minutes}`
+        return res
     }
+    function getCurrentTime() {
+        const now = new Date(); // 현재 시간을 얻습니다.
+
+        const year = now.getFullYear(); // 연도
+        const month = (now.getMonth() + 1).toString().padStart(2, '0'); // 월
+        const day = now.getDate().toString().padStart(2, '0'); // 일
+        const hours = now.getHours().toString().padStart(2, '0'); // 시간
+        const minutes = now.getMinutes().toString().padStart(2, '0'); // 분
+        const seconds = now.getSeconds().toString().padStart(2, '0'); // 초
+
+        return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
+    }
+
+    // 메시지를 시간대별로 그룹화
+    const groupedMessages = messages.reduce((groups, message) => {
+        const key = message.timestamp;
+        if (!groups[key]) {
+            groups[key] = [];
+        }
+        groups[key].push(message);
+        return groups;
+    }, {});
+
+    // 시간대별로 최근 메시지만 추출
+    const recentMessages = Object.values(groupedMessages).map(group => group[group.length - 1]);
 
     return (
         <>
@@ -86,9 +119,9 @@ function WebSocketComponent2({ roomId, sender }) {
             ) : (
                 <div>
                     <ul>
-                        {messages.map((message, index) => (
+                        {recentMessages.map((message, index) => (
                             <li key={index}>
-                                {message.sender} : {message.message} <span>{message.timestamp && parseAndFormatTimestamp(message.timestamp)}</span>
+                                {message.sender} : {message.message} <span>{parseAndFormatTimestamp(message.timestamp)}</span>
                             </li>
                         ))}
                     </ul>
