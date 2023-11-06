@@ -96,19 +96,6 @@ function WebSocketComponent2({ roomId, sender }) {
         return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
     }
 
-    // 메시지를 시간대별로 그룹화
-    const groupedMessages = messages.reduce((groups, message) => {
-        const key = message.timestamp;
-        if (!groups[key]) {
-            groups[key] = [];
-        }
-        groups[key].push(message);
-        return groups;
-    }, {});
-
-    // 시간대별로 최근 메시지만 추출
-    const recentMessages = Object.values(groupedMessages).map(group => group[group.length - 1]);
-
     return (
         <>
             {isLoading ? (
@@ -119,10 +106,8 @@ function WebSocketComponent2({ roomId, sender }) {
             ) : (
                 <div>
                     <ul>
-                        {recentMessages.map((message, index) => (
-                            <li key={index}>
-                                {message.sender} : {message.message} <span>{parseAndFormatTimestamp(message.timestamp)}</span>
-                            </li>
+                        {messages.map((message, index) => (
+                            <li key={index}> {message.sender} : {message.message}</li>
                         ))}
                     </ul>
                     <input
