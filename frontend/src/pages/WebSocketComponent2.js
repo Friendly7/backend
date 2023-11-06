@@ -95,6 +95,42 @@ function WebSocketComponent2({ roomId, sender }) {
 
         return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
     }
+    // 날짜 및 시간을 분리하는 함수
+    function parseDateAndTime(timestamp) {
+        const date = timestamp.slice(0, 10); // 'yyyy-MM-dd' 형태의 날짜 추출
+        const time = timestamp.slice(11, 16); // 'hh:mm' 형태의 시간 추출
+        return { date, time };
+    }
+    // 메시지 그룹화 및 날짜 및 시간 출력
+    const groupedMessages = groupMessagesByTime(messages);
+
+    function groupMessagesByTime(messages) {
+        const grouped = [];
+        let prevDate = null;
+        let prevTime = null;
+        let currentGroup = null;
+        messages.forEach((message) => {
+            const timestamp = message.timestamp;
+            const { date, time } = parseDateAndTime(timestamp);
+
+            if (date !== prevDate) {
+                currentGroup = { date, times: {} };
+                prevTime = null;
+                grouped.push(currentGroup);
+            }
+
+            if (time !== prevTime) {
+                currentGroup.times[time] = [];
+            }
+
+            currentGroup.times[time].push(message);
+            prevDate = date;
+            prevTime = time;
+        });
+        return grouped;
+    }
+
+
 
     return (
         <>
@@ -106,8 +142,27 @@ function WebSocketComponent2({ roomId, sender }) {
             ) : (
                 <div>
                     <ul>
-                        {messages.map((message, index) => (
-                            <li key={index}> {message.sender} : {message.message}</li>
+                        {/*{messages.map((message, index) => (*/}
+                        {/*    <li key={index}> {message.sender} : {message.message} <span>{parseAndFormatTimestamp(message.timestamp)}</span></li>*/}
+                        {/*))}*/}
+                        {groupedMessages.map((group, groupIndex) => (
+                            <li key={groupIndex}>
+                                <div className="date">{group.date}</div>
+                                {group.messages.map((messageData, index) => {
+                                    const message = messageData.message;
+                                    const formattedTime = parseAndFormatTimestamp(message.timestamp);
+                                    const isLastMessageInGroup = index === group.messages.length - 1;
+
+                                    return (
+                                        <div key={index}>
+                                            {message.sender} : {message.message}
+                                            {isLastMessageInGroup && (
+                                                <span>{formattedTime}</span>
+                                            )}
+                                        </div>
+                                    );
+                                })}
+                            </li>
                         ))}
                     </ul>
                     <input
