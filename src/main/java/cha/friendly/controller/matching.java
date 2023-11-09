@@ -1,28 +1,29 @@
 package cha.friendly.controller;
 
 import cha.friendly.domain.Advicerequest;
+import cha.friendly.domain.Dto.MatchingDto;
 import cha.friendly.domain.Member;
 import cha.friendly.repository.AdviceRequestCRUDRepository;
 import cha.friendly.repository.MemberCRUDRepository;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
+@Slf4j
+@RequiredArgsConstructor
 public class matching {
-    @Autowired
-    AdviceRequestCRUDRepository adviceRequestCRUDRepository;
-    @Autowired
-    MemberCRUDRepository memberCRUDRepository;
+    private final AdviceRequestCRUDRepository adviceRequestCRUDRepository;
+    private final MemberCRUDRepository memberCRUDRepository;
 
-    @PostMapping(value = "/matchinglist")public String matchinglist(@RequestParam(value = "request")Long id,Model model){
-        Advicerequest requestval = adviceRequestCRUDRepository.findByRequest(id);
-
+    @PostMapping(value = "/matchinglist")
+    public List<Member> matchinglist(@RequestBody MatchingDto matchingDto){
+        Advicerequest requestval = adviceRequestCRUDRepository.findByRequest(Long.valueOf(matchingDto.getRequest_id()));
         String one, two, three;
         one= requestval.getOne();
         two = requestval.getTwo();
@@ -37,53 +38,42 @@ public class matching {
         if (one.equals("별점")){
             if (two.equals("리뷰수")){
                 List<Member> members = memberCRUDRepository.findByMentorListOneIsRaiting1(requestval.getDOW() , requestval.getExpStat(), remote,requestval.getMinPrice(),
-                        requestval.getMaxPrice(), requestval.getCategory());
-                model.addAttribute("list", members);
-                model.addAttribute("id", id);
-                return "/adviceRequestMentorList";
+                        requestval.getMaxPrice(), requestval.getCategory(), requestval.getProfessional());
+                return members;
             }
             else{
                 List<Member> members = memberCRUDRepository.findByMentorListOneIsRaiting2(requestval.getDOW() , requestval.getExpStat(), remote,requestval.getMinPrice(),
-                        requestval.getMaxPrice(), requestval.getCategory());
-                model.addAttribute("list", members);
-                model.addAttribute("id", id);
-                return "/adviceRequestMentorList";
+                        requestval.getMaxPrice(), requestval.getCategory(), requestval.getProfessional());
+                return members;
             }
         }
         if (one.equals("리뷰수")){
             if (two.equals("별점")){
                 List<Member> members = memberCRUDRepository.findByMentorListOneIsReview_cnt1(requestval.getDOW() , requestval.getExpStat(), remote,requestval.getMinPrice(),
-                        requestval.getMaxPrice(), requestval.getCategory());
-                model.addAttribute("list", members);
-                model.addAttribute("id", id);
-                return "/adviceRequestMentorList";
+                        requestval.getMaxPrice(), requestval.getCategory(), requestval.getProfessional());
+                return members;
             }
             else{
                 List<Member> members = memberCRUDRepository.findByMentorListOneIsReview_cnt2(requestval.getDOW() , requestval.getExpStat(), remote,requestval.getMinPrice(),
-                        requestval.getMaxPrice(), requestval.getCategory());
-                model.addAttribute("list", members);
-                model.addAttribute("id", id);
-                return "/adviceRequestMentorList";
+                        requestval.getMaxPrice(), requestval.getCategory(), requestval.getProfessional());
+                return members;
             }
         }
 
         if (one.equals("매칭횟수")){
             if (two.equals("별점")){
                 List<Member> members = memberCRUDRepository.findByMentorListOneIsRes_rate1(requestval.getDOW() , requestval.getExpStat(), remote,requestval.getMinPrice(),
-                        requestval.getMaxPrice(), requestval.getCategory());
-                model.addAttribute("list", members);
-                model.addAttribute("id", id);
-                return "/adviceRequestMentorList";
+                        requestval.getMaxPrice(), requestval.getCategory(), requestval.getProfessional());
+                System.out.println(members);
+                return members;
             }
             else{
                 List<Member> members = memberCRUDRepository.findByMentorListOneIsRes_rate2(requestval.getDOW() , requestval.getExpStat(), remote,requestval.getMinPrice(),
-                        requestval.getMaxPrice(), requestval.getCategory());
-                model.addAttribute("list", members);
-                model.addAttribute("id", id);
-                return "/adviceRequestMentorList";
+                        requestval.getMaxPrice(), requestval.getCategory(), requestval.getProfessional());
+                return members;
             }
         }
-        return "/main";
+        return null;
     }
     @PostMapping(value = "/rematchinglist")public String rematchinglist(@RequestParam(value = "request")Long id,Model model){
         Advicerequest requestval = adviceRequestCRUDRepository.findByRequest(id);
@@ -102,7 +92,7 @@ public class matching {
         if (one.equals("별점")){
             if (two.equals("리뷰수")){
                 List<Member> members = memberCRUDRepository.findByReMentorListOneIsRaiting1(requestval.getDOW() , requestval.getExpStat(), remote,requestval.getMinPrice(),
-                        requestval.getMaxPrice(), requestval.getCategory(), re_matched);
+                        requestval.getMaxPrice(), requestval.getCategory(), re_matched, requestval.getProfessional());
                 model.addAttribute("list", members);
                 System.out.println(members);
                 model.addAttribute("id", id);
@@ -110,7 +100,7 @@ public class matching {
             }
             else{
                 List<Member> members = memberCRUDRepository.findByReMentorListOneIsRaiting2(requestval.getDOW() , requestval.getExpStat(), remote,requestval.getMinPrice(),
-                        requestval.getMaxPrice(), requestval.getCategory(), re_matched);
+                        requestval.getMaxPrice(), requestval.getCategory(), re_matched, requestval.getProfessional());
                 model.addAttribute("list", members);
                 model.addAttribute("id", id);
                 return "/adviceRequestMentorList";
@@ -119,14 +109,14 @@ public class matching {
         if (one.equals("리뷰수")){
             if (two.equals("별점")){
                 List<Member> members = memberCRUDRepository.findByReMentorListOneIsReview_cnt1(requestval.getDOW() , requestval.getExpStat(), remote,requestval.getMinPrice(),
-                        requestval.getMaxPrice(), requestval.getCategory(), re_matched);
+                        requestval.getMaxPrice(), requestval.getCategory(), re_matched, requestval.getProfessional());
                 model.addAttribute("list", members);
                 model.addAttribute("id", id);
                 return "/adviceRequestMentorList";
             }
             else{
                 List<Member> members = memberCRUDRepository.findByReMentorListOneIsReview_cnt2(requestval.getDOW() , requestval.getExpStat(), remote,requestval.getMinPrice(),
-                        requestval.getMaxPrice(), requestval.getCategory(), re_matched);
+                        requestval.getMaxPrice(), requestval.getCategory(), re_matched, requestval.getProfessional());
                 model.addAttribute("list", members);
                 model.addAttribute("id", id);
                 return "/adviceRequestMentorList";
@@ -136,14 +126,14 @@ public class matching {
         if (one.equals("매칭횟수")){
             if (two.equals("별점")){
                 List<Member> members = memberCRUDRepository.findByReMentorListOneIsRes_rate1(requestval.getDOW() , requestval.getExpStat(), remote,requestval.getMinPrice(),
-                        requestval.getMaxPrice(), requestval.getCategory(), re_matched);
+                        requestval.getMaxPrice(), requestval.getCategory(), re_matched, requestval.getProfessional());
                 model.addAttribute("list", members);
                 model.addAttribute("id", id);
                 return "/adviceRequestMentorList";
             }
             else{
                 List<Member> members = memberCRUDRepository.findByReMentorListOneIsRes_rate2(requestval.getDOW() , requestval.getExpStat(), remote,requestval.getMinPrice(),
-                        requestval.getMaxPrice(), requestval.getCategory(), re_matched);
+                        requestval.getMaxPrice(), requestval.getCategory(), re_matched, requestval.getProfessional());
                 model.addAttribute("list", members);
                 model.addAttribute("id", id);
                 return "/adviceRequestMentorList";
@@ -287,6 +277,5 @@ public class matching {
         model.addAttribute("list", rematchinglist);
         return "/rematchinglist";
     }
-
-
 }
+

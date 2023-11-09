@@ -1,17 +1,23 @@
 import * as React from "react";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-//import Container from "@mui/material/Container";
+
 import { Navbar, Nav, Button, Container, Dropdown } from "react-bootstrap";
-//import Button from "@mui/material/Button";
 import styled from "styled-components";
 import SvgIcon from "@mui/material/SvgIcon";
 import ManagementMatch from '../../pages/ManagementMatch';
 import ManagementChat from '../../pages/ManagementChat';
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+//import Container from "@mui/material/Container";
+//import Button from "@mui/material/Button";
+import SessionManager from "../../pages/SessionManager";
+import {useNavigate} from 'react-router-dom';
+import axios from "axios";
 
 function ManagerHeader(props) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const {isLoggedIn, setIsLoggedIn} = SessionManager();
+  const navigate = useNavigate;
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -29,7 +35,7 @@ function ManagerHeader(props) {
             <ImageWrapper>
               <img
                 width="80"
-                src="https://swiperjs.com/demos/images/nature-1.jpg"
+                src="../img/friendly.jpg"
               />
             </ImageWrapper>
           </Nav.Link>
@@ -53,13 +59,12 @@ function ManagerHeader(props) {
         </Navbar.Brand>
         </LogWrapper>
       </Containers>
-
       <BoxWrapper>
         <CategoryWrapper>
           {/* Nav에 justify-content-between 클래스 추가 */}
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto" style={{ display: 'flex', justifyContent: 'space-between', marginLeft: '300px', marginRight: '50px' }}>
-              <Nav.Link href="/ManagementMatch">매칭 신청 관리</Nav.Link>
+              <Nav.Link href="/">매칭 신청 관리</Nav.Link>
               <Nav.Link href="/ManagementChat">채팅 관리</Nav.Link>
               <Nav.Link href="/ManagementUserList">회원 목록 관리</Nav.Link>
               <Nav.Link href="/ManagementConnect">회원 연결 관리</Nav.Link>

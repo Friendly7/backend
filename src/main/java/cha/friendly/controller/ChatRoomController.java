@@ -1,6 +1,7 @@
 package cha.friendly.controller;
 
 import cha.friendly.domain.ChatRoom;
+import cha.friendly.domain.Dto.ChatReqFriend;
 import cha.friendly.domain.Dto.ChatReqName;
 import cha.friendly.domain.Member;
 import cha.friendly.service.ChatRoomService;
@@ -40,6 +41,16 @@ public class ChatRoomController {
         ChatRoom chatRoom = chatRoomService.createChatRoom(chatReqName);
         return chatRoom;
     }
+    // 채팅방 생성
+    @PostMapping("/room/friend")
+    public ChatRoom createFriendRoom(@RequestBody ChatReqFriend chatReqFriend) {
+        ChatRoom friendRoom = chatRoomService.findFriendRoom(chatReqFriend.getRoomName());
+        if(friendRoom==null) {
+            ChatRoom chatRoom = chatRoomService.createChatFriendRoom(chatReqFriend);
+            return chatRoom;
+        }
+        return null;
+    }
 
     //채팅방 리스트(user) 본인과 연관된 채팅방 리스트를 출력한다.
     @GetMapping("/room/user")
@@ -54,6 +65,16 @@ public class ChatRoomController {
         } catch (Exception e){
             return null;
         }
+    }
+    @GetMapping("/room/friend/ChatRoomList")
+    public List<ChatRoom> friendRoom(@SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember) {
+        //세션에 회원 데이터가 없으면 home
+        if (loginMember == null) {
+            return null;
+        }
+        //채팅방 목록
+        List<ChatRoom> allFriendRoom = chatRoomService.findAllFriendRoom();
+        return allFriendRoom;
     }
 
     //채팅방 삭제

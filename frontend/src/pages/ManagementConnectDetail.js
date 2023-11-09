@@ -1,7 +1,6 @@
 import * as React from "react";
 import { useParams } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
-import { createData, rows } from "./ManagementConnectData";
 import { Container } from "react-bootstrap";
 import styled from "styled-components";
 import SvgIcon from "@mui/material/SvgIcon";
@@ -9,14 +8,6 @@ import Button from "@mui/material/Button";
 
 export default function ManagementListDetail(props) {
   const { No } = useParams(); // URL에서 No 매개변수를 가져옴
-
-  // 선택한 No에 해당하는 데이터 찾기
-  const selectedRow = rows.find((row) => row.No === No);
-
-  // 선택한 데이터가 없으면 null 반환
-  if (!selectedRow) {
-    return null;
-  }
 
   return (
     <div>

@@ -43,7 +43,6 @@ public class LoginController {
 
     @GetMapping("/checkSession")
     public String checkSession(HttpSession session) {
-        // 세션에 사용자 정보가 있는지 확인하거나 다른 세션 상태 체크 로직을 수행
         if (session.getAttribute(SessionConst.LOGIN_MEMBER) != null) {
             Member loginMember = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
             String memberName = loginMember.getName();

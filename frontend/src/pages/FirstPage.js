@@ -63,6 +63,10 @@ export default function FirstPage() {
             <div>
                 <button onClick={() => navigate('/ManagementMatch')}>관리자 페이지 </button>
             </div>
+            <div>
+                <button onClick={() => navigate('/FriendChat')}>친구상담 </button>
+            </div>
+
         </>
     );
   }

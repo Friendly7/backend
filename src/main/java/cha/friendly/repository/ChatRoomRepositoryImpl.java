@@ -10,4 +10,7 @@ public interface ChatRoomRepositoryImpl extends MongoRepository<ChatRoom, String
     List<ChatRoom> findByUsername2(String username2);
 
     ChatRoom findByRoomId(String roomId);
+    List<ChatRoom> findByType(String type);
+
+    ChatRoom findByroomName1(String roomName);
 }

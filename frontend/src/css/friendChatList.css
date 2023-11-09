@@ -1,0 +1,11 @@
+.chat-room-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2개의 열로 나누려면 2를 사용 */
+    gap: 10px; /* 셀 사이의 간격 설정 */
+}
+
+.chat-room {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}

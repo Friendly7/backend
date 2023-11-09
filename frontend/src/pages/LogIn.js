@@ -26,7 +26,7 @@ export default function Login() {
     axios.post('/login', data)
         .then((response) => {
           if (response.data === 'success') {
-            navigate('/');
+            window.location.href = '/'
           }
           else if(response.data === 'fail'){
             setLoginMessage('아이디 또는 비밀번호가 맞지 않습니다');
@@ -55,7 +55,7 @@ export default function Login() {
             <div className='login_right'>
               <a onClick={() => navigate('/Explanation')} id='whatis'>"친해지자"란?</a>
               <div className='login_name'>
-                <span id='lg_content_one'>친해지자</span><br/><br/>
+                <span id='lg_content_one'>친해지자</span><br/>
                 <span id='lg_content_two'>고민상담과 멘토링이 필요할땐 우리 언제든 <span id='lg_content_two_name'>친해지자</span></span>
               </div>
               <div className='login_form'>

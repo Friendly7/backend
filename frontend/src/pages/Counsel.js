@@ -1,10 +1,12 @@
 import React from 'react';
 import { useNavigate } from "react-router-dom";
 import '../css/Counsel.css';
+import se from './SessionManager';
+import SessionManager from "./SessionManager";
 
 export default function Counsel() {
-    const navigate = useNavigate();
-  
+  const { isLoggedIn,name } = SessionManager();
+
     return (
       <div className="container_cs">
         <div className='counsel'>
@@ -17,7 +19,7 @@ export default function Counsel() {
                 <label id='counsel_exp_lb'>체험여부</label>
               </div>
               <div className='counsel_nameex_input'>
-                <input type="text" id="counsel_name_input" placeholder='  ' ></input>
+                <input type="text" id="counsel_name_input" value={name} readOnly/>
                 <label id='counsel_name_input_olb'><input type="radio" id='counsel_name_input_o' name="exp" value="희망" /> 희망</label>
                 <label id='counsel_name_input_nlb'><input type="radio" id='counsel_name_input_n' name="exp" value="비희망" /> 비희망</label>
               </div>
@@ -49,7 +51,7 @@ export default function Counsel() {
               </div>
               <div className='significant'>
                 <label id='significant_lb'>특이사항</label><br/>
-                <input type="text" id="significant_input" placeholder='  ' ></input>
+                <input type="text" id="significant_input" placeholder='매칭에 참고할 사항을 적어주세요(ex:진로를 못정하겠어요)' ></input>
               </div>
               <div className='counsel_nummeth_lb'>
                 <label id='counsel_number_lb'>희망 인원</label>

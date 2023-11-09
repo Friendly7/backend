@@ -2,6 +2,7 @@ package cha.friendly.service;
 
 import cha.friendly.domain.ChatMessage;
 import cha.friendly.domain.ChatRoom;
+import cha.friendly.domain.Dto.ChatReqFriend;
 import cha.friendly.domain.Dto.ChatReqName;
 import cha.friendly.repository.ChatRoomRepositoryImpl;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,12 @@ public class ChatRoomService {
     public List<ChatRoom> findAllRoom() {
         // 채팅방 생성순서 최근 순으로 반환
         List<ChatRoom> findRooms = chatRoomRepository.findAll();
+//        Collections.reverse(findRooms);
+        return findRooms;
+    }
+    public List<ChatRoom> findAllFriendRoom() {
+        // 채팅방 생성순서 최근 순으로 반환
+        List<ChatRoom> findRooms = chatRoomRepository.findByType("friend");
 //        Collections.reverse(findRooms);
         return findRooms;
     }
@@ -59,5 +66,18 @@ public class ChatRoomService {
 
     public ChatRoom findByRoomId(String roomId) {
         return chatRoomRepository.findByRoomId(roomId);
+    }
+
+    public ChatRoom createChatFriendRoom(ChatReqFriend chatReqFriend) {
+        ChatRoom chatRoom = ChatRoom.createFriendRoom(chatReqFriend);
+        chatRoomRepository.save(chatRoom);
+        return chatRoom;
+    }
+
+    public ChatRoom findFriendRoom(String roomName) {
+        ChatRoom chatRoom = chatRoomRepository.findByroomName1(roomName);
+        if (chatRoom == null) {
+            return null;
+        } return chatRoom;
     }
 }

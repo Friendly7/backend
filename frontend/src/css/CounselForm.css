@@ -1,0 +1,906 @@
+html,
+      body {
+        width: 100vw;
+        height: 100vh;
+        margin: 0px;
+      }
+
+.container_csf{
+    width: 100%;
+    height: 100%;
+    background-image: url( "../counsel_bg.jpg" );
+    background-size: 100%;
+    background-repeat: no-repeat;
+    position: absolute;
+}
+
+.counselform{
+    position: absolute;
+    top: 10%;
+    left: 15%;
+    border: 1px solid white;
+    width: 70%;
+    height: 80%;
+    background-color:white;
+    box-shadow: 1px 1px 7px 1px #04230B;
+}
+
+@font-face { 
+  font-family: "counselname";
+  src: url("../font/HakgyoansimWoojuR.ttf") format("truetype");
+  font-weight: normal;
+}
+
+#firstp_counsel_form{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+#seconp_counsel_form{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+
+#thirdp_counsel_form{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+
+#fourdp_counsel_form{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+
+#fifthdp_counsel_form{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+
+#sixthdp_counsel_form{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+
+.counsel_form_header{
+  position: relative;
+  width: 100%;
+  height: 10%;
+}
+
+#counsel_form_homebtn{
+  position: relative;
+  left: 2%;
+  top:10%;
+  width: 5%;
+  height: 80%;
+  background-image: url('../로고.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  border: none;
+}
+
+.counsel_form_name{
+  position: absolute;
+  width: 100%;
+  height: 90%;
+  background-color: rgba(4, 35, 11, 0.1);
+}
+
+#counsel_form_name_fi{
+  position:absolute;
+  margin-top:2.5%;
+  margin-left:42%;
+  font-size:60px;
+  font-weight:900;
+  color:rgba(4, 35, 11,0.8);
+  font-family: 'counselname', serif;
+}
+
+#counsel_form_name_se{
+  position:absolute;
+  margin-top:7.5%;
+  margin-left:44%;
+  font-size:20px;
+  font-weight:900;
+  color: rgba(4, 35, 11,0.4);
+  font-family: 'counselname', serif;
+}
+
+.counsel_form_left{
+  position: absolute;
+  background-color: white;
+  top: 20%;
+  left: 3%;
+  width:30%;
+  height: 65%;
+  box-shadow: 1px 1px 7px 1px rgba(4, 35, 11, 0.6);
+}
+
+
+#v-line {
+  position: absolute;
+  top:14%;
+  left: 27.5%;
+  border-left : medium solid rgba(0,40,0,0.1);
+  background-color: rgba(0,40,0,0.1);
+  height : 8.1%;
+}
+
+#v-line_two {
+  position: absolute;
+  top:29%;
+  left: 27.5%;
+  border-left : medium solid rgba(0,40,0,0.1);
+  background-color: rgba(0,40,0,0.1);
+  height : 8.7%;
+}
+
+#v-line_three {
+  position: absolute;
+  top:44%;
+  left: 27.5%;
+  border-left : medium solid rgba(0,40,0,0.1);
+  background-color: rgba(0,40,0,0.1);
+  height : 8.7%;
+}
+
+#v-line_four {
+  position: absolute;
+  top:59.3%;
+  left: 27.5%;
+  border-left : medium solid rgba(0,40,0,0.1);
+  background-color: rgba(0,40,0,0.1);
+  height : 8.7%;
+}
+
+#v-line_five {
+  position: absolute;
+  top:74%;
+  left: 27.5%;
+  border-left : medium solid rgba(0,40,0,0.1);
+  background-color: rgba(0,40,0,0.1);
+  height : 8.7%;
+}
+
+.h-line {
+  position: absolute;
+  top: 13%;
+  left: 0%;
+  border-top : medium solid rgba(0,40,0,0.1);
+  width : 100%;
+}
+
+#counsel_form_left_circle_half{
+  position: absolute;
+  top:7.5%;
+  left: 23%;
+  width: 10%;
+  height: 7%;
+  border: 2px solid #04230B;
+  border-radius: 40px;
+  background-color: white;
+}
+
+#counsel_form_left_circle_half_se{
+  position: absolute;
+  top:22%;
+  left: 23%;
+  width: 10%;
+  height: 7%;
+  border: 2px solid #04230B;
+  border-radius: 40px;
+  background-color: white;
+}
+
+#counsel_form_left_circle_half_th{
+  position: absolute;
+  top:37.5%;
+  left: 23%;
+  width: 10%;
+  height: 7%;
+  border: 2px solid #04230B;
+  border-radius: 40px;
+  background-color: white;
+}
+
+#counsel_form_left_circle_half_four{
+  position: absolute;
+  top:52.5%;
+  left: 23%;
+  width: 10%;
+  height: 7%;
+  border: 2px solid #04230B;
+  border-radius: 40px;
+  background-color: white;
+}
+
+#counsel_form_left_circle_half_five{
+  position: absolute;
+  top:67.5%;
+  left: 23%;
+  width: 10%;
+  height: 7%;
+  border: 2px solid #04230B;
+  border-radius: 40px;
+  background-color: white;
+}
+
+#counsel_form_left_circle_full{
+  position: absolute;
+  top:7%;
+  left: 23%;
+  width: 10%;
+  height: 7%;
+  border: 2px solid white;
+  border-radius: 40px;
+  background-image: linear-gradient(to top right, #04230B, #CBDFA0);
+}
+
+#counsel_form_left_circle_full_se{
+  position: absolute;
+  top:22%;
+  left: 23%;
+  width: 10%;
+  height: 7%;
+  border: 2px solid white;
+  border-radius: 40px;
+  background-image: linear-gradient(to top right, #04230B, #CBDFA0);
+}
+
+#counsel_form_left_circle_full_th{
+  position: absolute;
+  top:37.5%;
+  left: 23%;
+  width: 10%;
+  height: 7%;
+  border: 2px solid white;
+  border-radius: 40px;
+  background-image: linear-gradient(to top right, #04230B, #CBDFA0);
+}
+
+#counsel_form_left_circle_full_four{
+  position: absolute;
+  top:52.5%;
+  left: 23%;
+  width: 10%;
+  height: 7%;
+  border: 2px solid white;
+  border-radius: 40px;
+  background-image: linear-gradient(to top right, #04230B, #CBDFA0);
+}
+
+#counsel_form_left_circle_full_five{
+  position: absolute;
+  top:67.5%;
+  left: 23%;
+  width: 10%;
+  height: 7%;
+  border: 2px solid white;
+  border-radius: 40px;
+  background-image: linear-gradient(to top right, #04230B, #CBDFA0);
+}
+
+#counsel_form_left_circle_full_six{
+  position: absolute;
+  top:82%;
+  left: 23%;
+  width: 10%;
+  height: 7%;
+  border: 2px solid white;
+  border-radius: 40px;
+  background-image: linear-gradient(to top right, #04230B, #CBDFA0);
+}
+
+#counsel_form_left_circle_none{
+  position: absolute;
+  top:22%;
+  left: 23%;
+  width: 10%;
+  height: 7%;
+  border: 2px solid rgba(0,40,0,0.1);
+  border-radius: 40px;
+  background-color:white;
+}
+
+#counsel_form_left_circle_none_three{
+  position: absolute;
+  top:37.5%;
+  left: 23%;
+  width: 10%;
+  height: 7%;
+  border: 2px solid rgba(0,40,0,0.1);
+  border-radius: 40px;
+  background-color:white;
+}
+
+#counsel_form_left_circle_none_four{
+  position: absolute;
+  top:52.5%;
+  left: 23%;
+  width: 10%;
+  height: 7%;
+  border: 2px solid rgba(0,40,0,0.1);
+  border-radius: 40px;
+  background-color:white;
+}
+
+#counsel_form_left_circle_none_five{
+  position: absolute;
+  top:67%;
+  left: 23%;
+  width: 10%;
+  height: 7%;
+  border: 2px solid rgba(0,40,0,0.1);
+  border-radius: 40px;
+  background-color:white;
+}
+
+#counsel_form_left_circle_none_six{
+  position: absolute;
+  top:82%;
+  left: 23%;
+  width: 10%;
+  height: 7%;
+  border: 2px solid rgba(0,40,0,0.1);
+  border-radius: 40px;
+  background-color:white;
+}
+
+#counsel_form_left_one{
+  position: absolute;
+  top:9%;
+  left: 37%;
+  color:#04230B;
+  font-size: 25px;
+  font-family: 'counselname', serif;
+}
+
+#counsel_form_left_two{
+  position: absolute;
+  top:24%;
+  left: 37%;
+  color:rgba(4, 35, 11, 0.6);
+  font-size: 25px;
+  font-family: 'counselname', serif;
+}
+
+#counsel_form_left_three{
+  position: absolute;
+  top:39%;
+  left: 37%;
+  color:rgba(4, 35, 11, 0.6);
+  font-size: 25px;
+  font-family: 'counselname', serif;
+}
+
+#counsel_form_left_four{
+  position: absolute;
+  top:54%;
+  left: 37%;
+  color:rgba(4, 35, 11, 0.6);
+  font-size: 25px;
+  font-family: 'counselname', serif;
+}
+
+#counsel_form_left_five{
+  position: absolute;
+  top:69%;
+  left: 37%;
+  color:rgba(4, 35, 11, 0.6);
+  font-size: 25px;
+  font-family: 'counselname', serif;
+}
+
+#counsel_form_left_six{
+  position: absolute;
+  top:84%;
+  left: 37%;
+  color:rgba(4, 35, 11, 0.6);
+  font-size: 25px;
+  font-family: 'counselname', serif;
+}
+
+.counsel_form_right{
+  position: absolute;
+  background-color: white;
+  top: 20%;
+  left: 37%;
+  width:60%;
+  height: 65%;
+  box-shadow: 1px 1px 7px 1px rgba(4, 35, 11, 0.6);
+}
+
+#progress{
+  appearance: none;
+  width: 80%;
+  height: 1%;
+  margin-left: 10%;
+  margin-top: 3%;
+}
+
+#progress::-webkit-progress-bar {
+  background:#f0f0f0;
+  border-radius:10px;
+  box-shadow: inset 3px 3px 10px #ccc;
+}
+#progress::-webkit-progress-value {
+  border-radius:10px;
+  background: #1D976C;
+  background: -webkit-linear-gradient(to right, rgba(4, 35, 11, 0.1),rgba(4, 35, 11,0.6));
+  background: linear-gradient(to right,rgba(4, 35, 11, 0.1), rgba(4, 35, 11,0.6));
+}
+
+#progress_lb{
+  position: absolute;
+  top: 7%;
+  right: 10%;
+  color:rgba(4, 35, 11,0.8);
+}
+
+#counsel_form_name_lb{
+  position: absolute;
+  top: 22%;
+  left: 10%;
+  color:rgba(4, 35, 11, 0.6);
+  font-size: 25px;
+  font-weight: bold;
+  font-family: 'counselname', serif;
+}
+
+#name_form_counsel{
+  position: absolute;
+  top:29%;
+  left: 10%;
+  border-radius: 5%;
+  box-shadow: 1px 1px 5px 1px rgba(4, 35, 11, 0.3);
+  width: 80%;
+  height: 5%;
+  border: none;
+  font-size: medium;
+}
+
+#counsel_form_field_lb{
+  position: absolute;
+  top:44%;
+  left: 10%;
+  color:rgba(4, 35, 11, 0.6);
+  font-size: 25px;
+  font-weight: bold;
+  font-family: 'counselname', serif;
+}
+
+#sel_field{
+  position: absolute;
+  top:51%;
+  left: 10%;
+  width: 80%;
+  height: 5%;
+  border-radius: 5%;
+  box-shadow: 1px 1px 5px 1px rgba(4, 35, 11, 0.3);
+  border: none;
+  font-size: medium;
+}
+
+#counsel_form_significant_lb{
+  position: absolute;
+  top:66%;
+  left: 10%;
+  color:rgba(4, 35, 11, 0.6);
+  font-size: 25px;
+  font-weight: bold;
+  font-family: 'counselname', serif;
+}
+
+#significant_form_counsel{
+  position: absolute;
+  top:73%;
+  left: 10%;
+  border-radius: 5%;
+  box-shadow: 1px 1px 5px 1px rgba(4, 35, 11, 0.3);
+  width: 80%;
+  height: 5%;
+  border: none;
+  font-size: medium;
+}
+
+#nextbtn{
+  position: absolute;
+  left: 75%;
+  top: 85%;
+  width: 6%;
+  height: 8%;
+  border-radius: 70%;
+  border: none;
+  box-shadow: 1px 1px 5px 1px rgba(4, 35, 11, 0.3);
+  background-image: url('../counsel_arrow.JPG');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#counsel_form_method_lb{
+  position: absolute;
+  top: 35%;
+  left: 30%;
+  color:rgba(4, 35, 11, 0.6);
+  font-size: 35px;
+  font-weight: bold;
+  font-family: 'counselname', serif;
+}
+
+.counsel_method{
+  position: absolute;
+  top:35%;
+  left:45%;
+  font-size:35px;
+  width: 40%;
+  font-family: 'counselname', serif;
+}
+
+#counsel_method_input_n{
+  margin-left: 10%;
+}
+
+#counsel_form_exp_lb{
+  position: absolute;
+  top: 55%;
+  left: 30%;
+  color:rgba(4, 35, 11, 0.6);
+  font-size: 35px;
+  font-weight: bold;
+  font-family: 'counselname', serif;
+}
+
+.counsel_exp{
+  position: absolute;
+  top:55%;
+  left:45%;
+  font-size:35px;
+  width: 40%;
+  font-family: 'counselname', serif;
+}
+
+#counsel_exp_input_n{
+  margin-left: 10%;
+}
+
+#counsel_form_day_lb{
+  position: absolute;
+  top: 22%;
+  left: 10%;
+  color:rgba(4, 35, 11, 0.6);
+  font-size: 25px;
+  font-weight: bold;
+  font-family: 'counselname', serif;
+}
+
+#sel_day{
+  position: absolute;
+  top:30%;
+  left: 10%;
+  width: 80%;
+  height: 5%;
+  border-radius: 5%;
+  box-shadow: 1px 1px 5px 1px rgba(4, 35, 11, 0.3);
+  border: none;
+  font-size: medium;
+}
+
+#counsel_form_time_lb{
+  position: absolute;
+  top: 41%;
+  left: 10%;
+  color:rgba(4, 35, 11, 0.6);
+  font-size: 25px;
+  font-weight: bold;
+  font-family: 'counselname', serif;
+}
+
+#sel_time{
+  position: absolute;
+  top:49%;
+  left: 10%;
+  width: 80%;
+  height: 5%;
+  border-radius: 5%;
+  box-shadow: 1px 1px 5px 1px rgba(4, 35, 11, 0.3);
+  border: none;
+  font-size: medium;
+}
+
+#counsel_form_price_lb{
+  position: absolute;
+  top: 60%;
+  left: 10%;
+  color:rgba(4, 35, 11, 0.6);
+  font-size: 25px;
+  font-weight: bold;
+  font-family: 'counselname', serif;
+}
+
+.sliderrange{
+  position: absolute;
+  left:10%;
+  top: 67%;
+  width: 80%;
+  height: 7%;
+}
+
+#sliderrange_price{
+  position: absolute;
+  top:75%;
+  left: 10%;
+  font-size: 20px;
+  font-family: 'couns elname', serif;
+  width: 30%;
+}
+
+#recom_price{
+  position: absolute;
+  background-image: url('../recom_price.JPG');
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 4%;
+  height: 6%;
+  border: none;
+  top:74%;
+  right: 60%;
+}
+
+#recommend{
+  position: absolute;
+  top:80%;
+  left: 10%;
+}
+
+#counsel_form_ingre{
+  position: absolute;
+  top: 22%;
+  left: 10%;
+  color:rgba(4, 35, 11, 0.6);
+  font-size: 25px;
+  font-weight: bold;
+  font-family: 'counselname', serif;
+}
+
+#sel_first_pri{
+  position: absolute;
+  top:33%;
+  left:14%;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: 'counselname', serif;
+}
+#sel_second_pri{
+  position: absolute;
+  top:48%;
+  left:14%;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: 'counselname', serif;
+}
+#sel_third_pri{
+  position: absolute;
+  top:63%;
+  left:14%;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: 'counselname', serif;
+}
+
+#sel_first_lb{
+  position: absolute;
+  top:31%;
+  left:35%;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: 'counselname', serif;
+}
+
+#counsel_form_check{
+  position: absolute;
+  top: 20%;
+  left: 32%;
+  color:rgba(4, 35, 11, 0.6);
+  font-size: 25px;
+  font-weight: bold;
+  font-family: 'counselname', serif;
+}
+
+#sel_first{
+  position: absolute;
+  top:32%;
+  left: 25%;
+  width: 60%;
+  height: 5%;
+  border-radius: 5%;
+  box-shadow: 1px 1px 5px 1px rgba(4, 35, 11, 0.3);
+  border: none;
+  font-size: medium;
+}
+
+#sel_second_lb{
+  position: absolute;
+  top:41%;
+  left:35%;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: 'counselname', serif;
+}
+
+#sel_second{
+  position: absolute;
+  top:47%;
+  left: 25%;
+  width: 60%;
+  height: 5%;
+  border-radius: 5%;
+  box-shadow: 1px 1px 5px 1px rgba(4, 35, 11, 0.3);
+  border: none;
+  font-size: medium;
+}
+
+#sel_third_lb{
+  position: absolute;
+  top:51%;
+  left:35%;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: 'counselname', serif;
+}
+
+#sel_third{
+  position: absolute;
+  top:62%;
+  left: 25%;
+  width: 60%;
+  height: 5%;
+  border-radius: 5%;
+  box-shadow: 1px 1px 5px 1px rgba(4, 35, 11, 0.3);
+  border: none;
+  font-size: medium;
+}
+
+#sel_field_check{
+  position: absolute;
+  top:31%;
+  left:47%;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: 'counselname', serif;
+}
+
+#sel_method_check{
+  position: absolute;
+  top:48%;
+  left:32%;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: 'counselname', serif;
+}
+
+#sel_day_check{
+  position: absolute;
+  top:41%;
+  left: 47%;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: 'counselname', serif;
+}
+
+#sel_time_check{
+  position: absolute;
+  top:51%;
+  left: 47%;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: 'counselname', serif;
+}
+
+#sel_fourth_lb{
+  position: absolute;
+  top:61%;
+  left:35%;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: 'counselname', serif;
+}
+
+#sel_fifth_lb{
+  position: absolute;
+  top:71%;
+  left:35%;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: 'counselname', serif;
+}
+
+#sel_sixth_lb{
+  position: absolute;
+  top:81%;
+  left:35%;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: 'counselname', serif;
+}
+
+#sel_price_check{
+  position: absolute;
+  top: 61%;
+  left: 47%;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: 'counselname', serif;
+}
+
+#sel_method_check{
+  position: absolute;
+  top: 71%;
+  left: 47%;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: 'counselname', serif;
+}
+
+#sel_exp_check{
+  position: absolute;
+  top: 81%;
+  left: 47%;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: 'counselname', serif;
+}
+
+#counsel_form_complete{
+  position: absolute;
+  top:40%;
+  left: 33%;
+  font-size: 40px;
+  font-weight: bold;
+  font-family: 'counselname', serif;
+}
+
+#counsel_form_com_two{
+  position: absolute;
+  top:50%;
+  left: 31.5%;
+  font-size: 25px;
+  font-weight: bold;
+  font-family: 'counselname', serif;
+}
+
+#gomainbtn{
+  position: absolute;
+  top: 75%;
+  left: 28%;
+  width: 15%;
+  height: 9%;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: 'counselname', serif;
+  color:rgba(4, 35, 11,0.8);
+  
+}
+
+#gomypagebtn{
+  position: absolute;
+  top: 75%;
+  left: 58%;
+  width: 15%;
+  height: 9%;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: 'counselname', serif;
+  color:rgba(4, 35, 11,0.8);
+}

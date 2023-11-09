@@ -8,7 +8,8 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { createData, rows } from "./ManagementMatchData";
+import axios from 'axios';
+import {useEffect, useState} from "react";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -29,6 +30,17 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export default function ManagementMatch() {
+  const [rows, setRows] = useState([]);
+  useEffect(() => {
+    axios.get('/manage/match/list').then(response => {
+      console.log(response.data);
+      setRows(response.data);
+    })
+        .catch(error => {
+          // 오류 발생 시 처리
+          console.error('Error fetching data:', error);
+        });
+  },[])
   const theme = useTheme();
   return (
     <TableContainer component={Paper}>
@@ -43,15 +55,15 @@ export default function ManagementMatch() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <StyledTableRow key={row.No}>
+          {rows.map((row,index) => (
+            <StyledTableRow key={index}>
               <StyledTableCell component="th" scope="row" align="center">
-                <Link to={`/ManagementMatchDetail/${row.No}`}>{row.No}</Link>
+                <Link to={`/ManagementMatchDetail/${row.request_id}`}>{index+1}</Link>
               </StyledTableCell>
-              <StyledTableCell align="center">{row.Class}</StyledTableCell>
-              <StyledTableCell align="center">{row.State}</StyledTableCell>
-              <StyledTableCell align="center">{row.Username}</StyledTableCell>
-              <StyledTableCell align="center">{row.Date}</StyledTableCell>
+              <StyledTableCell align="center">{row.category}</StyledTableCell>
+              <StyledTableCell align="center">{row.matching}</StyledTableCell>
+              <StyledTableCell align="center">{row.user_name}</StyledTableCell>
+              <StyledTableCell align="center">{row.date}</StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>

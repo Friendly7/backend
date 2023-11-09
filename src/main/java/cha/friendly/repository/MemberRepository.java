@@ -2,6 +2,7 @@ package cha.friendly.repository;
 
 import cha.friendly.domain.Member;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -12,6 +13,7 @@ import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
+@Slf4j
 public class MemberRepository {
     @PersistenceContext
     private EntityManager em;
@@ -30,6 +32,7 @@ public class MemberRepository {
     }
 
     public List<Member> findByName(String name) {
+        log.info(name);
         return em.createQuery("select m from Member m where m.name = :name", Member.class)
                 .setParameter("name", name)
                 .getResultList();

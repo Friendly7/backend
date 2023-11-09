@@ -4,6 +4,7 @@ import cha.friendly.domain.Address;
 import cha.friendly.domain.Member;
 import cha.friendly.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,10 +13,12 @@ import java.util.List;
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
+@Slf4j
 public class MemberService {
     private final MemberRepository memberRepository;
 
     public List<Member> findByName(String name) {
+        log.info(name);
         return memberRepository.findByName(name);
     }
 

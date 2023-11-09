@@ -18,7 +18,6 @@ function ManagerMain() {
   return (
         <div>
           <ManagerHeader />
-
           <ViewWrapper>
             <ProfileWrapper>
               <ManagerProfile />

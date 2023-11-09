@@ -15,10 +15,15 @@ export default function Chat() {
         if (isLoggedIn && loading) {
             axios.get('/chat/room/'+roomId)
                 .then((response)=>{
-                    if(response.data.roomName1 ===name)
-                        setRoomName(response.data.roomName2)
-                    else
+                    console.log(response)
+                    if(response.data.type!='friend') {
+                        if(response.data.roomName1 === name)
+                            setRoomName(response.data.roomName2)
+                        else
+                            setRoomName(response.data.roomName1)
+                    } else{
                         setRoomName(response.data.roomName1)
+                    }
                     setLoading(false)
                 }).catch((error) => { console.log(error)});
         }
