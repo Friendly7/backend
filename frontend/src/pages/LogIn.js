@@ -26,8 +26,10 @@ export default function Login() {
     axios.post('/login', data)
         .then((response) => {
           if (response.data === 'success') {
-            window.location.href = '/'
+            navigate('/')
           }
+          else if(response.data === '/ManagerMain')
+            navigate('/ManagerMain')
           else if(response.data === 'fail'){
             setLoginMessage('아이디 또는 비밀번호가 맞지 않습니다');
             setPassword('');
@@ -44,7 +46,7 @@ export default function Login() {
   }
 
   return (
-      <div className="container_lg">
+      <div className="container_lgl">
         <div className="container_lg_t">
           <div className='header_lg'>
             <div className='logo'></div>

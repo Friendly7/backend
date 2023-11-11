@@ -1,0 +1,115 @@
+html,
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0px;
+      }
+
+.mypage_connecting{
+    position: absolute;
+    width: 70%;
+    height: 75%;
+    left: 20%;
+    top: 18%;
+}
+
+#mypage_connecting_one{
+    position: absolute;
+    left: 2%;
+    font-size:35px;
+    font-weight:600;
+    color:rgba(4, 35, 11,0.8);
+    font-family: 'counselname', serif;
+}
+
+#mypage_connecting_two{
+    position: absolute;
+    left: 2%;
+    top:45%;
+    font-size:35px;
+    font-weight:600;
+    color:rgba(4, 35, 11,0.8);
+    font-family: 'counselname', serif;
+}
+
+#mypage_connecting_table_one{
+    position: absolute;
+    width: 95%;
+    top: 10%;
+    left: 2%;
+}
+
+#mypage_connecting_table_two {
+    position: absolute;
+    width: 95%;
+    height: 20%;
+    top: 55%;
+    left: 2%;
+}
+
+#hr_two{
+    position: absolute;
+    top: 50%;
+    background-color: #287D0A;
+    height: 0.1%;
+    width: 100%;
+}
+
+#connecting_one_thead{
+    position: relative;
+    border:3px solid #CFDCE5;
+    border-left: none;
+    border-right: none;
+    text-align: center;
+    width: 90%;
+    font-size:24px;
+    font-weight:600;
+    color:rgba(4, 35, 11,0.8);
+    font-family: 'counselname', serif;
+}
+
+#connecting_one_tbody{
+    position: relative;
+    margin-top: 3%;
+    font-size:21px;
+    font-weight:600;
+    color:rgba(4, 35, 11,0.8);
+    font-family: 'counselname', serif;
+}
+
+#connecting_two_thead{
+    position: relative;
+    border:3px solid #CFDCE5;
+    border-left: none;
+    border-right: none;
+    text-align: center;
+    width: 90%;
+    font-size:24px;
+    font-weight:600;
+    color:rgba(4, 35, 11,0.8);
+    font-family: 'counselname', serif;
+}
+
+#connecting_two_tbody{
+    position: relative;
+    margin-top: 3%;
+    font-size:21px;
+    font-weight:600;
+    color:rgba(4, 35, 11,0.8);
+    font-family: 'counselname', serif;
+}
+
+#gohomework_red{
+    background-color: #FFD5D1;
+    border: 1px solid #FFD5D1;
+    color:red;
+    border-radius: 20%;
+}
+
+#gohomework_blue{
+    border: none;
+    background-color: #DAE2FF;
+    color: #1573FF;
+    border: 1px solid #DAE2FF;
+    border-radius: 20%;
+}

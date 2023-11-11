@@ -14,7 +14,11 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { createData, rows } from "./ManagementChatData";
+import ManagerHeader from "../components/layouts/ManagerHeader";
+import ManagerProfile from "./ManagerProfile";
+import {styled as sc} from "styled-components";
+import {useEffect, useState} from "react";
+import axios from "axios";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -35,9 +39,27 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export default function ManagementChat() {
-  const theme = useTheme();
+  const [rows, setRows] = useState([]);
+  useEffect(() => {
+    axios.get('/manage/reportList').then(response => {
+      if(response.data!=null) {
+        setRows(response.data);
+      }
+      console.log(response.data)
+    })
+        .catch(error => {
+          console.error('Error fetching data:', error);
+        });
+  },[])
 
   return (
+      <ScreenWrapper>
+        <ManagerHeader />
+        <ViewWrapper>
+          <ProfileWrapper>
+            <ManagerProfile />
+          </ProfileWrapper>
+           <TableWrapper>
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
@@ -49,18 +71,47 @@ export default function ManagementChat() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <StyledTableRow key={row.No}>
+          {rows.map((row,idx) => (
+            <StyledTableRow key={row.idx}>
               <StyledTableCell component="th" scope="row" align="center">
-                <Link to={`/ManagementChatDetail/${row.No}`}>{row.No}</Link>
+                <Link to={`/ManagementChatDetail/${row.id}`}>{idx+1}</Link>
               </StyledTableCell>
-              <StyledTableCell align="center">{row.Title}</StyledTableCell>
-              <StyledTableCell align="center">{row.Singo}</StyledTableCell>
-              <StyledTableCell align="center">{row.PiSingo}</StyledTableCell>
+              <StyledTableCell align="center">{row.title}</StyledTableCell>
+              <StyledTableCell align="center">{row.reporter}</StyledTableCell>
+              <StyledTableCell align="center">{row.respondent}</StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
       </Table>
     </TableContainer>
+           </TableWrapper>
+        </ViewWrapper>
+      </ScreenWrapper>
+
   );
 }
+
+const ProfileWrapper = sc.div`
+width: 380px;
+height: 800px;
+margin-top: 70px;
+`;
+
+const ViewWrapper = sc.div`
+display: flex;
+flex-direction: row;
+
+padding-top: 10px;
+`;
+
+const TableWrapper = sc.div`
+display: flex;
+flex-direction: column;
+
+width: 1000px;
+padding-top: 10px;
+`;
+const ScreenWrapper = sc.div`
+margin-left: 260px;
+margin-right: 260px;
+`;

@@ -5,13 +5,14 @@ import axios from 'axios';
 import WebSocketComponent2 from "./WebSocketComponent2";
 import ChatMemoComponent from "./ChatMemoComponent";
 
-export default function Chat() {
+export default function Chat({id}) {
     const { isLoggedIn,name } = SessionManager(); // 세션 상태를 관리
     const [loading, setLoading] = useState(true)
     const [roomName, setRoomName] = useState('');
-    const location = useLocation();
-    const roomId = location.state.id;
+    const [roomId, setRoomId] = useState(id);
+
     useEffect(() => {
+        console.log(roomId)
         if (isLoggedIn && loading) {
             axios.get('/chat/room/'+roomId)
                 .then((response)=>{
@@ -32,7 +33,7 @@ export default function Chat() {
         <>
             <h3>{roomName}</h3>
             <div>
-            {name && <WebSocketComponent2 roomId={roomId} sender={name}/>}
+            {roomId && name && <WebSocketComponent2 roomId={roomId} sender={name}/>}
             </div>
             <ChatMemoComponent />
         </>

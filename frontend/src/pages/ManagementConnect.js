@@ -5,7 +5,7 @@ import {
   Route,
   Routes,
   Link,
-  useParams,
+  useParams, useNavigate,
 } from "react-router-dom";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -14,7 +14,11 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { createData, rows } from "./ManagementConnectData";
+import ManagerHeader from "../components/layouts/ManagerHeader";
+import ManagerProfile from "./ManagerProfile";
+import {styled as sc} from "styled-components";
+import {useEffect, useState} from "react";
+import axios from "axios";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -35,14 +39,34 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export default function ManagementConnect() {
-  const theme = useTheme();
+  const [rows, setRows] = useState([]);
+  const navigate = useNavigate();
+  useEffect(() => {
+    axios.get('/').then(response => {
+      if(response.data!=null) {
+        setRows(response.data);
+      }
+      console.log(response.data)
+    })
+        .catch(error => {
+          console.error('Error fetching data:', error);
+        });
+  },[])
   return (
+      <div>
+        <ScreenWrapper>
+          <ManagerHeader />
+          <ViewWrapper>
+            <ProfileWrapper>
+              <ManagerProfile />
+            </ProfileWrapper>
+            <TableWrapper>
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
             <StyledTableCell align="center">상담사/멘토</StyledTableCell>
-            <StyledTableCell align="center">상담자/멘티</StyledTableCell>
+            <StyledTableCell align="center">내담자/멘티</StyledTableCell>
             <StyledTableCell align="center">연결 기간</StyledTableCell>
             <StyledTableCell align="center">연결 관리</StyledTableCell>
           </TableRow>
@@ -63,5 +87,34 @@ export default function ManagementConnect() {
         </TableBody>
       </Table>
     </TableContainer>
+</TableWrapper>
+</ViewWrapper>
+</ScreenWrapper>
+      </div>
   );
 }
+const ScreenWrapper = sc.div`
+margin-left: 260px;
+margin-right: 260px;
+`;
+const ProfileWrapper = sc.div`
+  width: 380px;
+  height: 800px;
+  margin-top: 70px;
+`;
+
+const ViewWrapper = sc.div`
+  display: flex;
+  flex-direction: row;
+
+  padding-top: 10px;
+`;
+
+const TableWrapper = sc.div`
+  display: flex;
+  flex-direction: row;
+
+  width: 1000px;
+
+  padding-top: 100px;
+`;

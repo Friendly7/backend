@@ -33,15 +33,15 @@ export default function ManagementMatch() {
   const [rows, setRows] = useState([]);
   useEffect(() => {
     axios.get('/manage/match/list').then(response => {
-      console.log(response.data);
-      setRows(response.data);
+      if(response.data!==null)
+        setRows(response.data);
     })
         .catch(error => {
           // 오류 발생 시 처리
           console.error('Error fetching data:', error);
         });
   },[])
-  const theme = useTheme();
+
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">

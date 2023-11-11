@@ -31,11 +31,11 @@ function ManagerHeader(props) {
     <div>
       <Containers>
         <Navbar.Brand>
-          <Nav.Link href="/">
+          <Nav.Link href="/ManagerMain">
             <ImageWrapper>
               <img
                 width="80"
-                src="../img/friendly.jpg"
+                src='../로고.png'
               />
             </ImageWrapper>
           </Nav.Link>
@@ -43,7 +43,7 @@ function ManagerHeader(props) {
 
         <LogWrapper>
         <Navbar.Brand>
-          <Nav.Link href="/">
+          <Nav.Link href="/ManagerMain">
           <SvgIcon
             {...props}
             sx={{
@@ -64,8 +64,8 @@ function ManagerHeader(props) {
           {/* Nav에 justify-content-between 클래스 추가 */}
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto" style={{ display: 'flex', justifyContent: 'space-between', marginLeft: '300px', marginRight: '50px' }}>
-              <Nav.Link href="/">매칭 신청 관리</Nav.Link>
-              <Nav.Link href="/ManagementChat">채팅 관리</Nav.Link>
+              <Nav.Link href="/ManagerMain">매칭 신청 관리</Nav.Link>
+              <Nav.Link href="/ManagementChat">신고 관리</Nav.Link>
               <Nav.Link href="/ManagementUserList">회원 목록 관리</Nav.Link>
               <Nav.Link href="/ManagementConnect">회원 연결 관리</Nav.Link>
               <Nav.Link href="/ManagementQnA">문의사항</Nav.Link>
@@ -73,8 +73,6 @@ function ManagerHeader(props) {
           </Navbar.Collapse>
         </CategoryWrapper>
       </BoxWrapper>
-
-
     </div>
   );
 }

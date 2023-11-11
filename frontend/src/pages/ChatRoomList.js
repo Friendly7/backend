@@ -1,10 +1,10 @@
 import axios from 'axios';
 import React, {useState,useEffect} from 'react';
 import SessionManager from './SessionManager'
-import {useNavigate} from "react-router-dom";
+import {useNavigate } from "react-router-dom";
 import "../css/ChatRoomList.css";
 
-export default function ChatRoomList() {
+export default function ChatRoomList({getRoomId}) {
     const { isLoggedIn,name } = SessionManager(); // 세션 상태를 관리
     const [ roomList, setRoomList ] = useState(null)
     const [loading, setLoading] = useState(true)
@@ -28,7 +28,7 @@ export default function ChatRoomList() {
     },[isLoggedIn,loading]);
 
     const enterRoom = (roomId)=> {
-        navigate('/Chat',{ state: {id: roomId}})
+        getRoomId(roomId)
     }
     return (
         <body>

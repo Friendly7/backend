@@ -4,25 +4,25 @@ import axios from 'axios';
 function SessionManager() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [name, setName] = useState('');
+    const [role, setRole] = useState('')
 
     useEffect(() => {
         axios.get('/checkSession')
             .then((response) => {
-                if (response.data == 'not_authenticated') {
-                    console.log("로그인안함");
+                if (response.data ==null) {
                     setIsLoggedIn(false);
-                } else {
-                    setName(response.data);
+                } else if(response.data!="") {
+                    setName(response.data.name);
+                    setRole(response.data.role)
                     setIsLoggedIn(true);
                 }
-
             })
             .catch((error) => {
                 console.error('Error:', error);
             });
     }, []);
 
-    return { isLoggedIn, setIsLoggedIn, name };
+    return { isLoggedIn, setIsLoggedIn, name, role};
 }
 
 export default SessionManager;

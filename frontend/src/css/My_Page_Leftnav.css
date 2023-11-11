@@ -1,0 +1,99 @@
+html,
+      body {
+        width: 100%;
+        height: 20%;
+        margin: 0px;
+      }
+
+#left_nav{
+    position: absolute;
+    width: 15%;
+    height: 40%;
+    top: 30%;
+    left: 3%;
+
+}
+
+#left_profile{
+    position: absolute;
+    width: 15%;
+    height: 10%;
+    top: 16%;
+    left: 3%;
+
+}
+
+.list_bottom{
+    position: absolute;
+    top:390%;
+    width: 100%;
+}
+
+#catego_one{
+    font-size:20px;
+  font-weight:400;
+  color:rgba(4, 35, 11,0.8);
+  font-family: 'counselname', serif;
+}
+
+#catego_two{
+    position: relative;
+    top:10%;
+    font-size:20px;
+  font-weight:400;
+  color:rgba(4, 35, 11,0.8);
+  font-family: 'counselname', serif;
+}
+
+#tools_list{
+    position: relative;
+    top:10%;
+}
+
+.list_logout{
+    color: red;
+}
+
+#profile_text_one{
+    position: absolute;
+    top:17%;
+    left:40%;
+    font-size:18px;
+  font-weight:400;
+  color:rgba(4, 35, 11,0.8);
+  font-family: 'counselname', serif;
+}
+
+#profileimage{
+    position: absolute;
+    left: 3%;
+    top: 15%;
+    width:30%;
+    height: 80%;
+    background-color: aqua;
+}
+
+#ingspot{
+    position: absolute;
+    background-color: #61DB37;
+    border-radius: 40%;
+    top: 20%;
+    left: 90%;
+    width: 2.5%;
+    height: 4%;
+    border: 1px solid #61DB37;
+    color: #61DB37;
+}
+
+#mypage_table{
+    position: absolute;
+    width: 100%;
+    height: 20%;
+    top: 23%;
+    left: 3%;
+}
+
+thead{
+    position: absolute;
+    left: 0; 
+}

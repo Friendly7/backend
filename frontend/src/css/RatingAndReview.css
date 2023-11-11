@@ -1,0 +1,36 @@
+#ratingandreviewname{
+    position: absolute;
+    top: 80%;
+}
+
+#star{
+    position: absolute;
+    top: 95%;
+    width: 80%;
+    height: 20%;
+}
+
+#reviewname{
+    position: absolute;
+    top:105%;
+    font-size: 120%;
+}
+
+#reviewinput{
+    position: absolute;
+    top:120%;
+    width: 120%;
+    height: 20%;
+}
+
+#reviewsubmit{
+    position: absolute;
+    top: 125%;
+    left:140%;
+    width: 10%;
+    height: 10%;
+    background-color: #A4ADFF;
+    border: 1px solid #A4ADFF;
+    color: white;
+    font-size: 150%;
+}

@@ -16,30 +16,17 @@ import styled from "styled-components";
 
 function ManagerMain() {
   return (
-        <div>
+        <ScreenWrapper>
           <ManagerHeader />
           <ViewWrapper>
             <ProfileWrapper>
               <ManagerProfile />
             </ProfileWrapper>
-
             <TableWrapper>
-              <Routes>
-                <Route path="/ManagementMatch" element= {<ManagementMatch />} />
-                <Route path="/ManagementChat" element={<ManagementChat />} />
-                <Route path="/ManagementUserList" element={<ManagementUserList />} />
-                <Route path="/ManagementConnect" element={<ManagementConnect />} />
-                <Route path="/ManagementQnA" element={<ManagementQnA />} />
-                <Route path="/ManagementMatchDetail/:No" element={<ManagementMatchDetail />} />
-                <Route path="/ManagementChatDetail/:No" element={<ManagementChatDetail />} />
-                <Route path="/ManagementUserListDetail/:No" element={<ManagementUserListDetail />} />
-                <Route path="/ManagementConnectDetail/:No" element={<ManagementConnectDetail />} />
-                <Route path="/ManagementQnADetail/:State" element={<ManagementQnADetail />} />
-                <Route path="/" element={ <ManagementMatch /> } />
-              </Routes>
+              <ManagementMatch />
             </TableWrapper>
           </ViewWrapper>
-        </div>
+        </ScreenWrapper>
   );
 }
 
@@ -66,3 +53,20 @@ const TableWrapper = styled.div`
 
   padding-top: 100px;
 `;
+const ScreenWrapper = styled.div`
+margin-left: 260px;
+margin-right: 260px;
+`;
+//
+//
+//   <Routes>
+//     <Route path="/ManagementChat" element={<ManagementChat />} />
+//     <Route path="/ManagementUserList" element={<ManagementUserList />} />
+//     <Route path="/ManagementConnect" element={<ManagementConnect />} />
+//     <Route path="/ManagementQnA" element={<ManagementQnA />} />
+//     <Route path="/ManagementChatDetail/:No" element={<ManagementChatDetail />} />
+//     <Route path="/ManagementUserListDetail/:No" element={<ManagementUserListDetail />} />
+//     <Route path="/ManagementConnectDetail/:No" element={<ManagementConnectDetail />} />
+//     <Route path="/ManagementQnADetail/:State" element={<ManagementQnADetail />} />
+//     <Route path="/ManagementMatchDetail/:request_id" element={<ManagementMatchDetail />} />
+//     <Route path="/ManagerMain" element={ <<ManagementMatch> /> } />

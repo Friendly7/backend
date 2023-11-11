@@ -1,0 +1,26 @@
+.c_table {
+    border-collapse: collapse;
+    width: 500px;
+    background-color: white;
+}
+
+.c_thead{
+    box-shadow: 4px 4px 10px rgba(0,0,0,0.1);
+}
+
+/* 테이블 행 */
+.c_td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+}
+
+.c_th {
+    padding: 8px;
+    text-align: left;
+    text-align: center;
+    border-top: 2px solid #000;
+    border-bottom: 2px solid #000;
+    color: #000;
+}

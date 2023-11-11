@@ -1,0 +1,322 @@
+html,
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0px;
+      }
+
+.mypage_points{
+    position: absolute;
+    width: 70%;
+    height: 75%;
+    left: 20%;
+    top: 17%;
+}
+
+#mypage_points_one{
+    position: absolute;
+    left: 0%;
+    font-size:35px;
+    font-weight:600;
+    color:rgba(4, 35, 11,0.8);
+    font-family: 'counselname', serif;
+}
+
+.mypage_points_conone{
+    position: absolute;
+    width: 35%;
+    height: 20%;
+    left: 8%;
+    top: 12%;
+    border: 1px solid rgba(40, 125, 10, 0.5);
+    background-color: rgba(40, 125, 10, 0.5);
+}
+
+.mypage_points_contwo{
+    position: absolute;
+    width: 35%;
+    height: 20%;
+    left: 55%;
+    top: 12%;
+    border: 1px solid rgba(40, 125, 10, 0.5);
+    background-color: rgba(40, 125, 10, 0.5);
+}
+
+.mypage_points_conthree{
+    position: absolute;
+    width: 35%;
+    height: 20%;
+    left: 8%;
+    top: 40%;
+    border: 1px solid rgba(40, 125, 10, 0.5);
+    background-color: rgba(40, 125, 10, 0.5);
+}
+
+.mypage_points_confour{
+    position: absolute;
+    width: 35%;
+    height: 20%;
+    left: 55%;
+    top: 40%;
+    border: 1px solid rgba(40, 125, 10, 0.5);
+    background-color: rgba(40, 125, 10, 0.5);
+}
+
+#pointshr_one{
+    position: absolute;
+    top: 5%;
+    left: 0%;
+    background-color: #287D0A;
+    height: 0.1%;
+    width: 100%;
+}
+
+#pointshr_two{
+    position: absolute;
+    top: 67%;
+    left: 0%;
+    background-color: #287D0A;
+    height: 0.1%;
+    width: 100%;
+}
+
+#wallet{
+    position: absolute;
+    width: 20%;
+    height: 60%;
+    max-width: 100%;
+    left: 7%;
+    top:20%;
+    color:white;
+}
+
+#download{
+    position: absolute;
+    width: 20%;
+    height: 60%;
+    max-width: 100%;
+    left: 7%;
+    top:20%;
+    color:white;
+}
+
+#futpoint{
+    position: absolute;
+    width: 20%;
+    height: 60%;
+    max-width: 100%;
+    left: 7%;
+    top:20%;
+    color:white;
+}
+
+#ingpoint{
+    position: absolute;
+    width: 20%;
+    height: 60%;
+    max-width: 100%;
+    left: 7%;
+    top:20%;
+    color:white;
+}
+
+.points_more{
+    position: absolute;
+    width: 25%;
+    height: 8%;
+    left: 37%;
+    top: 75%;
+    background-color: white;
+    border: 1px solid #287D0A;
+}
+
+.points_more:hover{
+    position: absolute;
+    width: 25%;
+    height: 8%;
+    left: 37%;
+    top: 75%;
+    background-color: #287D0A;
+    border: 1px solid #287D0A;
+}
+
+#points_more_span{
+    position: absolute;
+    color: black;
+    font-size: 200%;
+    left: 18%;
+    top: 30%;
+    font-family: 'counselname', serif;
+}
+
+#points_more_span:hover{
+    position: absolute;
+    color: white;
+    font-size: 200%;
+    left: 18%;
+    top: 30%;
+    font-family: 'counselname', serif;
+}
+
+.points_plus{
+    position: absolute;
+    width: 17%;
+    height: 8%;
+    left: 54%;
+    top: 75%;
+    background-color: #1A96EF;
+    border: 1px solid #1A96EF;
+}
+
+#points_plus_span{
+    position: absolute;
+    color: white;
+    font-size: 180%;
+    left: 32%;
+    top: 25%;
+}
+
+#mypage_points_conone_spanone{
+    position: absolute;
+    left: 45%;
+    top: 27%;
+    font-size: 160%;
+    color: white;
+}
+
+#mypage_points_conone_spantwo{
+    position: absolute;
+    left: 69%;
+    top: 50%;
+    font-size: 220%;
+    color: white;
+}
+
+#mypage_points_contwo_spanone{
+    position: absolute;
+    left: 45%;
+    top: 27%;
+    font-size: 160%;
+    color: white;
+}
+
+#mypage_points_contwo_spantwo{
+    position: absolute;
+    left: 69%;
+    top: 50%;
+    font-size: 220%;
+    color: white;
+}
+
+#mypage_points_conthree_spanone{
+    position: absolute;
+    left: 45%;
+    top: 27%;
+    font-size: 160%;
+    color: white;
+}
+
+#mypage_points_conthree_spantwo{
+    position: absolute;
+    left: 69%;
+    top: 50%;
+    font-size: 220%;
+    color: white;
+}
+
+#mypage_points_confour_spanone{
+    position: absolute;
+    left: 45%;
+    top: 27%;
+    font-size: 160%;
+    color: white;
+}
+
+#mypage_points_confour_spantwo{
+    position: absolute;
+    left: 69%;
+    top: 50%;
+    font-size: 220%;
+    color: white;
+}
+
+#points_yellow{
+    color:yellow;
+}
+
+#pickdatebox{
+    position: absolute;
+    border:1px solid #D8F3E3;
+    background-color: #D8F3E3;
+    width:45%;
+    height: 7%;
+    left: 55%;
+    top:60%;
+}
+
+#pickdate{
+    position: absolute;
+    font-size: 200%;
+    font-family: 'counselname', serif;
+    left: 8%;
+    top:30%;
+}
+
+#deleteschedule{
+    position: absolute;
+    width: 17%;
+    height: 80%;
+    border:1px solid black;
+    border-radius: 20%;
+    background-color: white;
+    left: 60%;
+    top:10%;
+    font-size: 130%;
+    font-family: 'counselname', serif;
+}
+
+#plusschedule{
+    position: absolute;
+    width: 17%;
+    height: 80%;
+    border:1px solid #0070FF;
+    border-radius: 20%;
+    background-color: #0070FF;
+    left: 80%;
+    top:10%;
+    font-size: 130%;
+    font-family: 'counselname', serif;
+    color: white;
+}
+
+#deleteicon {
+    position: absolute;
+    width: 40%;
+    height: 70%;
+    top:25%;
+    color: black; /* 아이콘 색상 변경 */
+    left:5%;
+  }
+
+  #deletelabel{
+    position: absolute;
+    color:black;
+    left:50%;
+    top:30%;
+  }
+
+  #addicon {
+    position: absolute;
+    width: 40%;
+    height: 70%;
+    top:25%;
+    color: white; /* 아이콘 색상 변경 */
+    left:5%;
+  }
+
+  #addlabel{
+    position: absolute;
+    color:white;
+    left:50%;
+    top:30%;
+  }

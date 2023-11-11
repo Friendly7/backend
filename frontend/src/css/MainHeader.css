@@ -1,0 +1,120 @@
+.MainHeaderBox{
+
+}
+
+#MHgohome{
+    position: absolute;
+    left:10%;
+    top:5%;
+    width:6%;
+    height: 10%;
+    background-image: url('../로고.png');
+    background-color: white;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: none;
+}
+
+#MHperson{
+    position: absolute;
+    top:5%;
+    left: 67%;
+    font-size:25px;
+    font-weight:400;
+    color:rgba(4, 35, 11,0.8);
+    font-family: 'counselname', serif;
+    border:none;
+    background-color: white;
+}
+
+#MHmypage{
+    position: absolute;
+    top:5%;
+    left: 79%;
+    font-size:25px;
+    font-weight:400;
+    color:rgba(4, 35, 11,0.8);
+    font-family: 'counselname', serif;
+    border:none;
+    background-color: white;
+}
+
+#MHlogin{
+    position: absolute;
+    top:5%;
+    left: 87%;
+    font-size:25px;
+    font-weight:400;
+    color:rgba(4, 35, 11,0.8);
+    font-family: 'counselname', serif;
+    border:none;
+    background-color: white;
+}
+
+#MHhr{
+    position: absolute;
+    left: 5%;
+    top:15%;
+    width: 90%;
+    border: 1px solid #287D0A;
+}
+
+#MHService{
+    position: absolute;
+    top:10%;
+    left: 23%;
+    font-size:38px;
+    font-weight:600;
+    color:rgba(4, 35, 11,0.8);
+    font-family: 'counselname', serif;
+    border:none;
+    background-color: white;
+}
+
+#MHCounsel{
+    position: absolute;
+    top:10%;
+    left: 37%;
+    font-size:38px;
+    font-weight:600;
+    color:rgba(4, 35, 11,0.8);
+    font-family: 'counselname', serif;
+    border:none;
+    background-color: white;
+}
+
+#MHFriend{
+    position: absolute;
+    top:10%;
+    left: 56%;
+    font-size:38px;
+    font-weight:600;
+    color:rgba(4, 35, 11,0.8);
+    font-family: 'counselname', serif;
+    border:none;
+    background-color: white;
+}
+
+#MHMentoring{
+    position: absolute;
+    top:10%;
+    left: 71%;
+    font-size:38px;
+    font-weight:600;
+    color:rgba(4, 35, 11,0.8);
+    font-family: 'counselname', serif;
+    border:none;
+    background-color: white;
+}
+
+#MHCommunity{
+    position: absolute;
+    top:10%;
+    left: 85%;
+    font-size:38px;
+    font-weight:600;
+    color:rgba(4, 35, 11,0.8);
+    font-family: 'counselname', serif;
+    border:none;
+    background-color: white;
+}

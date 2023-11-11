@@ -1,0 +1,8 @@
+.vertical-line {
+    position: absolute;
+    width: 0.08%; /* 세로선의 두께 설정 */
+    height: 80%; /* 세로선의 높이 설정 */
+    left: 18%;
+    top: 15%;
+    background-color: rgba(117, 117, 117, 0.3)/* 세로선의 색상 설정 */
+  }

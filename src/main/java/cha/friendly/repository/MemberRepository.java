@@ -57,6 +57,11 @@ public class MemberRepository {
                 .setParameter("userId", userId)
                 .executeUpdate();
     }
+    public void cancelBanDate(Long userId) {
+        em.createQuery("update Member m set m.banDate = null WHERE m.id = :userId")
+                .setParameter("userId", userId)
+                .executeUpdate();
+    }
     public List<Member> banList() {
         return em.createQuery("SELECT m FROM Member m WHERE m.is_blocked = 0", Member.class)
                 .getResultList();
@@ -70,5 +75,12 @@ public class MemberRepository {
         } catch (NoResultException e) {
             return null; // 이메일에 해당하는 회원이 없을 경우 null 반환
         }
+    }
+
+    public void banDate(Long userId, String formattedDateTime) {
+        em.createQuery("update Member m set m.banDate = :formattedDateTime WHERE m.id = :userId")
+                .setParameter("userId", userId)
+                .setParameter("formattedDateTime",formattedDateTime)
+                .executeUpdate();
     }
 }

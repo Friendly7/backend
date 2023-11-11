@@ -1,0 +1,25 @@
+/* AverageRatingBar.css */
+.average-rating-bar {
+    border: 1px solid #ccc;
+    width: 175%;
+    padding: 5%;
+    height: 30%;
+}
+
+.review-counts {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.progress-bar-container {
+    background-color: #f0f0f0; /* 프로그레스 바의 배경색을 설정합니다. */
+    height: 15px; /* 프로그레스 바의 높이를 조절합니다. */
+    border: 1px solid #ccc; /* 프로그레스 바에 테두리를 추가합니다. */
+    border-radius: 5px; /* 프로그레스 바의 모서리를 둥글게 만듭니다. */
+}
+
+.progress-bar {
+    background-color: #ffc107; /* 선택한 평점 색상 (예: 노란색) */
+    border-radius: 5px; /* 프로그레스 바의 모서리를 둥글게 만듭니다. */
+}

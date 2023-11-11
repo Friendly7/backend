@@ -1,19 +1,8 @@
 html,
-    body{
-        width:100%;
-        height:100%;
-        margin:0px;
-        background-color: white;
-    }
-
-#roomListBox{
-    position:absolute;
-    left: 5%;
-    top:5%;
-    width:90%;
-    height: 90%;
-    background-color: rgba(232, 234, 246, 1);
-    border-radius: 3%;
+body{
+    width:24%;
+    height:80%;
+    margin:0px;
 }
 
 #chatlist{
@@ -21,8 +10,8 @@ html,
     background-color: white;
     border:1px solid white;
     border-radius: 2%;
-    width:25%;
-    height: 90%;
+    width:24%;
+    height: 80%;
     left:3%;
     top:5%;
 }
@@ -37,7 +26,7 @@ html,
 #roomboxlist{
     position: absolute;
     top: 10%;
-    width:107%;
+    width:106.5%;
     right:-4%;
 }
 
@@ -48,6 +37,8 @@ html,
     height: 15%;
     right:9%;
     border:1px solid rgba(57, 73, 171, 0.2);
+    border-left: none;
+    border-right: none;
 }
 
 #roombox:hover{

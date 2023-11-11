@@ -2,9 +2,11 @@ package cha.friendly.controller;
 
 import cha.friendly.domain.Advicerequest;
 import cha.friendly.domain.Dto.MatchingDto;
+import cha.friendly.domain.Dto.MatchingMentorDto;
 import cha.friendly.domain.Member;
 import cha.friendly.repository.AdviceRequestCRUDRepository;
 import cha.friendly.repository.MemberCRUDRepository;
+import cha.friendly.session.SessionConst;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -141,9 +143,11 @@ public class matching {
         }
         return "/main";
     }
-    @PostMapping(value = "/matchingMentor")public String matchingMentor(@RequestParam(value = "request_id")Long request_id, @RequestParam(value = "mentor_id")Long mentor_id,Model model){
-        Advicerequest result = adviceRequestCRUDRepository.findByRequest(request_id);
-        Member result2 = memberCRUDRepository.findByMember(mentor_id);
+    //매칭요청 버튼클릭 로직(관리자(
+    @PostMapping(value = "/matchingMentor")
+    public String matchingMentor(@RequestBody MatchingMentorDto matchingMentorDto){
+        Advicerequest result = adviceRequestCRUDRepository.findByRequest(Long.valueOf(matchingMentorDto.getRequest_id()));
+        Member result2 = memberCRUDRepository.findByMember(Long.valueOf(matchingMentorDto.getMentor_id()));
         Long  mentor = result2.getId();
         result.setMatmentornum(mentor);
         result.setMatching("수락대기");
@@ -151,15 +155,19 @@ public class matching {
         result.setMentor_waiting("대기");
         result.setMatmentorname(result2.getName());
         adviceRequestCRUDRepository.save(result);
-        return "/main";
+        return "/";
     }
-    @PostMapping(value = "/mentorwaitinglist")public String mentorwaitinglist(@RequestParam(value = "mentor_id")Long id, Model model){
+
+    //멘토(상담사)가 자신에게 들어온요청 리스트확인
+    @PostMapping(value = "/mentorwaitinglist")
+    public String mentorwaitinglist(@RequestParam(value = "mentor_id")Long id, Model model){
         List<Advicerequest> result = adviceRequestCRUDRepository.findByMentorWaitingList(id);
         model.addAttribute("list", result);
         return "/mentorWaitingList";
     }
-
-    @PostMapping(value = "/mentorwaiting")public String mentorwaiting(@RequestParam(value = "request_id")Long request_id, @RequestParam(value = "mentor_id")Long mentor_id,
+    //멘토가 요청을 수락거절 로직(멘토가 거절, 수락버튼 눌렀을떄 동작하는거)
+    @PostMapping(value = "/mentorwaiting")
+    public String mentorwaiting(@RequestParam(value = "request_id")Long request_id, @RequestParam(value = "mentor_id")Long mentor_id,
                                                                       @RequestParam(value = "popUP")Long popUp, Model model){
         Advicerequest result = adviceRequestCRUDRepository.findByRequest(request_id);
         Member member = memberCRUDRepository.findByMember(mentor_id);
@@ -209,34 +217,33 @@ public class matching {
         return "/main";
     }
 
-    @PostMapping(value = "/userwaitinglist1")public String userwaitinglist1(@RequestParam(value = "user_id")Long id, Model model){
-        List<Advicerequest> result = adviceRequestCRUDRepository.findByUserWaitingList(id);
-        System.out.println(result);
-        model.addAttribute("list", result);
-        return "/userWaitingList1";
+    //유저가 자신의 신청상태 보는거
+    @PostMapping(value = "/userwaitinglist1")
+    public List<Advicerequest> userwaitinglist1(@SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember) {
+        List<Advicerequest> result = adviceRequestCRUDRepository.findByUserWaitingList(loginMember.getId());
+        return result;
     }
 
-    @PostMapping(value = "/userwaitinglist2")public String userwaitinglist2(@RequestParam(value = "request_id")Long request_id, @RequestParam(value = "mentor_id")Long mentor_id, Model model){
+    @PostMapping(value = "/userwaitinglist2")
+    public String userwaitinglist2(@RequestParam(value = "request_id")Long request_id, @RequestParam(value = "mentor_id")Long mentor_id, Model model){
         Member member = memberCRUDRepository.findByMember(mentor_id);
         Advicerequest result = adviceRequestCRUDRepository.findByUserWaitingList2(request_id);
         model.addAttribute("list", member);
         model.addAttribute("list2", result);
         return "/userWaitingList2";
     }
-
-    @PostMapping(value = "/userwaiting")public String userwaiting(@RequestParam(value = "request_id")Long request_id, @RequestParam(value = "user_id")Long user_id,
-                                                                  @RequestParam(value = "popUP")Long popUp, @RequestParam(value = "mentor_id")Long mentor_id, Model model){
-        Advicerequest result = adviceRequestCRUDRepository.findByUserIDRequest(request_id);
-        Member member = memberCRUDRepository.findByMember(mentor_id);
+    //user 수락,거절
+    @PostMapping(value = "/userwaiting")
+    public String userwaiting(@RequestParam(value = "request_id")String request_id, @RequestParam(value = "popUP")String popUp, @RequestParam(value = "matmentorname")String matmentorname) {
+        Advicerequest result = adviceRequestCRUDRepository.findByUserIDRequest(Long.valueOf(request_id));
+        Member member = memberCRUDRepository.findByNameMember(matmentorname);
         int match_cnt = member.getMatchCnt();
         int totalMatCount = member.getTotalMatchingCount();
-        if (popUp==0)
-        {
+        int pop = Integer.parseInt(popUp);
+        if (pop==0)
             result.setUser_waiting("거절");
-        }
-        else if (popUp==1) {
+        else if (pop==1)
             result.setUser_waiting("수락");
-        }
 
         if (result.getUser_waiting().equals("수락") && result.getMentor_waiting().equals("수락")) {
             if (match_cnt <= 3) {

@@ -27,7 +27,9 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private Role role; //1개의 계정은 1개의 역할만 같는다.
 
+    private int reportCnt;
     private int is_blocked; //정지유무
+    private String banDate;
 
     /**
      매칭에 사용되는 데이터

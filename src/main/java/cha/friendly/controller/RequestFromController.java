@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import retrofit2.http.Path;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -42,7 +43,13 @@ public class RequestFromController {
             return null;
         return byAdviceRequestList;
     }
-
+    @GetMapping("/manage/match/list/{request_id}")
+    public Advicerequest reqSelectedOne(@PathVariable Long request_id) {
+        Advicerequest advicerequest = adviceRequestCRUDRepository.findByRequest_id(request_id);
+        if(advicerequest==null)
+            return null;
+        return advicerequest;
+    }
 
     @GetMapping(value = "/moveAdviceRequest")
     public String adviceRequest1(HttpSession session, Model model){

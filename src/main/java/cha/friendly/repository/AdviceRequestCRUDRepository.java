@@ -27,4 +27,7 @@ public interface AdviceRequestCRUDRepository extends JpaRepository<Advicerequest
 
     @Query(value = "select * from advicerequest where matching != '매칭완료' and matching != '매칭거절' and matching != '수락대기'", nativeQuery = true)
     List<Advicerequest> findByAdviceRequestList();
+
+    @Query(value = "select * from advicerequest where request_id = :id and matching ='요청대기'", nativeQuery = true)
+    Advicerequest findByRequest_id(Long id);
 }

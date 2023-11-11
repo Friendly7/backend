@@ -26,7 +26,6 @@ public class MemoController {
         Memo memo = new Memo();
         String contentsWithBr = contents.replace("\n", "<br>");
         memo.setContents(contentsWithBr);
-        log.info(contents);
         memo.setMemberId(loginMember.getId());
         Memo addMemo = memoService.addMemo(memo);
         return ResponseEntity.ok(addMemo);

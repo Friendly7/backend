@@ -1,6 +1,7 @@
 package cha.friendly.controller;
 
 import cha.friendly.controller.form.MemberForm;
+import cha.friendly.domain.Dto.BanDto;
 import cha.friendly.domain.Member;
 import cha.friendly.domain.enumP.Role;
 import cha.friendly.service.MemberService;
@@ -12,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -69,16 +71,20 @@ public class MemberController {
     }
 
     @GetMapping("/members")
-    public String list(Model model, @SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember) {
+    public List<Member> list(Model model, @SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember) {
         //세션에 회원 데이터가 없으면 home
         if (loginMember == null) {
-            return "home";
+            return null;
         }
         //세션이 유지되면 로그인으로 이동
         List<Member> members = memberService.findMembers();
-        model.addAttribute("members", members);
-        model.addAttribute("member", loginMember);
-        return "members/memberList";
+        List<Member> list = new ArrayList<>();
+        for (Member member : members) {
+            if(member.getId()!=1) {
+                list.add(member);
+            }
+        }
+        return list;
     }
 
     @GetMapping("/members/edit")
@@ -111,14 +117,12 @@ public class MemberController {
 
     @PostMapping("/members/ban")
     @ResponseBody
-    public String banUser(@RequestBody Member member) {
-        memberService.ban(member);
-        return member.getName();
+    public void banUser(@RequestBody BanDto banDto) {
+        memberService.ban(banDto.getMember_id());
     }
     @PostMapping("/members/ban/cancel")
     @ResponseBody
-    public String cancelBanUser(@RequestBody Member member) {
-        memberService.cancelBan(member);
-        return member.getName();
+    public void cancelBanUser(@RequestBody BanDto banDto) {
+        memberService.cancelBan(banDto.getMember_id());
     }
 }

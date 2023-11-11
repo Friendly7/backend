@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
+import '../css/ChatMemoComponent.css';
 
 function ChatMemoComponent() {
     const [memo, setMemo] = useState('');
@@ -67,6 +68,7 @@ function ChatMemoComponent() {
     }, []);
 
     return (
+        <body>
         <div className="chat-memo">
             <h2>채팅 메모</h2>
             <div>
@@ -95,7 +97,8 @@ function ChatMemoComponent() {
                 </tr>
                 </thead>
                 <tbody>
-                {memos.map((memo, index) => (
+                {memos !== null ? (
+                    memos.map((memo, index) => (
                     <tr key={index}>
                         <td>
                             <input
@@ -107,10 +110,14 @@ function ChatMemoComponent() {
                         <td>{index + 1}</td>
                         <td style={{ whiteSpace: 'pre-line' }}>{memo.contents.replace(/<br>/g, '\n')}</td>
                     </tr>
-                ))}
+                ))) : (
+                    <td>새로운 메모를 추가해보세요!</td>
+                    )}
                 </tbody>
+
             </table>
         </div>
+        </body>
     );
 }
 

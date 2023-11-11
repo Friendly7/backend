@@ -28,6 +28,7 @@ public class LoginController {
         //성공. 세션이 있으면 있는 세션 반환, 없으면 신규 세션 생성
         HttpSession session = request.getSession();
         session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
+        if(loginMember.getId()==1) return "/ManagerMain";
         return "success";
     }
 
@@ -42,13 +43,13 @@ public class LoginController {
     }
 
     @GetMapping("/checkSession")
-    public String checkSession(HttpSession session) {
+    public Member checkSession(HttpSession session) {
         if (session.getAttribute(SessionConst.LOGIN_MEMBER) != null) {
             Member loginMember = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
-            String memberName = loginMember.getName();
-            return memberName;
+            System.out.println("loginMember = " + loginMember.getName());
+            return loginMember;
         } else {
-            return "not_authenticated";
+            return null;
         }
     }
 

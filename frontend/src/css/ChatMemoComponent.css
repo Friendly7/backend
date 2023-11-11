@@ -1,0 +1,14 @@
+html,
+body{
+    width:20%;
+    height:80%;
+    margin:0px;
+}
+
+.chat-memo{
+    position: absolute;
+    width: 20%;
+    background-color: aqua;
+    left: 65%;
+    top:10%;
+}

@@ -8,6 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
@@ -63,13 +65,19 @@ public class MemberService {
     }
 
     @Transactional
-    public void ban(Member member) {
-        memberRepository.ban(member.getId());
+    public void ban(String member_id) {
+        memberRepository.ban(Long.valueOf(member_id));
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        // 날짜와 시간을 원하는 형식으로 출력하기 위해 DateTimeFormatter 사용
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formattedDateTime = currentDateTime.format(formatter);
+        memberRepository.banDate(Long.valueOf(member_id), formattedDateTime);
     }
 
     @Transactional
-    public void cancelBan(Member member) {
-        memberRepository.cancelBan(member.getId());
+    public void cancelBan(String member_id) {
+        memberRepository.cancelBan(Long.valueOf(member_id));
+        memberRepository.cancelBanDate(Long.valueOf(member_id));
     }
 
     public boolean isEmailUnique(String email) {

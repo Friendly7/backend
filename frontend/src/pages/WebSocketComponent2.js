@@ -21,8 +21,10 @@ function WebSocketComponent2({ roomId, sender }) {
     };
 
     useEffect(() => {
-        if(getPrev) {getChatMessages(roomId); setGetPrev(false)}
-
+        if(getPrev) {
+            getChatMessages(roomId);
+            setGetPrev(false)
+        }
         const initializeWebSocket = () => {
             const socket = new SockJS('/ws-stomp');
             const stomp = Stomp.over(socket);
@@ -54,6 +56,7 @@ function WebSocketComponent2({ roomId, sender }) {
             return () => {
                 if (stompClient) {
                     stompClient.disconnect();
+                    console.log('소켓 종료')
                 }
             };
         };
@@ -125,8 +128,8 @@ function WebSocketComponent2({ roomId, sender }) {
     return (
         <>
             {isLoading ? (
-                <div className="loading">
-                    <div className="spinner"></div>
+                <div className="c_chat_loading ">
+                    <div className="c_spinner"></div>
                     방 입장 중...
                 </div>
             ) : (

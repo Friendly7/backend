@@ -5,25 +5,39 @@ import Typography from "@mui/material/Typography";
 import Container, { containerClasses } from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import styled from "styled-components";
-import SvgIcon from "@mui/material/SvgIcon";
+import SvgIcon from '@mui/icons-material/ManageAccounts';
 import ManagerCategory from "./ManagerCategory";
+import {useNavigate} from "react-router-dom";
+import axios from "axios";
+import SessionManger from '../pages/SessionManager'
 
 function ManagerProfile(props) {
+  const navigate = useNavigate();
+  const {isLoggedIn,setIsLoggedIn} = SessionManger();
+  const logout = () => {
+    axios.post('/logout')
+        .then(() => {
+          // 세션 상태 업데이트
+          setIsLoggedIn(false);
+          navigate('/');
+          window.location.reload();
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+  }
   return (
     <div>
       <Profile>
         <ProfileImageWrapper>
-          <SvgIcon {...props} sx={{ fontSize: 80 }}>
-            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-          </SvgIcon>
+          <SvgIcon {...props} sx={{ fontSize: 80 }} />
         </ProfileImageWrapper>
-        <div
-          style={{ fontSize: "20px", textAlign: "center", marginTop: "10px", marginBottom: "10px"}}
-        >
-          관리자
-          <br />
-        </div>
-        <div style={{ fontSize: "40px", textAlign: "center", marginBottom: "30px" }}>정관리</div>
+        <div style={{ fontSize: "30px", textAlign: "center", marginTop: "5%", marginBottom: "5%" }}>관리자</div>
+        <div style={{ fontSize: "20px", textAlign: "center", marginTop: "5%", marginBottom: "5%"}}>
+          <Button onClick={logout}
+                  sx={{ backgroundColor: 'rgba(40,125,10,0.5)', color: 'rgba(4,35,11,0.8)',
+                    '&:hover': { backgroundColor: 'rgba(32,100,8,0.5)',color: 'white' },
+                    fontSize: 15, width: '6vw',borderRadius:'10px'}}>로그아웃</Button></div>
 
         <ManagerCategory />
       </Profile>
