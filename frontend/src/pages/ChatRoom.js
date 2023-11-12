@@ -8,7 +8,6 @@ export default function ChatRoom() {
         if (!loading) {
             return;
         }
-
         const reqName = {
             user1: '관리자',
             user2: '나도사용자'

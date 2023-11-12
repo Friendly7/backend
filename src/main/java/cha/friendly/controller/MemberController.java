@@ -4,6 +4,7 @@ import cha.friendly.controller.form.MemberForm;
 import cha.friendly.domain.Dto.BanDto;
 import cha.friendly.domain.Member;
 import cha.friendly.domain.enumP.Role;
+import cha.friendly.repository.MemberCRUDRepository;
 import cha.friendly.service.MemberService;
 import cha.friendly.session.SessionConst;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,7 @@ import java.util.List;
 @Slf4j
 public class MemberController {
     private final MemberService memberService;
+    private final MemberCRUDRepository memberCRUDRepository;
 
     @ModelAttribute("roles")
     public Role[] roles() {
@@ -51,6 +53,11 @@ public class MemberController {
             return "exist";
         }
         return "available";
+    }
+
+    @GetMapping("/member/findByName/{name}")
+    public Member findByNameMember(@PathVariable String name){
+        return memberCRUDRepository.findByNameMember(name);
     }
 
     @PostMapping("/members/new")
@@ -86,6 +93,7 @@ public class MemberController {
         }
         return list;
     }
+
 
     @GetMapping("/members/edit")
     public String editForm(Model model, @SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember) {

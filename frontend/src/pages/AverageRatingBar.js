@@ -1,7 +1,7 @@
 // AverageRatingBar.js
 import React from 'react';
 import { Rating, Typography, Box, LinearProgress } from '@mui/material';
-import './AverageRatingBar.css';
+import '../css/AverageRatingBar.css';
 
 function AverageRatingBar({ averageRating, reviewCounts }) {
     const totalReviews = reviewCounts.reduce((total, count) => total + count, 0);

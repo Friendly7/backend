@@ -6,27 +6,36 @@ import {
 import '../css/My_Page_center.css';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import Modal from 'react-modal';
 
-function My_Page_mypage() {
+export default function My_Page_mypage() {
     // const data = [
     //     { id:1, name: '박멘토', content: '자기소개서 멘토링', class: '멘토링' , date:'YYYY.MM.DD', state:'결제 대기'},
     //     { id:2, name: '정상담', content: '대인관계 상담', class: '상담', date:'YYYY.MM.DD', state:'매칭 대기'},
     // ];
     const [data,setData] = useState([])
+    const [mentorData,setMentorData] = useState([])
     const navigate = useNavigate()
     const handleButtonClick = (id) => {
         console.log(`버튼 클릭 - 데이터 ID: ${id}`);
-        // 여기에 버튼 클릭 시 실행할 동작 추가
     };
     useEffect(() => {
-        axios.post('userwaitinglist1')
+        axios.post('/userwaitinglist1')
             .then(response => {
-                console.log(response.data)
-                if(response.data!=null)
+                console.log(response.data[0])
+                if(response.data!=null) {
                     setData(response.data)
+                    axios.get('/member/findByName/'+response.data[0].matmentorname)
+                        .then(response2 => {
+                            if(response2.data!=null)
+                                setMentorData(response2.data)
+                                })
+                        .catch(error => {
+                            console.error('오류 발생:', error);
+                        });
+                }
             })
             .catch(error => {
-                // 오류 처리
                 console.error('오류 발생:', error);
             });
     }, []);
@@ -35,17 +44,66 @@ function My_Page_mypage() {
         const formattedDate = currentDate.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit'});
         return formattedDate;
     }
-    const accept = (reqForm) => {
-        let b = window.confirm("수락, 거절을 선택하세요");
+
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [userChoice, setUserChoice] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+    const openModal = () => {
+        setModalIsOpen(true);
+    };
+
+    const closeModal = () => {
+        setModalIsOpen(false);
+    };
+
+    const handleConfirm = (reqForm) => {
+        setUserChoice('1');
         const postData = {
-            'request_id':reqForm.request_id,
-            'popUP':b,
-            'mentor_name':reqForm
+            'request_id': reqForm.request_id,
+            'popUp': "confirm",
+            'matmentorname': reqForm.matmentorname
         }
-        axios.post('/userwaiting',postData).then(response=>{
+        axios.post('/userwaiting', postData).then(response => {
+            alert('30000포인트 결제되었습니다.')
+            // axios.post('/cash/use',{amount:30000}).then(response=> {
+            // })
+            if (loading) {
+                const reqName = {
+                    user2: reqForm.matmentorname
+                };
+                axios.post('/chat/room', reqName)
+                    .then((response) => {
+                        setLoading(false);
+                        console.log('방이 생성되었습니다.', response.data);
+                    })
+                    .catch((error) => {
+                        setLoading(false);
+                        console.error('방 생성 중 오류 발생:', error);
+                    });
+            }
             navigate('/My_Page_main')
-        })
+            window.location.reload()
+            closeModal();
+        });
     }
+
+    const handleCancel = (reqForm) => {
+        // setUserChoice('0');
+        // const postData = {
+        //     'request_id':reqForm.request_id,
+        //     'popUp':"cancel",
+        //     'matmentorname':reqForm.matmentorname
+        // }
+        // axios.post('/userwaiting',postData).then(response=>{
+        //     navigate('/My_Page_main')
+        //     window.location.reload()
+        // }).catch(err=> {
+        //     console.log(err)
+        // })
+        // closeModal();
+    };
+
     return (
         <body>
         <div className='mypage_mypage'>
@@ -79,14 +137,34 @@ function My_Page_mypage() {
                         <td>{item.significant}</td>
                         <td>{item.category}</td>
                         <td>{reqDate(item.date)}</td>
-                        <td>{(item.user_waiting !== '대기' && item.user_waiting) && (
+                        <td>{item.matching !== '수락대기' && (
                             <div>
                             <span>{item.matching}</span><br />
                             <button id='gochatroom' onClick={() => handleButtonClick(item.id)}>채팅방 가기</button>
                         </div>)}
-                            {item.user_waiting === '대기' && (<div>
-                                <button onClick={accept(item)}>{item.matching}</button>
-                            </div>)}
+                            {item.matching === '수락대기' && item.user_waiting === '대기' && (
+                                <div>
+                                <button onClick={openModal}>{item.matching}</button>
+                                <Modal
+                                    isOpen={modalIsOpen}
+                                    onRequestClose={closeModal}
+                                    contentLabel="Confirm Modal"
+                                >
+                                    <p>재매칭은 3회까지 가능하며, 본인이나 상대방에 의해 재매칭될 수 있습니다.</p>
+                                    <b>멘토/상담사 자기소개</b>
+                                    <p>{mentorData.introduce}</p>
+                                    <b>결제 예정 금액</b>
+                                    <p>{30000}</p>
+                                    <button onClick={()=>handleConfirm(item)}>수락</button>
+                                    <button onClick={()=>handleCancel(item)}>거절</button>
+                                </Modal>
+                            </div>
+                            )}
+                            {item.matching =='수락대기' && item.user_waiting =='수락' && (
+                                <div>
+                                    <span>대기 중</span>
+                                </div>
+                            )}
                         </td>
                     </tr>
                 ))}
@@ -96,5 +174,3 @@ function My_Page_mypage() {
         </body>
     );
 }
-
-export default My_Page_mypage;

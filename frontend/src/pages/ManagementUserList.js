@@ -62,6 +62,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 export default function ManagementUserList() {
     const [rows, setRows] = useState([]);
+    const theme = useTheme();
     const navigate = useNavigate();
     useEffect(() => {
         axios.get('/members').then(response => {
@@ -104,7 +105,7 @@ export default function ManagementUserList() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row,idx) => (
+          {rows && rows.map((row,idx) => (
             <StyledTableRow key={idx}>
               <StyledTableCell component="th" scope="row" align="center">
                 <Link to={`/ManagementUserListDetail/${row.id}`}>{idx+1}</Link>

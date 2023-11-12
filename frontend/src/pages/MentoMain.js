@@ -8,15 +8,19 @@ import styled from "styled-components";
 function MentoMain() {
   return (
       <div>
+<ScreenWrapper>
+    <MentoHeader />
 
-        <ViewWrapper>
-          <ProfileWrapper>
+    <ViewWrapper>
+        <ProfileWrapper>
             <MentoProfile />
-          </ProfileWrapper>
-            <MentoMypage/>
-          <TableWrapper>
+        </ProfileWrapper>
+        <MentoMypage/>
+        <TableWrapper>
+
         </TableWrapper>
-        </ViewWrapper>
+    </ViewWrapper>
+</ScreenWrapper>
       </div>
   );
 }
@@ -32,7 +36,6 @@ const ProfileWrapper = styled.div`
 const ViewWrapper = styled.div`
   display: flex;
   flex-direction: row;
-
   padding-top: 10px;
 `;
 

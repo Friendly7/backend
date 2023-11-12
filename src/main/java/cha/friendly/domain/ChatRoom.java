@@ -24,10 +24,10 @@ public class ChatRoom {
     private int maximum =2;
     private String passwd;
 
-    public static ChatRoom create(ChatReqName chatReqName) {
+    public static ChatRoom create(ChatReqName chatReqName, String name) {
         ChatRoom chatRoom = new ChatRoom();
         chatRoom.roomId = UUID.randomUUID().toString();
-        chatRoom.username1 = chatReqName.getUser1();
+        chatRoom.username1 = name;
         chatRoom.username2 = chatReqName.getUser2();
         chatRoom.roomName1 = chatRoom.username2;
         chatRoom.roomName2 = chatRoom.username1;

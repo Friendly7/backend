@@ -9,6 +9,11 @@ import java.util.List;
 public interface AdviceRequestCRUDRepository extends JpaRepository<Advicerequest, Long> {
     @Query(value = "select * from advicerequest where request_id = :id", nativeQuery = true)
     Advicerequest findByRequest(Long id);
+    @Query(value = "select * from advicerequest where matching = '매칭완료'", nativeQuery = true)
+    List<Advicerequest> findSuccess();
+
+    @Query(value = "select * from advicerequest where matching = '매칭완료' and user_id = :id", nativeQuery = true)
+    List<Advicerequest> findSuccessLogin(Long id);
 
     @Query(value = "select * from advicerequest where request_id = :id", nativeQuery = true)
     Advicerequest findByUserIDRequest(Long id);

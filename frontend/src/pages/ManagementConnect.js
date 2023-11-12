@@ -42,11 +42,11 @@ export default function ManagementConnect() {
   const [rows, setRows] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
-    axios.get('/').then(response => {
-      if(response.data!=null) {
+    axios.get('/matching/success/getList').then(response => {
+      console.log(response.data)
+      if(response.data!=null && response.data!='') {
         setRows(response.data);
       }
-      console.log(response.data)
     })
         .catch(error => {
           console.error('Error fetching data:', error);
@@ -67,7 +67,6 @@ export default function ManagementConnect() {
           <TableRow>
             <StyledTableCell align="center">상담사/멘토</StyledTableCell>
             <StyledTableCell align="center">내담자/멘티</StyledTableCell>
-            <StyledTableCell align="center">연결 기간</StyledTableCell>
             <StyledTableCell align="center">연결 관리</StyledTableCell>
           </TableRow>
         </TableHead>

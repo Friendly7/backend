@@ -11,15 +11,33 @@ import My_Page_connected from "../pages/My_Page_connected";
 import '../css/My_Page_connecting_center.css';
 
 function My_Page_connecting_center() {
-    const data = [
-        { id:1, name: '박멘토', content: '자기소개서 멘토링', classify: '진로' , dur:'YYYY.MM.DD 부터 YYYY.MM.DD 까지', schedule: '매주 화요일 09:00', homework: '미제출'  },
-        { id:2, name: '정상담', content: '대인관계 상담', classify: 'TCI', dur:'YYYY.MM.DD 부터 YYYY.MM.DD 까지', schedule: '매주 수요일 09:00' , homework: '미제출' },
-    ];
-
+    // const data = [
+    //     { id:1, name: '박멘토', content: '자기소개서 멘토링', classify: '진로' , dur:'YYYY.MM.DD 부터 YYYY.MM.DD 까지', schedule: '매주 화요일 09:00', homework: '미제출'  },
+    //     { id:2, name: '정상담', content: '대인관계 상담', classify: 'TCI', dur:'YYYY.MM.DD 부터 YYYY.MM.DD 까지', schedule: '매주 수요일 09:00' , homework: '미제출' },
+    // ];
+    const [data, setData] = useState([]);
     const handleButtonClick = (id) => {
         console.log(`버튼 클릭 - 데이터 ID: ${id}`);
         // 여기에 버튼 클릭 시 실행할 동작 추가
     };
+    useEffect(() => {
+        axios.get('/matching/success/getList/login').then(response => {
+            if(response.data!=null) {
+                console.log(response.data)
+                setData(response.data);
+            }
+            console.log(response.data)
+        })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+    },[])
+    const dateFormat = (date) => {
+        const currentDate = new Date(date);
+        const formattedDate = currentDate.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit'});
+        return formattedDate
+    }
+
     return (
         <body>
         <div className='mypage_connecting'>
@@ -47,13 +65,13 @@ function My_Page_connecting_center() {
                 </tr>
                 </thead>
                 <tbody id="connecting_one_tbody">
-                {data.map((item,index) => (
-                    <tr key={item.id} style={{ backgroundColor: index % 2 === 1 ? '#F5F8FA' : 'transparent' }}>
-                        <td>{item.id}</td>
-                        <td>{item.name}</td>
-                        <td>{item.content}</td>
-                        <td>{item.classify}</td>
-                        <td>{item.dur}</td>
+                {data && data.map((item,index) => (
+                    <tr key={item.request_id} style={{ backgroundColor: index % 2 === 1 ? '#F5F8FA' : 'transparent' }}>
+                        <td>{index+1}</td>
+                        <td>{item.matchedname}</td>
+                        <td>{item.significant}</td>
+                        <td>{item.category}</td>
+                        <td>{dateFormat(item.matchingStartDate)}~</td>
                         <td>{item.schedule}</td>
                         <td>
                             {item.homework === '미제출' && (<div>
@@ -91,22 +109,22 @@ function My_Page_connecting_center() {
                 </tr>
                 </thead>
                 <tbody id="connecting_two_tbody">
-                {data.map((item,index) => (
-                    <tr key={item.id}  style={{ backgroundColor: index % 2 === 1 ? '#F5F8FA' : 'transparent' }}>
-                        <td>{item.id}</td>
-                        <td><Link to={`/detail/${item.name}`}>{item.name}</Link></td>
-                        <td>{item.content}</td>
-                        <td>{item.classify}</td>
-                        <td>{item.dur}</td>
-                        <td>{item.schedule}</td>
-                        <td>{item.homework === '미제출' && (<div>
-                            <button id='gohomework_red' onClick={() => handleButtonClick(item.id)}>미제출</button>
-                        </div>)}
-                            {item.homework === '제출' && (<div>
-                                <button id='gohomework_blue' onClick={() => handleButtonClick(item.id)}>미제출</button>
-                            </div>)}</td>
-                    </tr>
-                ))}
+                {/*{data && data.map((item,index) => (*/}
+                {/*    <tr key={item.id}  style={{ backgroundColor: index % 2 === 1 ? '#F5F8FA' : 'transparent' }}>*/}
+                {/*        <td>{item.id}</td>*/}
+                {/*        <td><Link to={`/detail/${item.name}`}>{item.name}</Link></td>*/}
+                {/*        <td>{item.content}</td>*/}
+                {/*        <td>{item.classify}</td>*/}
+                {/*        <td>{item.dur}</td>*/}
+                {/*        <td>{item.schedule}</td>*/}
+                {/*        <td>{item.homework === '미제출' && (<div>*/}
+                {/*            <button id='gohomework_red' onClick={() => handleButtonClick(item.id)}>미제출</button>*/}
+                {/*        </div>)}*/}
+                {/*            {item.homework === '제출' && (<div>*/}
+                {/*                <button id='gohomework_blue' onClick={() => handleButtonClick(item.id)}>미제출</button>*/}
+                {/*            </div>)}</td>*/}
+                {/*    </tr>*/}
+                {/*))}*/}
                 </tbody>
             </table>
         </div>

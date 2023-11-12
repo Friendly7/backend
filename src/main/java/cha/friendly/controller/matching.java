@@ -3,17 +3,21 @@ package cha.friendly.controller;
 import cha.friendly.domain.Advicerequest;
 import cha.friendly.domain.Dto.MatchingDto;
 import cha.friendly.domain.Dto.MatchingMentorDto;
+import cha.friendly.domain.Dto.MentorWaitingDto;
+import cha.friendly.domain.Dto.UserWaitingDto;
+import cha.friendly.domain.MatchingHistory;
 import cha.friendly.domain.Member;
 import cha.friendly.repository.AdviceRequestCRUDRepository;
+import cha.friendly.repository.MatchHistoryRepository;
 import cha.friendly.repository.MemberCRUDRepository;
 import cha.friendly.session.SessionConst;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @RestController
@@ -22,6 +26,19 @@ import java.util.List;
 public class matching {
     private final AdviceRequestCRUDRepository adviceRequestCRUDRepository;
     private final MemberCRUDRepository memberCRUDRepository;
+    private final MatchHistoryRepository matchHistoryRepository;
+
+    @GetMapping("/matching/success/getList")
+    public List<Advicerequest> getSuccessList(@SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember) {
+        List<Advicerequest> success = adviceRequestCRUDRepository.findSuccess();
+        return success;
+    }
+
+    @GetMapping("/matching/success/getList/login")
+    public List<MatchingHistory> getSuccessListLogin(@SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember) {
+        List<MatchingHistory> byName = matchHistoryRepository.findByUsername(loginMember.getName());
+        return byName;
+    }
 
     @PostMapping(value = "/matchinglist")
     public List<Member> matchinglist(@RequestBody MatchingDto matchingDto){
@@ -160,24 +177,23 @@ public class matching {
 
     //멘토(상담사)가 자신에게 들어온요청 리스트확인
     @PostMapping(value = "/mentorwaitinglist")
-    public String mentorwaitinglist(@RequestParam(value = "mentor_id")Long id, Model model){
-        List<Advicerequest> result = adviceRequestCRUDRepository.findByMentorWaitingList(id);
-        model.addAttribute("list", result);
-        return "/mentorWaitingList";
+    public List<Advicerequest> mentorwaitinglist(@SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember){
+        System.out.println("loginMember = " + loginMember.getId());
+        List<Advicerequest> result = adviceRequestCRUDRepository.findByMentorWaitingList(loginMember.getId());
+        System.out.println("result = " + result);
+        return result;
     }
     //멘토가 요청을 수락거절 로직(멘토가 거절, 수락버튼 눌렀을떄 동작하는거)
     @PostMapping(value = "/mentorwaiting")
-    public String mentorwaiting(@RequestParam(value = "request_id")Long request_id, @RequestParam(value = "mentor_id")Long mentor_id,
-                                                                      @RequestParam(value = "popUP")Long popUp, Model model){
-        Advicerequest result = adviceRequestCRUDRepository.findByRequest(request_id);
-        Member member = memberCRUDRepository.findByMember(mentor_id);
-        if (popUp==0)
-        {
+    public String mentorwaiting(@RequestBody MentorWaitingDto metorWaitingDto,
+                                @SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember){
+        Advicerequest result = adviceRequestCRUDRepository.findByRequest(Long.valueOf(metorWaitingDto.getRequest_id()));
+        Member member = memberCRUDRepository.findByMember(loginMember.getId());
+        if (metorWaitingDto.getPopUp().equals("cancel"))
             result.setMentor_waiting("거절");
-        }
-        else if (popUp==1) {
+        else if (metorWaitingDto.getPopUp().equals("confirm"))
             result.setMentor_waiting("수락");
-        }
+
         if (result.getUser_waiting().equals("수락") && result.getMentor_waiting().equals("수락")){
             int match_cnt = member.getMatchCnt();
             int totalMatCount = member.getTotalMatchingCount();
@@ -234,15 +250,15 @@ public class matching {
     }
     //user 수락,거절
     @PostMapping(value = "/userwaiting")
-    public String userwaiting(@RequestParam(value = "request_id")String request_id, @RequestParam(value = "popUP")String popUp, @RequestParam(value = "matmentorname")String matmentorname) {
-        Advicerequest result = adviceRequestCRUDRepository.findByUserIDRequest(Long.valueOf(request_id));
-        Member member = memberCRUDRepository.findByNameMember(matmentorname);
+    public String userwaiting(@RequestBody UserWaitingDto userWaitingDto,
+                              @SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember) {
+        Advicerequest result = adviceRequestCRUDRepository.findByUserIDRequest(Long.valueOf(userWaitingDto.getRequest_id()));
+        Member member = memberCRUDRepository.findByNameMember(userWaitingDto.getMatmentorname());
         int match_cnt = member.getMatchCnt();
         int totalMatCount = member.getTotalMatchingCount();
-        int pop = Integer.parseInt(popUp);
-        if (pop==0)
+        if (userWaitingDto.getPopUp().equals("cancel"))
             result.setUser_waiting("거절");
-        else if (pop==1)
+        else if (userWaitingDto.getPopUp().equals("confirm"))
             result.setUser_waiting("수락");
 
         if (result.getUser_waiting().equals("수락") && result.getMentor_waiting().equals("수락")) {
@@ -276,6 +292,18 @@ public class matching {
         }
         adviceRequestCRUDRepository.save(result);
         memberCRUDRepository.save(member);
+        MatchingHistory matchingHistory = new MatchingHistory();
+        LocalDateTime currentTime = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formattedTime = currentTime.format(formatter);
+        matchingHistory.setMatchingStartDate(formattedTime);
+        matchingHistory.setMatchedname(userWaitingDto.getMatmentorname());
+        matchingHistory.setUsername(loginMember.getName());
+        matchingHistory.setSignificant(result.getSignificant());
+        matchingHistory.setCategory(result.getCategory());
+
+        matchingHistory.setStatus("진행");
+        matchHistoryRepository.save(matchingHistory);
         return "/main";
     }
 

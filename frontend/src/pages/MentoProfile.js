@@ -7,23 +7,26 @@ import Button from "@mui/material/Button";
 import styled from "styled-components";
 import SvgIcon from "@mui/material/SvgIcon";
 import MentoCategory from "./MentoCategory";
+import SessionManager from "./SessionManager"
+import PersonIcon from '@mui/icons-material/Person';
 
 function MentoProfile(props) {
+  const {name, isLoggedIn, setIsLoggedIn, role} = SessionManager();
   return (
     <div>
       <Profile>
         <ProfileImageWrapper>
-          <SvgIcon {...props} sx={{ fontSize: 80 }}>
+          <PersonIcon {...props} sx={{ fontSize: 80 }}>
             <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-          </SvgIcon>
+          </PersonIcon>
         </ProfileImageWrapper>
         <div
           style={{ fontSize: "20px", textAlign: "center", marginTop: "10px", marginBottom: "10px"}}
         >
-          전문 상담사
+          {role=='COUNSELOR' && '상담사'}
           <br />
         </div>
-        <div style={{ fontSize: "40px", textAlign: "center", marginBottom: "30px" }}>김상담</div>
+        <div style={{ fontSize: "17px", textAlign: "center", marginBottom: "30px" }}>{name}</div>
 
         <MentoCategory />
       </Profile>

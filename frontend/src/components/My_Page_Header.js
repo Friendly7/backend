@@ -2,7 +2,7 @@ import React from 'react';
 import {
     BrowserRouter,
     Routes,
-    Route,
+    Route, useNavigate,
 } from "react-router-dom";
 import '../css/My_Page_Header.css';
 import ListItemButton from "@mui/material/ListItemButton";
@@ -12,6 +12,7 @@ import HomeIcon from '@mui/icons-material/Home';
 
 
 function My_Page_Header() {
+    const navigate = useNavigate()
     return (
         <body>
         <div id='c_mypagelogo'></div>
@@ -25,7 +26,7 @@ function My_Page_Header() {
         <div id='c_gohome'>
             <ListItemButton >
                 <ListItemIcon>
-                    <HomeIcon style={{fontSize: 80}}/>
+                    <HomeIcon onClick={()=>navigate('/')} style={{fontSize: 80}}/>
                 </ListItemIcon>
             </ListItemButton>
         </div>

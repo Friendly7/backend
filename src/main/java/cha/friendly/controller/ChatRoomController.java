@@ -37,8 +37,9 @@ public class ChatRoomController {
 
     // 채팅방 생성
     @PostMapping("/room")
-    public ChatRoom createRoom(@RequestBody ChatReqName chatReqName) {
-        ChatRoom chatRoom = chatRoomService.createChatRoom(chatReqName);
+    public ChatRoom createRoom(@RequestBody ChatReqName chatReqName,
+                               @SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember) {
+        ChatRoom chatRoom = chatRoomService.createChatRoom(chatReqName, loginMember.getName());
         return chatRoom;
     }
     // 채팅방 생성

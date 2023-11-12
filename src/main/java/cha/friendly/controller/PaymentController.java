@@ -203,6 +203,18 @@ public class PaymentController {
         Collections.reverse(points);
         return points;
     }
+    @PostMapping("/cash/use")
+    public String usePoint(@SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember,
+                              @RequestBody String amount) {
+        loginMember.setPoint(loginMember.getPoint() - Integer.parseInt(amount.replace("=","")));
+
+        Point point = new Point();
+        point.setStatus("사용");
+        point.setHistory("-"+amount.replace("=",""));
+        point.setMemberId(loginMember);
+        payService.saveUsePoint(point);
+        return String.valueOf(loginMember.getPoint());
+    }
 }
     //---------------------------------------------------------------------------//
 //    @GetMapping("/members/new")

@@ -14,8 +14,13 @@ public class MatchingHistory {
     @Column(name = "MatchingHistory_id")
     private Long id;
 
-    private Long member1Id;
-    private Long member2Id; //매칭 멤버 ID
-
-    private String status; //상담 전, 상담완료
+    private String username;
+    private String matchedname;
+    private String status; //진행, 종료
+    private String significant;
+    private String matchingStartDate;
+    private String matchingEndDate;
+    private String schedule;
+    private String category;
+    private String homework;
 }

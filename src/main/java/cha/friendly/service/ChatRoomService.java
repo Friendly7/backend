@@ -32,8 +32,8 @@ public class ChatRoomService {
     }
 
     //채팅방 생성
-    public ChatRoom createChatRoom(ChatReqName chatReqName) {
-        ChatRoom chatRoom = ChatRoom.create(chatReqName);
+    public ChatRoom createChatRoom(ChatReqName chatReqName, String name) {
+        ChatRoom chatRoom = ChatRoom.create(chatReqName,name);
         chatRoomRepository.save(chatRoom);
         return chatRoom;
     }

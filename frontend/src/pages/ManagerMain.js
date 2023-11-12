@@ -49,7 +49,7 @@ const TableWrapper = styled.div`
   display: flex;
   flex-direction: row;
 
-  width: 1000px;
+  width: 800px;
 
   padding-top: 100px;
 `;
