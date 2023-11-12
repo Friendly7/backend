@@ -22,22 +22,13 @@ function My_Page_connecting_center() {
         // 여기에 버튼 클릭 시 실행할 동작 추가
     };
     useEffect(() => {
-        if(role && role == 'USER') {
-            axios.get('/matching/success/getList/login').then(response => {
-                if(response.data!=null) {
-                    console.log(response.data)
-                    setData(response.data);
-                }
-            })
-        } else if(role && role == "COUNSELOR") {
-            axios.get('/matching/success/getList/login/mentor').then(response => {
-                if(response.data!=null) {
-                    console.log(response.data)
-                    setData(response.data);
-                }
-            })
-        }
-    },[role])
+        axios.get('/matching/success/getList/login/mentor').then(response => {
+            if(response.data!=null) {
+                console.log(response.data)
+                setData(response.data);
+            }
+        })
+    },[])
 
     const dateFormat = (date) => {
         const currentDate = new Date(date);
@@ -63,7 +54,7 @@ function My_Page_connecting_center() {
                 <thead id="connecting_one_thead">
                 <tr>
                     <th>id</th>
-                    <th>상담사 닉네임</th>
+                    <th>내담자 닉네임</th>
                     <th>내용</th>
                     <th>분류</th>
                     <th>기간</th>
@@ -75,7 +66,7 @@ function My_Page_connecting_center() {
                 {data && data.map((item,index) => (
                     <tr key={item.id} style={{ backgroundColor: index % 2 === 1 ? '#F5F8FA' : 'transparent' }}>
                         <td>{index+1}</td>
-                        <td><Link to={`/detail/${item.matchedname}/${item.id}`}>{item.matchedname}</Link></td>
+                        <td><Link to={`/detail/${item.username}/${item.id}`}>{item.username}</Link></td>
                         <td>{item.significant}</td>
                         <td>{item.category}</td>
                         <td>{dateFormat(item.matchingStartDate)}~</td>

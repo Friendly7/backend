@@ -21,10 +21,22 @@ class VerificationCodeInput extends Component {
                     value={this.state.code}
                     onChange={this.handleCodeChange}
                 />
-                <button onClick={() => this.props.onVerify(this.state.code)}>확인</button>
+                <button style={buttonStyle} onClick={() => this.props.onVerify(this.state.code)}>확인</button>
             </>
         );
     }
 }
 
 export default VerificationCodeInput;
+const buttonStyle = {
+    padding: '3px 7px',
+    fontSize: '11px',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    textDecoration: 'none',
+    cursor: 'pointer',
+    border: '2px solid #4CAF50',
+    color: '#4CAF50',
+    backgroundColor: '#fff',
+    transition: 'background-color 0.3s, color 0.3s',
+};

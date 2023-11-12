@@ -6,18 +6,18 @@ import {
 } from "react-router-dom";
 import My_Page_Header from '../components/My_Page_Header.js';
 import My_Page_Leftnav from '../components/My_Page_Leftnav.js';
-import My_Page_points_center from '../components/My_Page_points_center.js';
+import My_Page_region_center from '../components/My_Page_region_center.js';
 import Line from '../components/Line.js';
 
-function My_Page_points() {
+function My_Page_region() {
     return (
         <body>
         <My_Page_Header />
         <My_Page_Leftnav />
         <Line />
-        <My_Page_points_center />
+        <My_Page_region_center />
         </body>
     );
 }
 
-export default My_Page_points;
+export default My_Page_region;

@@ -1,50 +1,50 @@
-/* Header 컴포넌트에 대한 CSS 스타일 */
+/*!* Header 컴포넌트에 대한 CSS 스타일 *!*/
 
-header {
-    background-color: #333; /* 배경색 설정 */
-    color: #fff; /* 텍스트 색상 설정 */
-    padding: 10px 0; /* 위 아래로 간격을 추가합니다. 필요에 따라 조절 가능 */
-}
+/*header {*/
+/*    background-color: #333; !* 배경색 설정 *!*/
+/*    color: #fff; !* 텍스트 색상 설정 *!*/
+/*    padding: 10px 0; !* 위 아래로 간격을 추가합니다. 필요에 따라 조절 가능 *!*/
+/*}*/
 
-.header-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
+/*.header-container {*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    justify-content: space-between;*/
+/*    max-width: 1200px;*/
+/*    margin: 0 auto;*/
+/*    padding: 0 20px;*/
+/*}*/
 
-.logo {
-    max-width: 100px;
-    height: auto;
-}
+/*.logo {*/
+/*    max-width: 100px;*/
+/*    height: auto;*/
+/*}*/
 
-nav {
-    flex: 1;
-}
+/*nav {*/
+/*    flex: 1;*/
+/*}*/
 
-.nav-links {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    justify-content: space-between;
-}
+/*.nav-links {*/
+/*    list-style: none;*/
+/*    padding: 0;*/
+/*    display: flex;*/
+/*    justify-content: space-between;*/
+/*}*/
 
-.nav-links li {
-    margin-right: 20px;
-}
+/*.nav-links li {*/
+/*    margin-right: 20px;*/
+/*}*/
 
-.nav-links a {
-    text-decoration: none;
-    color: #fff;
-}
+/*.nav-links a {*/
+/*    text-decoration: none;*/
+/*    color: #fff;*/
+/*}*/
 
-.login-button {
-    background-color: #007bff; /* 로그인 버튼 배경색 설정 */
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-}
+/*.login-button {*/
+/*    background-color: #007bff; !* 로그인 버튼 배경색 설정 *!*/
+/*    color: #fff;*/
+/*    border: none;*/
+/*    padding: 10px 20px;*/
+/*    border-radius: 5px;*/
+/*    cursor: pointer;*/
+/*}*/

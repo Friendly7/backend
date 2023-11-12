@@ -1,7 +1,7 @@
 import {
     BrowserRouter,
     Routes,
-    Route,
+    Route, useNavigate,
 } from "react-router-dom";
 import '../css/My_Page_center.css';
 import React, { useEffect, useState } from 'react';
@@ -14,6 +14,8 @@ import PaidIcon from '@mui/icons-material/Paid';
 import LocalParkingIcon from '@mui/icons-material/LocalParking';
 
 function My_Page_pointsplus_center() {
+    const [amount, setAmount] = useState('');
+    const [datatime,setDateTime] = useState([])
     const data = [
         { point:'900 P', price:'1,000원' },
         { point:'1,900 P', price:'2,000원'  },
@@ -21,15 +23,15 @@ function My_Page_pointsplus_center() {
         { point:'11,000 P', price:'10,000원'  },
         { point:'55,000 P', price:'50,000원'  },
     ];
-    const datatime = [
-        { class: '상담', time: '9', date:'2023-11-15', point:'-50000' },
-        { class: '상담', time: '10', date:'2023-10-20',point:'-50000' },
-        { class: '멘토', time: '11', date:'2023-09-05',point:'-50000' },
-        { class: '멘토', time: '12', date:'2023-11-03',point:'-50000' },
-    ];
+    // const datatime = [
+    //     { class: '상담', time: '9', date:'2023-11-15', point:'-50000' },
+    //     { class: '상담', time: '10', date:'2023-10-20',point:'-50000' },
+    //     { class: '멘토', time: '11', date:'2023-09-05',point:'-50000' },
+    //     { class: '멘토', time: '12', date:'2023-11-03',point:'-50000' },
+    // ];
     const [inputPrice, setinputPrice] = useState('');
     const [selectedMonth, setSelectedMonth] = useState(0);
-
+    const navigate = useNavigate();
     const handleInputChange = (e) => {
         setinputPrice(e.target.value);
     };
@@ -59,6 +61,17 @@ function My_Page_pointsplus_center() {
 
         return (itemDate >= targetDate && itemDate <= getCurrentDate());
     });
+    const pay = () => {
+        navigate(`/Payment/${inputPrice}`)
+    }
+    useEffect(()=>{
+        axios.get('/point/mine').then(response=> {
+            console.log(response.data)
+            if(response.data!=null && response.data.length!=0)
+                setDateTime(response.data)
+        })
+    },[])
+
     return (
         <body>
         <div className="mypage_pointsplus">
@@ -85,9 +98,9 @@ function My_Page_pointsplus_center() {
                 type="text"
                 value={inputPrice}
                 onChange={handleInputChange}
-                placeholder="충전할 금액을 입력해 주세요."
+                placeholder="충전할 금액을 입력해주세요."
             ></input>
-            <button id="mypage_pointsplus_two">결제하기</button>
+            <button onClick={pay} id="mypage_pointsplus_two">결제하기</button>
             <div id="morelist">
                 <label id="mypage_pointplus_label">조회 조건 선택 </label>
                 <select value={selectedMonth} onChange={handleSelectChange} id="mypage_pointplus_select">
@@ -104,12 +117,12 @@ function My_Page_pointsplus_center() {
                     <thead id="pointsplushead">
                     <tr>
                         <th>날짜</th>
-                        <th>사용 포인트</th>
+                        <th>포인트 내역</th>
                     </tr>
                     </thead>
                     <tbody  id="pointsplustbody">
-                    {filteredData.map(item => (
-                        <tr key={item.date}>
+                    {filteredData.map((item, index) => (
+                        <tr key={index}>
                             <td>{item.date}</td>
                             <td>{item.point}</td>
                         </tr>

@@ -10,4 +10,6 @@ import java.util.List;
 public interface MatchHistoryRepository extends JpaRepository<MatchingHistory,Long> {
 
     List<MatchingHistory> findByUsername(String name);
+
+    List<MatchingHistory> findByMatchedname(String name);
 }

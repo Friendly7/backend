@@ -20,7 +20,7 @@ public class LocationController {
     private final MemberService memberService;
 
     @PostMapping("/saveLocation")
-    public String saveLocation(LocationForm form,
+    public String saveLocation(@RequestBody LocationForm form,
                                @SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member member) {
         if (member == null) {
             return "home";

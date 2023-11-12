@@ -1,9 +1,10 @@
 import {useState, useEffect} from 'react';
 import { Map, MapMarker } from "react-kakao-maps-sdk"
-import useKakaoLoader from "./useKakaoLoader"
+import useKakaoLoader from "../pages/useKakaoLoader"
 import axios from 'axios';
+import '../css/My_Page_region_center.css';
 
-function Location() {
+function My_Page_region_center() {
     const { kakao } = window;
     const [latitude, setLatitude] = useState('');
     const [longitude, setLongitude] = useState('');
@@ -20,13 +21,13 @@ function Location() {
             .then((response) => {
                 if(response.data === "save") alert("사용자의 위치가 저장되었습니다.")
             }).catch((error) =>{
-                console.log(error+'저장 실패')
+            console.log(error+'저장 실패')
         })
     }
     const [locate, setLocate] = useState('현재 위치는?')
     useKakaoLoader()
 
-    const lv = 7; //지도 확대 정도
+    const lv = 6; //지도 확대 정도
     const [state, setState] = useState({
         center: {
             lat: 33.450701,
@@ -52,7 +53,7 @@ function Location() {
                             const firstResult = result[0];
                             setAddress({
                                 ...address,  // 이전의 값들을 복사합니다.
-                                city: firstResult.address.region_1depth_name,
+                                city: firstResult.address.region_1depth_name+'시',
                                 gu: firstResult.address.region_2depth_name,
                                 dong: firstResult.address.region_3depth_name
                             });
@@ -92,15 +93,21 @@ function Location() {
             }))
         }
     }, [])
-
     return (
-        <>
+        <body>
+        <div className="regionBox">
+            <span id='mypage_region_one'>지역 인증</span>
+            <hr id="regionhr"></hr>
+            <span id="mypage_region_two">
+                *저희 '친해지자'서비스는 이용자의 신뢰를 바탕으로하는 서비스입니다.<br />
+                서비스 이용을 원하시면 지역인증을 완료해주세요
+            </span>
             <Map // 지도를 표시할 Container
                 center={state.center}
                 style={{
                     // 지도의 크기
-                    width: "50%",
-                    height: "50%",
+                    width: "80%",
+                    height: "80%",
                 }}
                 level={lv} // 지도의 확대 레벨
                 zoomable={false}
@@ -113,18 +120,28 @@ function Location() {
                             src: process.env.PUBLIC_URL + "/img.png", // 마커이미지의 주소입니다
                             size: {width: 100, height: 100}, // 마커이미지의 크기입니다
                             options: {
-                                offset: {x: 50, y: 40}
+                                offset: {x: -40, y: 50}
                             }
                         }}
                     />
                 )}
             </Map>
             <div>
-                <h3>현재 계신 위치는 {address.city} {address.gu} {address.dong}</h3>
-                <h3>위치가 맞다면 버튼을 눌러주세요 <button onClick={saveLocation}>위치 저장</button></h3>
+                <h3>현재 계신 위치는 {address.city} {address.gu} {address.dong} 입니다.</h3>
+                <h3>위치가 맞다면 버튼을 눌러주세요 <button onClick={saveLocation}
+                                              style={{
+                                                  backgroundColor: '#4CAF50', // 배경색
+                                                  fontSize:'15px',
+                                                  color: 'white', // 글자색
+                                                  padding: '10px 20px', // 여백
+                                                  border: 'none', // 테두리 제거
+                                                  borderRadius: '5px', // 모서리 둥글게
+                                                  cursor: 'pointer', // 마우스 오버 시 커서 스타일 변경
+                                              }}>위치 저장</button></h3>
             </div>
-        </>
-    )
+        </div>
+        </body>
+    );
 }
 
-export default Location;
+export default My_Page_region_center;

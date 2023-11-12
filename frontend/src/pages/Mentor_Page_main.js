@@ -6,18 +6,19 @@ import {
 } from "react-router-dom";
 import My_Page_Header from '../components/My_Page_Header.js';
 import My_Page_Leftnav from '../components/My_Page_Leftnav.js';
-import My_Page_points_center from '../components/My_Page_points_center.js';
 import Line from '../components/Line.js';
+import My_Page_center from '../components/My_Page_center.js';
+import Mentor_mypage_Main from "./Mentor_mypage_Main";
+import Mentor_mypage_Leftnav from "./Mentor_mypage_Leftnav";
 
-function My_Page_points() {
+
+export default function Mentor_page_main() {
     return (
         <body>
         <My_Page_Header />
-        <My_Page_Leftnav />
+        <Mentor_mypage_Leftnav />
         <Line />
-        <My_Page_points_center />
+        <Mentor_mypage_Main />
         </body>
     );
 }
-
-export default My_Page_points;

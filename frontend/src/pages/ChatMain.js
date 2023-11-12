@@ -169,14 +169,15 @@ export default function ChatMain() {
             <ChatRoomList getRoomId={getRoomId} />
             <h3>{roomName}</h3>
             <div>
-                {roomId && isLoading ?
-                         (
-                            <div className="c_chat_loading ">
+                {roomId ? (
+                    <div>
+                        {isLoading ? (
+                            <div className="c_chat_loading">
                                 <div className="c_spinner"></div>
                                 방 입장 중...
                             </div>
                         ) : (
-                            <div>
+                            <>
                                 <ul>
                                     {groupedMessages.map((group, groupIndex) => (
                                         <li key={groupIndex}>
@@ -200,19 +201,21 @@ export default function ChatMain() {
                                 <input
                                     type="text"
                                     value={messageText}
-                                    onChange={e => setMessageText(e.target.value)}
+                                    onChange={(e) => setMessageText(e.target.value)}
                                     placeholder="메시지를 입력하세요"
-                                    onKeyDown={e => {
+                                    onKeyDown={(e) => {
                                         if (e.key === 'Enter') {
                                             sendMessage();
                                         }
                                     }}
                                 />
                                 <button onClick={sendMessage}>전송</button>
-                            </div>
+                            </>
                         )}
+                    </div>
+                ) : null}
+                <ChatMemoComponent />
             </div>
-                {/*<ChatMemoComponent />*/}
             </div>
         </div>
         )

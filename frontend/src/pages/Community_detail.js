@@ -12,42 +12,61 @@ import Paper from "@mui/material/Paper";
 import { createData, rows } from "./ManagementQnAData";
 import { Container } from "react-bootstrap";
 import styled from "styled-components";
+import {useEffect, useState} from "react";
+import axios from "axios";
 
 export default function Community_detail() {
-  const { State } = useParams(); // URL에서 No 매개변수를 가져옴
+    const { id } = useParams(); // URL에서 No 매개변수를 가져옴
+    const [list, setList] = useState(null);
+    const [boardName, setBoardName] = useState("");
+    const [userName, setUserName] = useState("");
+    const [content, setContent] = useState("");
+    // 선택한 No에 해당하는 데이터 찾기
+    //const selectedRow = rows.find((row) => row.State === State);
+    const data = {
+        id:id
+    }
+    useEffect(() => {
+        axios.post('/viewAreaContent', data.id)
+            .then((response) => {
+                setList(response.data);
+                setBoardName(list?.[0].board_name);
+                setUserName(list?.[0].user_name);
+                setContent(list?.[0].content);
+                console.log(list);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
 
-  // 선택한 No에 해당하는 데이터 찾기
-  const selectedRow = rows.find((row) => row.State === State);
+    }, []);
+    // 선택한 데이터가 없으면 null 반환
+    //  if (!selectedRow) {
+    //     return null;
+    // }
+    if (list){
+        return(
+            <div>
+                {/* <Container key={selectedRow.State}>*/}
 
-  // 선택한 데이터가 없으면 null 반환
-  if (!selectedRow) {
-    return null;
-  }
-
-  return (
-    <div>
-      {/* <Container key={selectedRow.State}> */}
-        <TitleNoWrapper>아 시험기간인데 왤케 공부하기 싫지</TitleNoWrapper>
-        <TitleWrapper>
-          <TitleDateWrapper>작성 날짜 : XXXX.XX.XX</TitleDateWrapper>
-          <TitleSingoWrapper>작성자 : 이승후 님 </TitleSingoWrapper>
-        </TitleWrapper>
-
-        <ContentTitleWrapper>
-          문의 내용
-          <br />
-          <DetailWrapper>시험기간인데 공부하기 싫다 혼자있으면 아무것도 안할거같은데 같이 카공할사람 있어?
-
-          </DetailWrapper>
-          답변 추가
-          <br />
-          <AnswerWrapper>
-            <AnswerDetailWrapper></AnswerDetailWrapper>
-          </AnswerWrapper>
-        </ContentTitleWrapper>
-      {/* </Container> */}
-    </div>
-  );
+                <TitleNoWrapper>{list?.[0].board_name}</TitleNoWrapper>
+                <TitleWrapper>
+                    <TitleSingoWrapper>작성자 : {list?.[0].user_name} 님 </TitleSingoWrapper>
+                </TitleWrapper>
+                <ContentTitleWrapper>
+                    내용
+                    <br />
+                    <DetailWrapper>{list?.[0].content}</DetailWrapper>
+                    답변 추가
+                    <br />
+                    <AnswerWrapper>
+                        <AnswerDetailWrapper></AnswerDetailWrapper>
+                    </AnswerWrapper>
+                </ContentTitleWrapper>
+                {/*</Container>*/}
+            </div>
+        );
+    }else return null;
 }
 
 const TitleNoWrapper = styled.div`

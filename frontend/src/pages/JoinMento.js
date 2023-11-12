@@ -22,7 +22,7 @@ export default function JoinMento() {
   const [emailMessage, setEmailMessage] = useState('');
   const [isEmailButtonDisabled, setIsEmailButtonDisabled] = useState(false);
   const [verified, setVerified] = useState(false);
-  const [buttonLabel, setButtonLabel] = useState('인증번호 전송');
+  const [buttonLabel, setButtonLabel] = useState('인증 전송');
   const [isRunning, setRunning] = useState(false);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const [EmailVerifiedCode, setEmailVerifiedCode] = useState('');
@@ -33,6 +33,7 @@ export default function JoinMento() {
       setVerified(true);
       setRunning(false);
       setIsButtonDisabled(true)
+      window.alert('인증 완료')
     }else{
       alert("인증번호가 틀립니다.")
     }
@@ -153,16 +154,15 @@ export default function JoinMento() {
             <div className='join_form'>
               <label id='name_lb_join'>이름 <a id='red'>*</a></label><br/>
               <input type="text" id="name_form_join" value={name} onChange={(e) => setName(e.target.value)} required/>
-              <button onClick={checkName} id="check_name">중복 확인</button><br/>
+              <button style={buttonStyle} onClick={checkName} id="check_name">중복 확인</button><br/>
 
               <label id='email_lb_join'>이메일 <a id='red'>*</a></label><br/>
               <input type="email" id="email_form_join" value={email} onChange={(e) => setEmail(e.target.value)} required/>
-              <button onClick={checkEmail} id="check_email" disabled={isButtonDisabled}>{buttonLabel}</button>
+              <button style={buttonStyle} style={buttonStyle} onClick={checkEmail} id="check_email" disabled={isButtonDisabled}>{buttonLabel}</button>
               {isRunning && <Timer />}
-              <br/><br/>
+              <br/>
               <div>
-                {verified ? (
-                    <p>인증이 완료되었습니다.</p>
+                {verified ? (<></>
                 ) : (
                     <div>
                       <VerificationCodeInput onVerify={handleVerification} />
@@ -171,7 +171,7 @@ export default function JoinMento() {
               </div>
               <label id='number_lb_join'>전화번호 <a id='red'>*</a></label><br/>
               <input type="text" id="number_form_join" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} required/><br/>
-              <label id='passwd_lb_join'>Password <a id='red'>*</a></label><br/>
+              <label id='passwd_lb_join'>비밀번호 <a id='red'>*</a></label><br/>
               <input type="password" id="passwd_form_join" value={password} onChange={handlePasswordChange}
               required/><br/>
               <label id='passwdchk_lb_join'>Check Password <a id='red'>*</a></label><br/>
@@ -187,15 +187,8 @@ export default function JoinMento() {
                 )}
               </div>
             </div>
-            <div className='join_check'>
-              <label id='agreement_one'><input type="checkbox" id='agree_one_chk' name="color" value="blue"
-                                               checked={agreedToTerms} onChange={() => setAgreedToTerms(!agreedToTerms)}/> 약관동의</label>
-              <label id='agreement_two'><input type="checkbox" id='agree_two_chk' name="color" value="blue"
-                                               checked={agreedToPrivacy} onChange={() => setAgreedToPrivacy(!agreedToPrivacy)}/> 개인정보 제공 동의</label>
-            </div>
             <div className='join_btn'>
-              <button onClick={signUp} id='joincom'>Sign up</button><br/>
-              <button onClick={() => navigate('/')} id='kakaojo'>카카오로 회원가입</button>
+              <button onClick={() => navigate('/')} id='joincom'>Sign up</button><br/>
             </div>
             <div className='footer_join'>
               <span id='footer_join_mento'>일반 사용자로 가입하기 </span>
@@ -212,3 +205,15 @@ export default function JoinMento() {
     </div>
   );
 }
+const buttonStyle = {
+  padding: '3px 7px',
+  fontSize: '16px',
+  fontWeight: 'bold',
+  textAlign: 'center',
+  textDecoration: 'none',
+  cursor: 'pointer',
+  border: '2px solid #4CAF50',
+  color: '#4CAF50',
+  backgroundColor: '#fff',
+  transition: 'background-color 0.3s, color 0.3s',
+};

@@ -1,0 +1,41 @@
+html,
+    body{
+        width:90vw;
+        height:70vh;
+        margin:0px;
+    }
+
+#communitylocationBox{
+    position:absolute;
+    top:15%;
+    left:4%;
+    width: 90%;
+    height: 70%;
+}
+
+#communitylocationtbl{
+    position:absolute;
+    top:30%;
+}
+
+#communitylocationthead{
+    position: relative;
+    border:3px solid #CFDCE5;
+    border-left:none;
+    border-right:none;
+    text-align: center;
+    font-size:24px;
+    font-weight: 600;
+    color:rgba(4,35,11,0.8);
+    font-family: 'counselname', serif;
+}
+
+#communitylocationtbody{
+
+}
+
+#commlocationname{
+    position: absolute;
+    left:2%;
+    top:2%;
+}

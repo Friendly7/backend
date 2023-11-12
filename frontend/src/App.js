@@ -60,6 +60,16 @@ import My_Page_schedule from './pages/My_Page_schedule';
 import My_Page_points from './pages/My_Page_points';
 import My_Page_pointsplus from './pages/My_Page_pointsplus';
 import My_Page_review from './pages/My_Page_review';
+import Mentor_mypage_Main from "./pages/Mentor_mypage_Main";
+import Mentor_Page_main from "./pages/Mentor_Page_main";
+import Mentor_mypage_connecting from "./pages/Mentor_mypage_connecting";
+import Payment from "./pages/Payment";
+import My_Page_region from "./pages/My_Page_region";
+
+import CommunityCategory from "./pages/CommunityCategory";
+import Community_free from "./pages/Community_free";
+import Community_location from "./pages/Community_location";
+import Community_detail from "./pages/Community_detail";
 
 function App() {
   return (
@@ -116,10 +126,18 @@ function App() {
         <Route path="My_Page_pointsplus" element={<My_Page_pointsplus />} />
         <Route path="My_Page_review" element={<My_Page_review />} />
         {/*<Route path="Chatting_Main" element={<Chatting_Main />} />*/}
-        <Route path="/detail/:name" element={<My_Page_connecting_center_detail />} />
+        <Route path="/detail/:name/:id" element={<My_Page_connecting_center_detail />} />
+        <Route path="/Mentor_mypage_Main" element={<Mentor_mypage_Main />} />
+        <Route path="/Mentor_Page_main" element={<Mentor_Page_main />} />
+        <Route path="/Mentor_mypage_connecting" element={<Mentor_mypage_connecting />} />
+        <Route path="/Payment/:inputPrice" element={<Payment />} />
+        <Route path="/My_Page_region" element={<My_Page_region />} />
+        <Route path="CommunityCategory" element={<CommunityCategory />} />
+        <Route path="Community_free" element={<Community_free />} />
+        <Route path="Community_location" element={<Community_location />} />
+        <Route path="/Community_detail/:id" element={<Community_detail />} />
       </Routes>
     </BrowserRouter>
-
   );
 }
 

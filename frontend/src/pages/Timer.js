@@ -30,7 +30,7 @@ function Timer() {
     return (
         <>
             {/*<p>{formatTime(seconds)}</p>*/}
-            <p>{seconds}초</p>}
+            <span>{seconds}초</span>
         </>
     );
 }

@@ -85,8 +85,8 @@ export default function Login() {
             </div>
             <div id='join_choose'>
               <button onClick={hide} id='join_choose_form'>X</button><br/>
-              <button onClick={() => navigate('/JoinMento')} id='join_choose_btn'>멘토 / 상담사용 <br/>회원가입</button>
-              <button onClick={() => navigate('/JoinMenti')} id='join_choose_btn'>멘티 / 내담자용 <br/>회원가입</button>
+              <button onClick={() => navigate('/JoinMento')} id='join_choose_btn'>멘티 / 내담자용 <br/>회원가입</button>
+              <button onClick={() => navigate('/JoinMenti')} id='join_choose_btn'>멘토 / 상담사용 <br/>회원가입</button>
             </div>
           </div>
         </div>

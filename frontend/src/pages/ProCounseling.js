@@ -17,7 +17,7 @@ export default function ProCounseling() {
 
     }
     return (
-        <>
+        <ScreenWrapper>
         <MainHeader />
             <section id="CounselIntroduction">
                 <h2>전문 상담사란?</h2>
@@ -36,7 +36,7 @@ export default function ProCounseling() {
                 <h2>1급 상담사와 2급 상담사 차이가 있나요?</h2>
                 <p>상담사는 직업상담사, 청소년 심리상담사 등 여러가지 분야로 나눌 수 있습니다. </p>
                 <p>'친해지자'에서는 보다 전문적인 상담을 위해 상담분야별로 자체 기준을 통해 등급을 나누고 있습니다.</p>
-                <button>등급 판단 기준 확인하러 가기</button>
+                <button style={buttonStyle}>등급 기준 확인하기</button>
             </section>
             <section id="how-it-works">
                 <h2>상담은 어떻게 받나요?</h2>
@@ -47,12 +47,25 @@ export default function ProCounseling() {
                 </ol>
             </section>
 
-            <button onClick={goToWrite1}>1급 신청하기</button>  <button onClick={goToWrite2}>2급 신청하기</button>  <button onClick={goToWriteNonPro}>비전문 신청하기</button>
-        </>
+            <button style={buttonStyle}onClick={goToWrite1}>1급 신청하기</button>  <button style={buttonStyle} onClick={goToWrite2}>2급 신청하기</button>  <button style={buttonStyle} onClick={goToWriteNonPro}>비전문 신청하기</button>
+        </ScreenWrapper>
     )
 }
 
 const ScreenWrapper = styled.div`
-margin-left: 260px;
-margin-right: 260px;
+margin-left: 20%;
+margin-right: 20%;
+margin-top:10%;
 `;
+const buttonStyle = {
+    padding: '10px 20px',
+    fontSize: '14px',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    textDecoration: 'none',
+    cursor: 'pointer',
+    border: '2px solid #4CAF50',
+    color: '#4CAF50',
+    backgroundColor: '#fff',
+    transition: 'background-color 0.3s, color 0.3s',
+};

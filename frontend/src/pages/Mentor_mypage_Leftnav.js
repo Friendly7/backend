@@ -47,7 +47,7 @@ function My_Page_Leftnav() {
 
     const [currentImage, setCurrentImage] = useState(null);
     const fetchCurrentImage = () => {
-        // // 서버 API 엔드포인트를 사용하여 현재 프로필 이미지를 가져옴
+        // 서버 API 엔드포인트를 사용하여 현재 프로필 이미지를 가져옴
         // axios.get('/api/getCurrentProfileImage')
         //     .then((response) => {
         //         setCurrentImage(response.data.imageUrl);
@@ -75,7 +75,7 @@ function My_Page_Leftnav() {
         <body>
         <div id="left_profile">
             <img src={currentImage} alt="프로필 이미지" id="profileimage"/>
-            <span id="profile_text_one">일반 사용자</span>
+            <span id="profile_text_one">1급 상담사</span>
             <span id="profile_text_two">{name}</span>
             <div id="ingspot" ></div>
         </div>
@@ -102,7 +102,7 @@ function My_Page_Leftnav() {
                             <ListItemIcon></ListItemIcon>
                             <ListItemText primary="과거 연결 기록" />
                         </ListItemButton>
-                        <ListItemButton sx={{ pl: 4 }} onClick={() => navigate('/My_Page_connecting')}>
+                        <ListItemButton sx={{ pl: 4 }} onClick={() => navigate('/Mentor_mypage_connecting')}>
                             <ListItemIcon></ListItemIcon>
                             <ListItemText primary="연결된 멘토, 상담사" />
                         </ListItemButton>
@@ -127,7 +127,7 @@ function My_Page_Leftnav() {
                     <List component="div" disablePadding>
                         <ListItemButton sx={{ pl: 4 }}>
                             <ListItemIcon></ListItemIcon>
-                            <ListItemText primary="지역 인증" onClick={()=> navigate('/My_Page_region')} />
+                            <ListItemText primary="인증 관리" />
                         </ListItemButton>
                         <ListItemButton sx={{ pl: 4 }} onClick={() => navigate('/My_Page_points')}>
                             <ListItemIcon></ListItemIcon>

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @Slf4j
@@ -40,6 +41,25 @@ public class matching {
         return byName;
     }
 
+    @GetMapping("/matching/success/getList/login/mentor")
+    public List<MatchingHistory> getSuccessListLoginMentor(@SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember) {
+        List<MatchingHistory> byName = matchHistoryRepository.findByMatchedname(loginMember.getName());
+        return byName;
+    }
+
+    @GetMapping("/matching/success/login/{id}")
+    public MatchingHistory getSuccessLoginByNo(@PathVariable String id,
+                                               @SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember) {
+        Optional<MatchingHistory> byId = matchHistoryRepository.findById(Long.valueOf(id));
+        if (byId.isPresent()) {
+            MatchingHistory matchingHistoryById = byId.get();
+            return matchingHistoryById;
+        } else {
+            System.out.println("MatchingHistory not found");
+        }
+        return null;
+    }
+
     @PostMapping(value = "/matchinglist")
     public List<Member> matchinglist(@RequestBody MatchingDto matchingDto){
         Advicerequest requestval = adviceRequestCRUDRepository.findByRequest(Long.valueOf(matchingDto.getRequest_id()));
@@ -47,6 +67,7 @@ public class matching {
         one= requestval.getOne();
         two = requestval.getTwo();
         three = requestval.getThree();
+        System.out.println(requestval.getOnoffline());
         int remote;
         if (requestval.getOnoffline().equals("대면")){
             remote = 1;
@@ -163,6 +184,8 @@ public class matching {
     //매칭요청 버튼클릭 로직(관리자(
     @PostMapping(value = "/matchingMentor")
     public String matchingMentor(@RequestBody MatchingMentorDto matchingMentorDto){
+        System.out.println("matchingMentorDto = " + matchingMentorDto.getMentor_id());
+        System.out.println("matchingMentorDto = " + matchingMentorDto.getRequest_id());
         Advicerequest result = adviceRequestCRUDRepository.findByRequest(Long.valueOf(matchingMentorDto.getRequest_id()));
         Member result2 = memberCRUDRepository.findByMember(Long.valueOf(matchingMentorDto.getMentor_id()));
         Long  mentor = result2.getId();

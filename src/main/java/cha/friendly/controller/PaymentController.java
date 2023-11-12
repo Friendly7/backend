@@ -4,6 +4,8 @@ import cha.friendly.controller.form.IamportClient;
 import cha.friendly.domain.*;
 import cha.friendly.domain.enumP.PaymentMethod;
 import cha.friendly.domain.enumP.PaymentStatus;
+import cha.friendly.repository.MemberCRUDRepository;
+import cha.friendly.repository.PointRepository;
 import cha.friendly.service.MemberService;
 import cha.friendly.service.PayService;
 import cha.friendly.domain.Dto.UpdatePaymentDto;
@@ -38,9 +40,13 @@ public class PaymentController {
     private IamportClient api;
 
     private MemberService memberService;
+    private final PointRepository pointRepository;
 
-    public PaymentController(PayService payService) {
+    private final MemberCRUDRepository memberCRUDRepository;
+    public PaymentController(PayService payService, PointRepository pointRepository, MemberCRUDRepository memberCRUDRepository) {
         this.payService = payService;
+        this.pointRepository = pointRepository;
+        this.memberCRUDRepository = memberCRUDRepository;
         // REST API 키와 REST API secret 를 아래처럼 순서대로 입력한다.
         this.api = new IamportClient("1073828412600238", "FthThbIht5OQgn0xGP0HuUlnT5Jz2aO6FJa84T7emIuYg3k39AsL8PMD9jQmIvkl3wCLU2pkwWy6LoUC");
     }
@@ -52,13 +58,6 @@ public class PaymentController {
             return "home";
         }
         //세션이 유지되면 로그인으로 이동
-        String email = loginMember.getEmail();
-        String name = loginMember.getName();
-        String phoneNumber = loginMember.getPhoneNumber();
-        log.info(email + " " + name + " " + phoneNumber);
-        model.addAttribute("name", name);
-        model.addAttribute("email", email);
-        model.addAttribute("phoneNumber", phoneNumber);
         model.addAttribute("member", loginMember);
         return "payments/payment";
     }
@@ -128,6 +127,15 @@ public class PaymentController {
         //저장한 paymentD객체를 읽어와서
         redirect.addAttribute("payment", paymentD.getMerchantUid());
         log.info("redirect에 전달하는 데이터(uid): " + paymentD.getMerchantUid());
+        Point point = new Point();
+        point.setStatus("충전");
+        point.setPoint(String.valueOf(paymentD.getAmount()));
+        point.setDate(((paymentD.getPaidAt()).toString().substring(0,10)));
+        point.setMember(loginMember);
+        log.info(String.valueOf(point.getId()));
+        pointRepository.save(point);
+        loginMember.setPoint(loginMember.getPoint()+paymentD.getAmount());
+        memberCRUDRepository.save(loginMember);
         return paymentD.getMerchantUid();
     }
 
@@ -183,8 +191,8 @@ public class PaymentController {
 
         Point point = new Point();
         point.setStatus("현금화");
-        point.setHistory("-"+amount.replace("=",""));
-        point.setMemberId(loginMember);
+        point.setPoint("-"+amount.replace("=",""));
+        point.setMember(loginMember);
         payService.saveUsePoint(point);
         return String.valueOf(loginMember.getPoint());
     }
@@ -195,6 +203,12 @@ public class PaymentController {
             return "home";
         }
         return String.valueOf(loginMember.getPoint());
+    }
+
+    @GetMapping("/point/mine")
+    public List<Point> getPointList(@SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember) {
+        List<Point> byMemberId = pointRepository.findByMemberId(loginMember.getId());
+        return byMemberId;
     }
 
     @GetMapping("/cash/convertList")
@@ -210,8 +224,8 @@ public class PaymentController {
 
         Point point = new Point();
         point.setStatus("사용");
-        point.setHistory("-"+amount.replace("=",""));
-        point.setMemberId(loginMember);
+        point.setPoint("-"+amount.replace("=",""));
+        point.setMember(loginMember);
         payService.saveUsePoint(point);
         return String.valueOf(loginMember.getPoint());
     }

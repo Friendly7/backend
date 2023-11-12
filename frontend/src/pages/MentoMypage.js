@@ -82,6 +82,7 @@ export default function MentoMypage() {
     })
     closeModal();
   };
+
   const navigate = useNavigate()
   useEffect(() => {
     axios.post('/mentorwaitinglist')
