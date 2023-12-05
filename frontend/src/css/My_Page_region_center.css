@@ -28,7 +28,10 @@ body {
     height: 0.1%;
     width: 100%;
 }
-
+.textzz{
+    position: absolute;
+    top:90%;
+}
 #mypage_region_two{
     position: absolute;
     left: 60%;

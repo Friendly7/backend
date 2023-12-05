@@ -1,0 +1,17 @@
+html, body{
+    width:100vw;
+    height:100vh;
+    margin: 0px;
+}
+
+#manageDiv{
+    position: absolute;
+    width:55%;
+    height:60%;
+}
+#manageTable{
+    position: absolute;
+}
+#manageHead {
+    position:relative;
+}

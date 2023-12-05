@@ -108,6 +108,7 @@ function My_Page_region_center() {
                     // 지도의 크기
                     width: "80%",
                     height: "80%",
+                    top:'5%'
                 }}
                 level={lv} // 지도의 확대 레벨
                 zoomable={false}
@@ -120,13 +121,13 @@ function My_Page_region_center() {
                             src: process.env.PUBLIC_URL + "/img.png", // 마커이미지의 주소입니다
                             size: {width: 100, height: 100}, // 마커이미지의 크기입니다
                             options: {
-                                offset: {x: -40, y: 50}
+                                offset: {x: 0, y: 0}
                             }
                         }}
                     />
                 )}
             </Map>
-            <div>
+            <div className='textzz'>
                 <h3>현재 계신 위치는 {address.city} {address.gu} {address.dong} 입니다.</h3>
                 <h3>위치가 맞다면 버튼을 눌러주세요 <button onClick={saveLocation}
                                               style={{

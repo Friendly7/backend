@@ -26,8 +26,8 @@ body{
 #roomboxlist{
     position: absolute;
     top: 10%;
-    width:106.5%;
-    right:-4%;
+    width:100%;
+    right:-1%;
 }
 
 #roombox{
@@ -36,6 +36,7 @@ body{
     width:105%;
     height: 15%;
     right:9%;
+    font-size: 20px;
     border:1px solid rgba(57, 73, 171, 0.2);
     border-left: none;
     border-right: none;

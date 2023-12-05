@@ -12,6 +12,7 @@ import Typography from "@mui/material/Typography";
 import SessionManager from "../../pages/SessionManager";
 import {useNavigate} from 'react-router-dom';
 import axios from "axios";
+import '../../css/ManagerHeader.css'
 
 function ManagerHeader(props) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -28,23 +29,15 @@ function ManagerHeader(props) {
   };
 
   return (
-    <div>
+    <div className='ManagerHeaderDiv'>
       <Containers>
         <Navbar.Brand>
-          <Nav.Link href="/ManagerMain">
-            <ImageWrapper>
-              <img
-                width="80"
-                src='../로고.png'
-              />
-            </ImageWrapper>
-          </Nav.Link>
         </Navbar.Brand>
 
         <LogWrapper>
         <Navbar.Brand>
           <Nav.Link href="/ManagerMain">
-          <SvgIcon
+          <SvgIcon className='homeIcon'
             {...props}
             sx={{
               fontSize: 40,
@@ -82,7 +75,6 @@ const Containers = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   background-color: white;
   border-bottom-width: 10px;
 `;

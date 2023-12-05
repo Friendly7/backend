@@ -56,6 +56,7 @@ const TableWrapper = styled.div`
 const ScreenWrapper = styled.div`
 margin-left: 260px;
 margin-right: 260px;
+margin-top: 5%;
 `;
 //
 //

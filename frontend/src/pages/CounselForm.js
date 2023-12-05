@@ -154,7 +154,7 @@ export default function Counsel(){
     const [explain, setExplain] = useState("");
     const [one,setOne] = useState("별점")
     const [two,setTwo] = useState("리뷰수")
-    const [three,setThree] = useState("가격")
+    const [three,setThree] = useState("매칭횟수")
 
     const handleRadioChange = (event) => {
       setSelectedMethod(event.target.value);
@@ -313,7 +313,7 @@ export default function Counsel(){
               </button>
               {isHovered && (
                 <div id='recommend'>
-                  This div appears when the button is hovered.
+                    이 카테고리의 평균 가격은 35000 원입니다.
                 </div>
               )}
             </div>
@@ -341,21 +341,21 @@ export default function Counsel(){
               <label id='counsel_form_ingre'>매칭 우선 요소</label>
               <label id='sel_first_pri'>1순위</label>
               <select name="field" id="sel_first" onChange={e=>setOne(e.target.value)} value={one}>
-                <option value="응답시간">별점순</option>
-                <option value="가격">후기순</option>
-                <option value="상담시간">가격순</option>
+                <option value="별점">별점순</option>
+                <option value="리슈수">후기순</option>
+                <option value="매칭횟수">활동순</option>
               </select>
               <label id='sel_second_pri'>2순위</label>
               <select name="field" id="sel_second" onChange={e=>setTwo(e.target.value)} value={two}>
-                <option value="응답시간">별점순</option>
-                <option value="가격">후기순</option>
-                <option value="상담시간">가격순</option>
+                <option value="별점">별점순</option>
+                <option value="리뷰수">후기순</option>
+                <option value="매칭횟수">활동순</option>
               </select>
               <label id='sel_third_pri'>3순위</label>
               <select name="field" id="sel_third" onChange={e=>setThree(e.target.value)} value={three}>
-                <option value="응답시간">별점순</option>
-                <option value="가격">후기순</option>
-                <option value="상담시간">가격순</option>
+                <option value="별점">별점순</option>
+                <option value="리뷰수">후기순</option>
+                <option value="매칭횟수">활동순</option>
               </select>
               <button onClick={nextbtn_click} id='nextbtn'/>
             </div>

@@ -10,6 +10,19 @@ body {
     src: url('../font/ShantellSans-Italic-VariableFont_BNCE\,INFM\,SPAC\,wght.ttf') format('truetype');
 }
 
+.button_finish_{
+    position:absolute;
+    left:84%;
+    background-color: #e74c3c; /* 버튼 배경색 */
+    color: #fff; /* 텍스트 색상 */
+    padding: 10px 20px;
+    font-size: 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* 배경색 변경 시 부드럽게 전환 */
+}
+
 #MypagecondetailBox{
     position: absolute;
     width: 70%;

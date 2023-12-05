@@ -38,31 +38,38 @@ export default function My_Page_connecting_detail() {
             });
         loadMemos();
     },[])
+    const finish = () => {
+        let b = window.confirm('상담을 종료하시겠습니까?');
+        if(b) {
+            window.alert('상담을 종료합니다')
+            navigate(`/My_Page_review/${name}`)
+        }
+    }
 
     return (
         <div id="MypagecondetailBox">
             <div>
-                <span id='DTname'>{name}</span>
+                <span id='DTname'>{name}</span><button onClick={finish} className='button_finish_'>멘토링/상담 종료</button>
                 {data && data.map((item) => (<span id="DTclass">{item.category}</span>))}
                 <hr id="DThr"></hr>
                 <div id="DTsche">
                     <span id="DTschespan">SCHEDULE</span>
-                    {data.map((item) => (<span id="DTschespantwo">예정 멘토링: {item.schedule}</span>))}
+                    {data && data.map((item) => (<span id="DTschespantwo">예정 멘토링: {item.schedule}</span>))}
                 </div>
                 <span id="DTMemospan">MEMO</span>
-                <button id='DTMbtn' onClick={()=>navigate('/CHatMain')}>채팅방 가기</button>
+                <button id='DTMbtn' onClick={()=>navigate('/ChatMain')}>채팅방 가기</button>
                 <div id='DTMemoBox'>
-                    {memos.map((item) => (<span id="DTmemospanone">{item.contents}</span>))}
+                    {memos && memos.map((item) => (<span id="DTmemospanone">{item.contents}</span>))}
                 </div>
             </div>
             <div>
                 <div id='DTPersonalBox'>
-                    {data.map((item) => (<span id="DTpersonalspanone">{item.personal}</span>))}
+                    {data &&data.map((item) => (<span id="DTpersonalspanone">{item.personal}</span>))}
                 </div>
                 <div id="DTHomework">
                     <span id="DThomeworkspan">HOMEWORK</span>
-                    {data.map((item) => (<span id="DTworkspanone">과제 내용: {item.homeworkname}</span>))}
-                    {data.map((item) => (<span id="DTworkspantwo">제출 여부: {item.homeworkox}</span>))}
+                    {data && data.map((item) => (<span id="DTworkspanone">과제 내용: {item.homeworkname}</span>))}
+                    {data &&data.map((item) => (<span id="DTworkspantwo">제출 여부: {item.homeworkox}</span>))}
                 </div>
             </div>
         </div>

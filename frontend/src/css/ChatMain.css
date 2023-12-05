@@ -5,6 +5,15 @@ html,
         margin:0px;
     }
 
+#chatBox{
+    position: absolute;
+    width:50%;
+    height:80%;
+    left:28%;
+    bottom:15%;
+    background-color: white;
+}
+
 #chatMainBox{
     position: absolute;
     border:1px solid rgba(57, 73, 171, 0.1);
@@ -23,5 +32,77 @@ html,
 
 #ChattingMemo{
     position: absolute;
-    left: 40%;
+    left: 14%;
+    height: 81%;
+    bottom: 22%;
+}
+#chatinput{
+    position:absolute;
+    width:80%;
+    top:90%;
+    left:2%;
+    height: 7%;
+    border:1px solid rgba(57, 73, 171, 0.7);
+    border-radius:10%;
+    font-size:25px;
+    font-weight:600;
+    color:rgba(4, 35, 11,0.8);
+    font-family: 'counselname', serif;
+}
+#chatsendbtn {
+    position:absolute;
+    top:90%;
+    width:10%;
+    left:85%;
+    height: 7.5%;
+    border-radius:10%;
+    font-size:20px;
+    font-weight:600;
+    border:1px solid rgba(57, 73, 171, 0.7);
+    color:rgba(4, 35, 11,0.8);
+    font-family: 'counselname', serif;
+    background-color: white;
+}
+#chatroomname{
+    position:absolute;
+    top:2%;
+    left:3%;
+    font-size:25px;
+    font-weight:600;
+    color:rgba(4, 35, 11,0.7);
+    font-family: 'counselname', serif;
+}
+#chattime{
+    position:relative;
+}
+#chatmessage{
+    background-color: rgba(57, 73, 171, 0.1);
+    color:rgba(0, 0, 0,0.7);
+}
+#chatmsgdiv{
+    margin-right: 10px;
+}
+#imsi{
+    position: absolute;
+    top:13%;
+}
+.centerSpinner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 70vh;
+}
+
+.spinner {
+    border: 8px solid rgba(0, 0, 0, 0.1);
+    border-top: 8px solid #3498db; /* 스피너의 색상 */
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    animation: spin 1s linear infinite; /* 회전 애니메이션 적용 */
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }

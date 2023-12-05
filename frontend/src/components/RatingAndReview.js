@@ -27,7 +27,7 @@ export default function RatingAndReview({ mentorName }) {
             .then(response=>{
                 if(response.data ==="save") {
                     alert("작성 완료")
-                    navigate("/")
+                    navigate('/My_Page_review')
                 }
                 else alert("작성 실패")
             })
@@ -35,12 +35,10 @@ export default function RatingAndReview({ mentorName }) {
 
     return (
         <>
-            <h2 id='ratingandreviewname'>별점과 후기</h2>
             <div id='star'>
                 <TextRating value={textRatingValue} onRatingChange={handleTextRatingChange}/>
             </div>
             <div>
-                <label id='reviewname'>후기</label>
                 <textarea id='reviewinput' value={review} onChange={handleReviewChange} />
             </div>
             <button id='reviewsubmit' onClick={handleSubmit}>제출</button>

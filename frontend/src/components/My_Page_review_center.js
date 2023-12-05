@@ -10,24 +10,22 @@ import '../css/My_Page_review_center.css'
 
 function My_Page_review_center() {
     const {state} = useLocation();
-    const {name} = '사용자명';
+    const {name} = '상담전문이에요';
 
     const reviewCounts = [0, 0, 0, 0, 0]; // 0부터 4까지의 점수에 대한 리뷰 개수
     const [reviews, setReviews] = useState([]);
     const [mentorName, setMentorName] = useState(name);
 
     useEffect(() => {
-        // const params = {
-        //     metorName: name
-        // };
-        // axios.get("/review/list/mentor", {params:params})
-        //     .then((response) => {
-        //         console.log(response.data)
-        //         setReviews(response.data); // 리뷰 데이터를 상태에 저장
-        //     })
-        //     .catch((error) => {
-        //         console.error('리뷰 데이터를 불러오는 중 오류 발생:', error);
-        //     });
+         const params = { name:name };
+         axios.get("/review/list/mentor/"+name)
+             .then((response) => {
+                 console.log(response.data)
+                 setReviews(response.data); // 리뷰 데이터를 상태에 저장
+            })
+             .catch((error) => {
+                 console.error('리뷰 데이터를 불러오는 중 오류 발생:', error);
+             });
     }, []);
     const averageRating = reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length;
 
@@ -39,17 +37,18 @@ function My_Page_review_center() {
             <span id='mypage_review_one'>후기</span>
             <hr></hr>
             <div id='jun'>
-                <h2>{mentorName}</h2>
                 <Container maxWidth="md">
                     <Box my={3}>
                         <AverageRatingBar averageRating={averageRating} reviewCounts={reviewCounts} />
                     </Box>
-                    <RatingAndReview mentorName={mentorName} />
+                    <RatingAndReview className='list_review_data' mentorName={mentorName} />
+                    <div className='review_container'>
                     {reviews.map((review) => (
-                        <Box key={review.id} my={3}>
+                        <div key={review.id} my={3}>
                             <Review {...review} />
-                        </Box>
+                        </div>
                     ))}
+                    </div>
                 </Container>
             </div>
         </div>

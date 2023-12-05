@@ -18,12 +18,24 @@ export default function ChatRoomList({getRoomId}) {
                     if(Object.keys(response.data).length !== 0){
                         setRoomList(response.data)
                     }
-                    setLoading(false)
+                    axios.get('/chat/room/friend/ChatRoomList')
+                        .then((response2) => {
+                            console.log(response2.data)
+                            if(Object.keys(response2.data).length !== 0){
+                                setRoomList(response2.data)
+                            }
+                            setLoading(false)
+                        })
+                        .catch((error) => {
+                            console.error(error);
+                            setLoading(false)
+                        });
                 })
                 .catch((error) => {
                     console.error(error);
                     setLoading(false)
                 });
+
         }
     },[isLoggedIn,loading]);
 

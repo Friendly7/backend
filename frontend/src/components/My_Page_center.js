@@ -154,8 +154,8 @@ export default function My_Page_mypage() {
                                             backgroundColor: 'rgba(0, 0, 0, 0.5)',
                                         },
                                         content: {
-                                            width: '40%', // 원하는 너비로 조절
-                                            height: '43%',
+                                            width: '35%', // 원하는 너비로 조절
+                                            height: '30%',
                                             margin: 'auto', // 화면 중앙에 위치
                                             fontSize: '20px',
                                         },

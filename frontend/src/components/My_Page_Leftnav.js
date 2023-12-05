@@ -24,7 +24,7 @@ import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
 import SessionManager from '../pages/SessionManager'
-
+import PersonIcon from '@mui/icons-material/Person';
 
 function My_Page_Leftnav() {
     const navigate = useNavigate();
@@ -74,7 +74,7 @@ function My_Page_Leftnav() {
 
         <body>
         <div id="left_profile">
-            <img src={currentImage} alt="프로필 이미지" id="profileimage"/>
+            <PersonIcon sx={{ fontSize:100}}/>
             <span id="profile_text_one">일반 사용자</span>
             <span id="profile_text_two">{name}</span>
             <div id="ingspot" ></div>

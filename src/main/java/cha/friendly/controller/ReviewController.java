@@ -45,10 +45,9 @@ public class ReviewController {
         return ReviewListByLogin;
     }
 
-    @GetMapping("/list/mentor") //특정 사용자의 리뷰 리스트(사용자의 멘토 리뷰 조회)
-    public List<Review> reviewListByName(@RequestParam("metorName") String name) {
-        log.info(name);
-        return reviewService.findReviewByName(name);
+    @GetMapping("/list/mentor/{name}") //특정 사용자의 리뷰 리스트(사용자의 멘토 리뷰 조회)
+    public List<Review> reviewListByName(@PathVariable String name) {
+        return reviewService.findReviewByName("상담전문이에요");
     }
 
 }

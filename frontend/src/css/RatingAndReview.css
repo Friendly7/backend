@@ -5,7 +5,8 @@
 
 #star{
     position: absolute;
-    top: 95%;
+    top: 65%;
+    bottom:50px;
     width: 80%;
     height: 20%;
 }
@@ -18,14 +19,14 @@
 
 #reviewinput{
     position: absolute;
-    top:120%;
+    top:75%;
     width: 120%;
     height: 20%;
 }
 
 #reviewsubmit{
     position: absolute;
-    top: 125%;
+    top: 80%;
     left:140%;
     width: 10%;
     height: 10%;

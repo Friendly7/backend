@@ -19,7 +19,7 @@ import ChatRoom from "./pages/ChatRoom";
 import ChatRoomList from "./pages/ChatRoomList";
 import Chat from "./pages/Chat";
 import styled from 'styled-components'
-import FriendChat from "./pages/friendChat";
+import FriendChat from "./pages/FriendChat";
 import CreateChatRoomFriend from "./pages/CreateChatRoomFriend";
 import MainPage from "./pages/MainPage"
 import ProCounseling from "./pages/ProCounseling";
@@ -124,7 +124,7 @@ function App() {
         <Route path="My_Page_schedule" element={<My_Page_schedule />} />
         <Route path="My_Page_points" element={<My_Page_points />} />
         <Route path="My_Page_pointsplus" element={<My_Page_pointsplus />} />
-        <Route path="My_Page_review" element={<My_Page_review />} />
+        <Route path="My_Page_review/:mentorId" element={<My_Page_review />} />
         {/*<Route path="Chatting_Main" element={<Chatting_Main />} />*/}
         <Route path="/detail/:name/:id" element={<My_Page_connecting_center_detail />} />
         <Route path="/Mentor_mypage_Main" element={<Mentor_mypage_Main />} />

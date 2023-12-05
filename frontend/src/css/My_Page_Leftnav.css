@@ -63,6 +63,15 @@ html,
   color:rgba(4, 35, 11,0.8);
   font-family: 'counselname', serif;
 }
+#profile_text_two{
+    position: absolute;
+    top:47%;
+    left:40%;
+    font-size:18px;
+  font-weight:400;
+  color:rgba(4, 35, 11,0.8);
+  font-family: 'counselname', serif;
+}
 
 #profileimage{
     position: absolute;

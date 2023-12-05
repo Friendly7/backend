@@ -10,6 +10,7 @@ import '../css/ManagerMatchDetail.css'
 import ManagerHeader from "../components/layouts/ManagerHeader";
 import ManagerProfile from "./ManagerProfile";
 
+
 export default function ManagementMatchDetail(props) {
   const { request_id } = useParams();
   const [data, setData] = useState([]);
@@ -28,6 +29,7 @@ export default function ManagementMatchDetail(props) {
           });
     axios.post('/matchinglist', { request_id:request_id })
         .then((response) => {
+            console.log(response.data)
           setData(response.data)
         setSelectedItem(response.data[0])
         })
@@ -63,69 +65,65 @@ export default function ManagementMatchDetail(props) {
               </ProfileWrapper>
               <TableWrapper>
                   <div className="horizontalWrapper">
-                      <div>
-                          <PersonIcon sx={{ fontSize: 80 }}/>
+                      <div >
+                          <PersonIcon sx={{ fontSize: 130, margin:10 }}/>
                       </div>
                   <Button onClick={matchingReq}
-                      // variant="contained"
-                      //연한거: #rgba(40,125,10,0.5) , #rgba(4,35,11,0.8)
                       sx={{ backgroundColor: 'rgba(40,125,10,0.5)', color: 'rgba(4,35,11,0.8)',
                           '&:hover': { backgroundColor: 'rgba(32,100,8,0.5)',color: 'white' },
-                      fontSize: 17, width: '8vw',borderRadius:'10px', }}>
+                      fontSize: 25, width: '8vw',borderRadius:'10px', }}>
                       매칭 요청
                   </Button>
                   <div>
                       <div>
-                          <PersonIcon sx={{ fontSize: 80 }}/>
+                          <PersonIcon sx={{ fontSize: 130, margin:10 }}/>
                       </div>
                   </div>
               </div>
-              <div>
-                  <>
-                      {selectedItem && (
-                      <table>
-                          <caption></caption>
-                          <thead>
-                          <th></th>
-                          <th>우선 순위</th>
-                          <th></th>
-                          </thead>
-                          <tbody>
-                          <tr>
-                              <td>1순위</td>
-                              <td>{reqData.one}</td>
-                              <td colSpan={3}>
-                                  {reqData.one === "별점" && selectedItem.raiting}
-                                  {reqData.one === "매칭횟수" && selectedItem.totalMatchingCount}
-                                  {reqData.one === "리뷰수" && selectedItem.reviewCnt}
-                              </td>
-                          </tr>
-                          <tr>
-                              <td>2순위</td>
-                              <td>{reqData.two}</td>
-                              <td colSpan={3}>
-                                  {reqData.two === "별점" && selectedItem.raiting}
-                                  {reqData.two === "매칭횟수" && selectedItem.totalMatchingCount}
-                                  {reqData.two === "리뷰수" && selectedItem.reviewCnt}
-                              </td>
-                          </tr>
-                          <tr>
-                              <td>3순위</td>
-                              <td>{reqData.three}</td>
-                              <td colSpan={3}>
-                                  {reqData.three === "별점" && selectedItem.raiting}
-                                  {reqData.three === "매칭횟수" && selectedItem.totalMatchingCount}
-                                  {reqData.three === "리뷰수" && selectedItem.reviewCnt}
-                              </td>
-                          </tr>
-                          </tbody>
-                      </table>
-                      )}
-                  </>
+              <div >
+                      {/*{selectedItem && (*/}
+                      {/*<table id='manageTable'>*/}
+                      {/*    <thead id='manageHead'>*/}
+                      {/*    <th></th>*/}
+                      {/*    <th>우선 순위</th>*/}
+                      {/*    <th></th>*/}
+                      {/*    </thead>*/}
+                      {/*    <tbody>*/}
+                      {/*    <tr>*/}
+                      {/*        <td>1순위</td>*/}
+                      {/*        <td>{reqData.one}</td>*/}
+                      {/*        <td colSpan={3}>*/}
+                      {/*            {reqData.one === "별점" && selectedItem.raiting}*/}
+                      {/*            {reqData.one === "매칭횟수" && selectedItem.totalMatchingCount}*/}
+                      {/*            {reqData.one === "리뷰수" && selectedItem.reviewCnt}*/}
+                      {/*        </td>*/}
+                      {/*    </tr>*/}
+                      {/*    <tr>*/}
+                      {/*        <td>2순위</td>*/}
+                      {/*        <td>{reqData.two}</td>*/}
+                      {/*        <td colSpan={3}>*/}
+                      {/*            {reqData.two === "별점" && selectedItem.raiting}*/}
+                      {/*            {reqData.two === "매칭횟수" && selectedItem.totalMatchingCount}*/}
+                      {/*            {reqData.two === "리뷰수" && selectedItem.reviewCnt}*/}
+                      {/*        </td>*/}
+                      {/*    </tr>*/}
+                      {/*    <tr>*/}
+                      {/*        <td>3순위</td>*/}
+                      {/*        <td>{reqData.three}</td>*/}
+                      {/*        <td colSpan={3}>*/}
+                      {/*            {reqData.three === "별점" && selectedItem.raiting}*/}
+                      {/*            {reqData.three === "매칭횟수" && selectedItem.totalMatchingCount}*/}
+                      {/*            {reqData.three === "리뷰수" && selectedItem.reviewCnt}*/}
+                      {/*        </td>*/}
+                      {/*    </tr>*/}
+                      {/*    </tbody>*/}
+                      {/*</table>*/}
+                      {/*)}*/}
               </div>
-          <table>
+              <div id='manageDiv1'>
+          <table id='manageTable1'>
               <caption>신청서 정보</caption>
-              <thead>
+              <thead id='manageHead2'>
               <tr>
                   <th>닉네임</th>
                   <th>카테고리</th>
@@ -148,9 +146,11 @@ export default function ManagementMatchDetail(props) {
               </tr>
               </tbody>
           </table>
-          <table>
+              </div>
+                  <div id='manageDiv2'>
+          <table id='manageTable2'>
               <caption>추천 리스트</caption>
-              <thead>
+              <thead id='manageHead2'>
               <tr>
                   <th>번호</th>
                   <th>닉네임</th>
@@ -161,10 +161,11 @@ export default function ManagementMatchDetail(props) {
                   <th>별점</th>
                   <th>리뷰 개수</th>
                   <th>총 매칭 횟수</th>
+                  <th></th>
               </tr>
               </thead>
               <tbody>
-              {data.map((item, idx) => (
+              {data && data.map((item, idx) => (
                   <tr key={idx} className='c_td'>
                       <td>{idx+1}</td>
                       <td>{item.name}</td>
@@ -176,12 +177,15 @@ export default function ManagementMatchDetail(props) {
                       <td>{item.reviewCnt}</td>
                       <td>{item.totalMatchingCount}</td>
                       <td>
-                          <button onClick={() => handleSelect(item)}>선택</button>
+                          <button onClick={() => handleSelect(item)}
+                                  className={selectedItem === item ? 'selectedButton' : ''}
+                          >{selectedItem === item ? '선택됨' : '선택'}</button>
                       </td>
                   </tr>
               ))}
               </tbody>
           </table>
+                  </div>
           </TableWrapper>
           </ViewWrapper>
           </ScreenWrapper>
@@ -220,4 +224,5 @@ padding-top: 10px;
 const ScreenWrapper = styled.div`
 margin-left: 260px;
 margin-right: 260px;
+margin-top:3%;
 `;

@@ -9,6 +9,8 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import axios from 'axios';
+import "../css/ManagerMatch.css";
+
 import {useEffect, useState} from "react";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -44,9 +46,9 @@ export default function ManagementMatch() {
   },[])
 
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 700 }} aria-label="customized table">
-        <TableHead>
+    <TableContainer component={Paper} id='manageDiv'>
+      <Table sx={{ minWidth: 700 }} aria-label="customized table" id='manageTable'>
+        <TableHead id='manageHead'>
           <TableRow>
             <StyledTableCell align="center">No.</StyledTableCell>
             <StyledTableCell align="center">분류</StyledTableCell>

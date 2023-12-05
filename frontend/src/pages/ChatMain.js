@@ -48,23 +48,18 @@ export default function ChatMain() {
         stomp.connect({}, frame => {
             stomp.subscribe('/sub/chat/room/' + roomId, message => {
                 const messageData = JSON.parse(message.body);
-                const s = messageData.type === 'ENTER' ? '[알림]' : messageData.sender;
+                //const s = messageData.type === 'ENTER' ? '[알림]' : messageData.sender;
                 setMessages(prevMessages => [
                     ...prevMessages,
                     {
                         type: messageData.type,
-                        sender: s,
+                        sender: messageData.sender,
                         timestamp: messageData.timestamp,
                         message: messageData.message,
                     },
                 ]);
             });
-            stomp.send('/pub/chat/message', {}, JSON.stringify({
-                type: 'ENTER',
-                roomId: roomId,
-                sender: sender,
-                timestamp: getCurrentTime()
-            }));
+
             setStompClient(stomp);
             setIsLoading(false);
         });
@@ -136,7 +131,7 @@ export default function ChatMain() {
         return { date, time };
     }
     // 메시지 그룹화 및 시간 출력
-    const groupedMessages = groupMessagesByTime(messages);
+    // const groupedMessages = groupMessagesByTime(messages);
 
     function groupMessagesByTime(messages) {
         const grouped = [];
@@ -164,59 +159,49 @@ export default function ChatMain() {
         //     </div>
         //     <ChatMemoComponent />
         // </div>
-        <div className="container">
-            <div className="row">
-            <ChatRoomList getRoomId={getRoomId} />
-            <h3>{roomName}</h3>
-            <div>
-                {roomId ? (
-                    <div>
-                        {isLoading ? (
-                            <div className="c_chat_loading">
-                                <div className="c_spinner"></div>
-                                방 입장 중...
+
+            <div id='chatMainBox'>
+                <ChatRoomList getRoomId={getRoomId} />
+                <div id='chatBox'>
+                    <div className="container">
+                        <h3 id='chatroomname'>{roomName}</h3>
+                        {roomId && isLoading ? (
+                            <div className="c_chat_loading ">
+                                <div className="c_spinner" />
+                                <div className='centerSpinner'>
+                                <div className="spinner"></div></div>
                             </div>
                         ) : (
                             <>
-                                <ul>
-                                    {groupedMessages.map((group, groupIndex) => (
-                                        <li key={groupIndex}>
-                                            {group.messages.map((messageData, index) => {
-                                                const message = messageData.message;
-                                                const formattedTime = messageData.formattedTime;
-                                                const isLastMessageInGroup = index === group.messages.length - 1;
-
-                                                return (
-                                                    <div key={index}>
-                                                        {message.sender} : {message.message}
-                                                        {isLastMessageInGroup && formattedTime && (
-                                                            <span>{formattedTime}</span>
-                                                        )}
-                                                    </div>
-                                                );
-                                            })}
-                                        </li>
-                                    ))}
-                                </ul>
-                                <input
-                                    type="text"
-                                    value={messageText}
-                                    onChange={(e) => setMessageText(e.target.value)}
-                                    placeholder="메시지를 입력하세요"
-                                    onKeyDown={(e) => {
-                                        if (e.key === 'Enter') {
-                                            sendMessage();
-                                        }
-                                    }}
-                                />
-                                <button onClick={sendMessage}>전송</button>
+                            <div id='imsi'>
+                                {messages.map((message,index)=> (
+                                    name == message.sender ? (
+                                        <div key={index} id='chatmsgdiv' style={{ marginBottom: '10px', display: 'flex', alignItems: 'center', float:'right' , paddingBottom:'5px'}}>
+                                            <div id='chattime' style={{ marginRight: '10px', paddingTop: '10px', marginLeft:'500px'}}>{parseDateAndTime(message.timestamp).time}</div>
+                                            <div id='chatmessage' style={{ fontWeight:'500', fontSize: '25px', color: '#888'}}>{message.message}</div>
+                                        </div>
+                                    ): (
+                                        <div key={index} id='chatmsgdiv' style={{ marginBottom: '10px', display: 'flex', alignItems: 'center', float:'right' , paddingBottom:'5px'}}>
+                                            <div id='chatmessage' style={{ fontWeight:'500', fontSize: '25px', color: '#888' }}>{message.message}</div>
+                                            <div id='chattime' style={{ marginRight: '850px', paddingTop: '10px', marginLeft:'10px'}}>{parseDateAndTime(message.timestamp).time}</div>
+                                        </div>
+                                    )))}
+                            </div>
+                            <input id="chatinput" type="text" value={messageText} onChange={e => setMessageText(e.target.value)} placeholder="메시지를 입력하세요"
+                               onKeyDown={e => {
+                                   if (e.key === 'Enter') {
+                                       sendMessage();
+                                   }
+                               }}/>
+                            <button id="chatsendbtn" onClick={sendMessage}>전송</button>
                             </>
-                        )}
+                            )}
                     </div>
-                ) : null}
-                <ChatMemoComponent />
-            </div>
-            </div>
+                </div>
+                <div id='ChattingMemo'>
+                    <ChatMemoComponent />
+                </div>
+
         </div>
-        )
+    )
 }

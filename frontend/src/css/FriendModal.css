@@ -1,0 +1,34 @@
+.friend_input_name{
+    width:35%;
+    height: 35px;
+    position: relative;
+    margin-bottom: 50px;
+}
+
+.toCenter_friend{
+    text-align: center;
+}
+.button_friend {
+    background-color: #3498db;
+    color: #ffffff;
+    font-size: 16px;
+    padding: 10px 20px;
+    margin-right: 10px; /* 필요에 따라 오른쪽 여백을 조절합니다. */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+}
+
+.button_friend_cancel {
+    background-color: #e74c3c; /* 취소 버튼의 배경색을 변경합니다. */
+    color: #ffffff;
+    font-size: 16px;
+    padding: 10px 20px;
+    margin-right: 10px; /* 필요에 따라 오른쪽 여백을 조절합니다. */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}

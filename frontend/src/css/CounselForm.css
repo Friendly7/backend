@@ -468,7 +468,7 @@ html,
   width: 80%;
   height: 5%;
   border: none;
-  font-size: medium;
+  font-size: 25px;
 }
 
 #counsel_form_field_lb{
@@ -490,7 +490,7 @@ html,
   border-radius: 5%;
   box-shadow: 1px 1px 5px 1px rgba(4, 35, 11, 0.3);
   border: none;
-  font-size: medium;
+  font-size: 25px;
 }
 
 #counsel_form_significant_lb{
@@ -512,7 +512,7 @@ html,
   width: 80%;
   height: 5%;
   border: none;
-  font-size: medium;
+  font-size: 25px;
 }
 
 #nextbtn{
@@ -537,6 +537,24 @@ html,
   font-size: 35px;
   font-weight: bold;
   font-family: 'counselname', serif;
+}
+#counsel_method_input_olb{
+  font-size: 30px;
+  font-weight: bold;
+  font-family: 'counselname', serif;
+}
+#counsel_method_input_nlb{
+   font-size: 30px;
+   font-weight: bold;
+   font-family: 'counselname', serif;
+}
+#counsel_method_input_olb {
+  font-size: 30px;
+  font-weight: bold;
+  font-family: 'counselname', serif;
+}
+#counsel_exp_input_o,#counsel_exp_input_n,#counsel_method_input_o,#counsel_method_input_n{
+  transform: scale(1.5);
 }
 
 .counsel_method{
@@ -580,7 +598,7 @@ html,
   top: 22%;
   left: 10%;
   color:rgba(4, 35, 11, 0.6);
-  font-size: 25px;
+  font-size: 35px;
   font-weight: bold;
   font-family: 'counselname', serif;
 }
@@ -594,7 +612,7 @@ html,
   border-radius: 5%;
   box-shadow: 1px 1px 5px 1px rgba(4, 35, 11, 0.3);
   border: none;
-  font-size: medium;
+  font-size: 25px;
 }
 
 #counsel_form_time_lb{
@@ -616,7 +634,7 @@ html,
   border-radius: 5%;
   box-shadow: 1px 1px 5px 1px rgba(4, 35, 11, 0.3);
   border: none;
-  font-size: medium;
+  font-size: 25px;
 }
 
 #counsel_form_price_lb{
@@ -641,9 +659,9 @@ html,
   position: absolute;
   top:75%;
   left: 10%;
-  font-size: 20px;
+  font-size: 23px;
   font-family: 'couns elname', serif;
-  width: 30%;
+  width: 40%;
 }
 
 #recom_price{
@@ -655,13 +673,15 @@ html,
   height: 6%;
   border: none;
   top:74%;
-  right: 60%;
+  font-size: 23px;
+  right: 50%;
 }
 
 #recommend{
   position: absolute;
   top:80%;
   left: 10%;
+  font-size: 23px;
 }
 
 #counsel_form_ingre{
@@ -727,7 +747,7 @@ html,
   border-radius: 5%;
   box-shadow: 1px 1px 5px 1px rgba(4, 35, 11, 0.3);
   border: none;
-  font-size: medium;
+  font-size: 25px;
 }
 
 #sel_second_lb{
@@ -748,7 +768,7 @@ html,
   border-radius: 5%;
   box-shadow: 1px 1px 5px 1px rgba(4, 35, 11, 0.3);
   border: none;
-  font-size: medium;
+  font-size: 25px;
 }
 
 #sel_third_lb{
@@ -769,7 +789,7 @@ html,
   border-radius: 5%;
   box-shadow: 1px 1px 5px 1px rgba(4, 35, 11, 0.3);
   border: none;
-  font-size: medium;
+  font-size: 25px;
 }
 
 #sel_field_check{

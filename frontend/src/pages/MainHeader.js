@@ -73,7 +73,7 @@ export default function MainHeader() {
                     <hr id='MHhr' />
                     <button onClick={()=>navigate('/')} id='MHService'>서비스 소개</button>
                     <button onClick={()=>navigate('/ProCounseling')} id='MHCounsel'>전문/비전문 상담</button>
-                    <button onClick={()=>navigate('/')} id='MHFriend'>친구상담</button>
+                    <button onClick={()=>navigate('/FriendChat')} id='MHFriend'>친구상담</button>
                     <button onClick={()=>navigate('/Mentoring')} id='MHMentoring'>멘토링</button>
                     <button onClick={openModal} id='MHCommunity'>커뮤니티</button>
                 <Modal
@@ -82,8 +82,8 @@ export default function MainHeader() {
                     contentLabel="My Modal"
                     style={{
                         content: {
-                            width: '20%', // 모달의 가로 크기 조절
-                            height: '40%', // 모달의 세로 크기 조절
+                            width: '15%', // 모달의 가로 크기 조절
+                            height: '22%', // 모달의 세로 크기 조절
                             margin: 'auto', // 가운데 정렬
                         },
                     }}

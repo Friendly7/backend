@@ -13,6 +13,7 @@ import ManagerProfile from "./ManagerProfile";
 import {styled as sc} from "styled-components";
 import {useEffect, useState} from "react";
 import axios from "axios";
+import ManagerUserList from '../css/ManagerUserList.css'
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -94,9 +95,9 @@ export default function ManagementUserList() {
                   <ManagerProfile />
               </ProfileWrapper>
               <TableWrapper>
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 700 }} aria-label="customized table">
-        <TableHead>
+    <TableContainer component={Paper} id='manageDiv'>
+      <Table sx={{ minWidth: 700 }} aria-label="customized table" id='manageTable'>
+        <TableHead id='manageHead'>
           <TableRow>
             <StyledTableCell align="center">No.</StyledTableCell>
             <StyledTableCell align="center">닉네임</StyledTableCell>

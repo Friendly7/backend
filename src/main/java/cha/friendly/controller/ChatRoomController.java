@@ -75,6 +75,7 @@ public class ChatRoomController {
         }
         //채팅방 목록
         List<ChatRoom> allFriendRoom = chatRoomService.findAllFriendRoom();
+        System.out.println("friend" + allFriendRoom);
         return allFriendRoom;
     }
 

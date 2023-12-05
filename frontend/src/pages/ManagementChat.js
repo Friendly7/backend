@@ -18,6 +18,7 @@ import ManagerHeader from "../components/layouts/ManagerHeader";
 import ManagerProfile from "./ManagerProfile";
 import {styled as sc} from "styled-components";
 import {useEffect, useState} from "react";
+import "../css/ManagerChat.css";
 import axios from "axios";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -60,9 +61,10 @@ export default function ManagementChat() {
             <ManagerProfile />
           </ProfileWrapper>
            <TableWrapper>
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 700 }} aria-label="customized table">
-        <TableHead>
+
+    <TableContainer component={Paper} id='manageDiv'>
+      <Table sx={{ minWidth: 700 }} aria-label="customized table" id='manageTable'>
+        <TableHead id='manageHead'>
           <TableRow>
             <StyledTableCell align="center">No.</StyledTableCell>
             <StyledTableCell align="center">신고 내용</StyledTableCell>

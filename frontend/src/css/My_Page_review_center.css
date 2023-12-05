@@ -29,3 +29,12 @@ html,
     width: 50%;
     height: 50%;
 }
+.list_review_data{
+    position: absolute;
+    top:10%;
+
+}
+.review_container{
+    position: absolute;
+    top:100%;
+}

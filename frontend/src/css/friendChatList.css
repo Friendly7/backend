@@ -1,7 +1,8 @@
 .chat-room-list {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2개의 열로 나누려면 2를 사용 */
-    gap: 10px; /* 셀 사이의 간격 설정 */
+    grid-template-columns: repeat(5, 5fr); /* 3개의 열, 각 열은 1fr(동일한 비율)로 설정 */
+    grid-gap: 15px; /* 그리드 아이템 사이의 간격을 지정 */
+    gap: 250px; /* 셀 사이의 간격 설정 */
 }
 
 .chat-room {

@@ -106,11 +106,11 @@ export default function JoinMento() {
     }
     await axios.get('/member/findByName',{ params: {name: name}})
         .then(response => {
-          if(response.data ==="available") {
+          //if(response.data ==="available") {
             alert("사용 가능한 닉네임입니다.")
-          } else if(response.data === "exist") {
-            alert("이미 존재하는 닉네임입니다.")
-          }
+          //} else if(response.data === "exist") {
+          //  alert("이미 존재하는 닉네임입니다.")
+          //}
         }).catch(error =>{
           console.log(error)
         })

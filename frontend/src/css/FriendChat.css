@@ -1,0 +1,29 @@
+.friend_chat-button {
+    background-color: darkgreen;
+    font-size:25px;
+    font-weight:600;
+    color:white;
+    font-family: 'counselname', serif;
+    padding: 15px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+}
+.fontfont{
+    font-size: 40px;
+}
+.friend_chat-button_list {
+    background-color: white;
+    font-size:25px;
+    font-weight:600;
+    color:black;
+    font-family: 'counselname', serif;
+    padding: 15px 25px;
+    border: darkgreen 1px solid;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+}

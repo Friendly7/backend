@@ -55,11 +55,16 @@ export default function ProCounseling() {
 const ScreenWrapper = styled.div`
 margin-left: 20%;
 margin-right: 20%;
-margin-top:10%;
+margin-top:15%;
+font-size:25px;
+    font-weight:600;
+    color:rgba(4, 35, 11,0.8);
+    font-family: 'counselname', serif;
 `;
+
 const buttonStyle = {
     padding: '10px 20px',
-    fontSize: '14px',
+    fontSize: '25px',
     fontWeight: 'bold',
     textAlign: 'center',
     textDecoration: 'none',

@@ -70,9 +70,9 @@ function ChatMemoComponent() {
     return (
         <body>
         <div className="chat-memo">
-            <h2>채팅 메모</h2>
+            <h3 className='chat_title'>채팅 메모</h3>
             <div>
-                <textarea
+                <textarea className='textAreaSetting'
                     placeholder="메모를 작성하세요"
                     value={memo}
                     onChange={(e) => {
@@ -81,14 +81,16 @@ function ChatMemoComponent() {
                         }
                     }}
                 />
-                <div>
+                <div className='saveButton'>
                     <span>{remainingCharacters}/{maxLength}</span>
-                    <button onClick={addMemo}>저장</button>
+                    <button className='memo_button_style' onClick={addMemo}>저장</button>
                 </div>
             </div>
-            <button onClick={deleteSelectedMemos}>선택된 메모 삭제</button>
-            <table>
-                <thead>
+            <div className='memo_content'>
+            <button className='memo_delete_button' onClick={deleteSelectedMemos}>선택된 메모 삭제</button>
+            </div>
+            <table className='memo_table'>
+                <thead className='memo_head'>
                 <tr>
                     <th><input type="checkbox" /> </th>
                     <th>No.</th>
@@ -96,8 +98,8 @@ function ChatMemoComponent() {
                     <th>  </th>
                 </tr>
                 </thead>
-                <tbody>
-                {memos !== null ? (
+                <tbody className='momo_body'>
+                {memos && memos !== null ? (
                     memos.map((memo, index) => (
                     <tr key={index}>
                         <td>
@@ -111,12 +113,11 @@ function ChatMemoComponent() {
                         <td style={{ whiteSpace: 'pre-line' }}>{memo.contents.replace(/<br>/g, '\n')}</td>
                     </tr>
                 ))) : (
-                    <td>새로운 메모를 추가해보세요!</td>
+                    <></>
                     )}
                 </tbody>
-
             </table>
-        </div>
+            </div>
         </body>
     );
 }

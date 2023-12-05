@@ -1,3 +1,9 @@
+.horizontalWrapper{
+    position: relative;
+    width:100%;
+    left:20%;
+}
+
 .c_table {
     border-collapse: collapse;
     width: 500px;
@@ -23,4 +29,39 @@
     border-top: 2px solid #000;
     border-bottom: 2px solid #000;
     color: #000;
+}
+
+html, body{
+    width:100vw;
+    height:100vh;
+    margin: 0px;
+}
+
+#manageDiv1{
+    position: relative;
+    width:120%;
+    height:27%;
+}#manageDiv2{
+    position: relative;
+    width:120%;
+    height:0%;
+}
+#manageTable1{
+    position: absolute;
+    top: 3%;
+    font-size: 23px;
+}
+#manageTable2{
+    position: absolute;
+    top: 3%;
+    font-size: 23px;
+}
+#manageHead1 {
+    position:relative;
+    border-bottom: 1px solid darkgreen;
+    border-top: 1px solid darkgreen;
+}#manageHead2 {
+    position:relative;
+     border-bottom: 1px solid darkgreen;
+     border-top: 1px solid darkgreen;
 }
